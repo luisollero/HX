@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+   <!-- The struts rest plugin allows you to define the paths used for the webservice.
+   If you have groupings of controllers and you want users to access the controllers based on the groupings, you can do this in the following way:
+      1. create a package for each grouping (i.e. com.mersoft.test.group1, com.mersoft.test.group2)
+      2. set the struts.convention.package.locators as the last package name before the groupings (i.e. "test")
+      3. access the rest webservice by {application base}/{group name}/{controller name} (i.e. {application base}/group1/controller1, {application base}/group2/controller2)
+   If you want all controllers accessed from the application base:
+      1. put all the controllers in the same package (i.e. com.mersoft.controller).
+      2. set the struts.convention.package.locators as the last package name (i.e. "controller")
+     3. access the rest webservice by {application base}/{controller name} (i.e.  {application base}/controller1)
+   -->
+    <constant name="struts.convention.package.locators" value="action"/>  <!-- The convention plugin defaults this to "action,actions,struts,struts2" -->
+    <constant name="struts.convention.action.suffix" value="Controller"/>  <!-- The convention plugin defaults this to "Action" -->
+    <constant name="struts.convention.action.mapAllMatches" value="true"/>   <!-- The convention plugin defaults this to "false" -->
+    <constant name="struts.convention.default.parent.package" value="rest-default"/>  <!-- The convention plugin defaults this to "convention-default". The "rest-default" is defined by the struts2 rest plugin -->
+
+	<constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+   
+</struts>

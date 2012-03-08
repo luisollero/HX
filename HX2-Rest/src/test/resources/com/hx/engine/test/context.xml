@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc-default.properties
+				</value>
+				<value>classpath:jdbc.properties
+				</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+	</bean>
+
+	<import resource="classpath:/com/hx/model/dataSources.xml"/>
+	<import resource="classpath:/com/hx/model/annotatedClasses.xml"/>
+	<import resource="classpath:/com/hx/model/persistence.xml"/>
+	<import resource="classpath:/com/hx/model/dao/ethereal/dao.xml"/>
+
+	<!-- Motores -->
+	<bean id="userEngine" class="com.hx.engine.implementation.UserEngine">
+		<property name="daoUser" ref="daoUser"/>
+	</bean>
+	<bean id="regimentEngine" class="com.hx.engine.implementation.RegimentEngine">
+		<property name="daoRegiment" ref="daoRegiment"/>
+	</bean>	
+	<bean id="sectorEngine" class="com.hx.engine.implementation.SectorEngine">
+		<property name="daoSector" ref="daoSector"/>
+	</bean>
+	<bean id="houseEngine" class="com.hx.engine.implementation.HouseEngine">
+		<property name="daoHouse" ref="daoHouse"/>
+	</bean>
+	<bean id="personalityEngine" class="com.hx.engine.implementation.PersonalityEngine">
+		<property name="daoPersonality" ref="daoPersonality"/>
+	</bean>	
+
+</beans>
