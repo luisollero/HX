@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<!--
+		Además, gracias al uso de las Hibernate Annotations, también podemos
+		incluir los mappings entre las tablas de la BD y los POJOs en este
+		fichero de configuración de Spring, pues aquí indicamos las clases que
+		serán mapeadas a BD y en los propios POJO incluimos las anotaciones
+		que indicarán cómo se realiza dicho mapeo. De esta manera, podemos
+		prescindir del fichero de configuración de hibernate
+		(hibernate.cfg.xml), de los ficheros de mapeo (*.hbm.xml) de las
+		clases a persistir y de la factoría java que proporciona acceso a la
+		sesión de la BD. No obstante, se puede seguir usando los fciheros de
+		configuración clásicos mencionados anteriormente.
+	-->
+	<bean id="annotatedClasses" class="java.util.LinkedList">
+		<constructor-arg>
+			<list value-type="java.lang.Class">
+				<value>
+					com.hx.model.dto.User
+				</value>
+				<value>
+					com.hx.model.dto.House
+				</value>
+				<value>
+					com.hx.model.dto.Experience
+				</value>
+				<value>
+					com.hx.model.dto.Personality
+				</value>
+				<value>
+					com.hx.model.dto.Regiment
+				</value>
+				<value>
+					com.hx.model.dto.Role
+				</value>
+				<value>
+					com.hx.model.dto.Sector
+				</value>
+				<value>
+					com.hx.model.dto.Turn
+				</value>
+				<value>
+					com.hx.model.dto.HouseRelation
+				</value>
+				<value>
+					com.hx.model.dto.HouseRelationId
+				</value>
+				<value>
+					com.hx.model.dto.Message
+				</value>
+				<value>
+					com.hx.model.dto.Communication
+				</value>
+				<value>
+					com.hx.model.dto.SuplyLine
+				</value>
+				<value>
+					com.hx.model.dto.Action
+				</value>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>

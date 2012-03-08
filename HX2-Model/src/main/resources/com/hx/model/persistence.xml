@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<!-- Definición de las Session Factories -->
+	<bean abstract="true" id="commonSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+
+		<!--
+			Incluimos los siguientes parámetros de configuración de hibernate en
+			el fichero de configuración de Spring
+		-->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
+                <prop key="c3p0.acquire_increment">${c3p0.acquire_increment}</prop>
+                <prop key="c3p0.idle_test_period">${c3p0.idle_test_period}</prop>
+                <prop key="c3p0.min_size">${c3p0.min_size}</prop>
+                <prop key="c3p0.max_size">${c3p0.max_size}</prop>
+                <prop key="c3p0.max_statements">${c3p0.max_statements}</prop>
+                <prop key="c3p0.timeout">${c3p0.timeout}</prop>
+				<!-- Sólo actualiza si ha habido cambios -->
+				<!-- <prop key="hibernate.hbm2ddl.auto">validate</prop> -->
+			</props>
+		</property>
+
+		<property name="annotatedClasses" ref="annotatedClasses" />
+
+		<property name="eventListeners">
+			<map>
+				<entry key="merge">
+					<bean
+						class="org.springframework.orm.hibernate3.support.IdTransferringMergeEventListener" />
+  				</entry>
+<!--
+   				<entry key="pre-delete">
+ 					<bean class="com.hx.cms.PreDeleteListener"/>
+   				</entry>
+-->
+            </map>
+		</property>
+
+		<property name="entityInterceptor" ref="applicationInterceptor" />
+	</bean>
+
+	<bean id="backofficeInterceptor" class="com.hx.model.Interceptor"/>
+	<alias name="backofficeInterceptor" alias="applicationInterceptor"/>
+	
+	<!-- Beans de los interceptors para hibernate se encuentra declarado en el contexto components.xml del proyecto cms.components
+		<bean id="preDeleteInterceptor" class="com.hx.cms.PreDeleteInterceptor" parent="backofficeInterceptor" /> -->
+	
+	<!-- El bean que realiza esta acción de interceptor se encuentra en el contexto components.xml del cms.
+	Ya que necesita acceso a otros ds. Vease que se utiliza un alias para asignarla a "applicationInterceptor", Ejemplo:
+			
+			<alias name="backofficeInterceptor" alias="applicationInterceptor"/> 
+			<alias name="preDeleteInterceptor" alias="applicationInterceptor"/>
+	
+		Se usa el alias "preDeleteInterceptor" si estamos usando el 
+	contexto cms.components, sino, usaremos el alias "backofficeInterceptor". 
+	Como ejemplo tenemos el contexto aggregator-manager, que utiliza el alias backoffice -->
+	
+	<bean id="sessionFactory" parent="commonSessionFactory">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="schemaCreator" class="com.hx.model.SchemaCreator" />
+
+	<!-- Transaction manager -->
+	<bean id="transactionManager" class="com.hx.persistence.tx.impl.TransactionManagerImpl">
+		<property name="timeoutDelayInMillis" value="${session.timeout}"/>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Transactional interceptor -->
+	<bean id="transactionalInterceptor"
+		class="com.hx.persistence.tx.impl.TransactionalInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+
+	<!-- Assign Transactional interceptor to @Transactional methods -->
+	<bean class="com.hx.persistence.tx.TransactionalAutoProxyCreator">
+		<property name="transactionalInterceptor" ref="transactionalInterceptor" />
+	</bean>
+
+</beans>
