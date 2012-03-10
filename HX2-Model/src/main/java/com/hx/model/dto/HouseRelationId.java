@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 /**
  * Id para la relación entre casas.
  * 
- * @author kineas
+ * @author Luis Ollero
  */
 @Embeddable
 public class HouseRelationId implements Serializable {

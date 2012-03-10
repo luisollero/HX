@@ -9,7 +9,7 @@ import com.hx.model.dto.UserStatus;
 
 /**
  * Carga las colecciones.
- * @author kineas
+ * @author Luis Ollero
  *
  */
 public class HXCollections {

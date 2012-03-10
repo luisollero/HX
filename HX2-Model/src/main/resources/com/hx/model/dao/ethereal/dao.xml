@@ -49,7 +49,12 @@
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
 
-
+    <bean id="daoCommunication" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Communication"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOCommunication"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+	
 	<!-- DAO Implementado
 	<bean id="daoPerson" class="com.hx.persistence.ddg.DaoFactoryBean">
 		<property name="pojoClass" value="com.hx.backoffice.model.cms.dto.Person"/>

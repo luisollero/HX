@@ -12,7 +12,7 @@ import org.hibernate.annotations.FetchMode;
 
 /**
  * Turnos del juego
- * @author kineas
+ * @author Luis Ollero
  *
  */
 @Entity

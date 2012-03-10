@@ -5,7 +5,7 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hx.engine.IHouseEngine;
-import com.hx.model.dto.House;
+import com.hx.engine.pojo.House;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Validateable;
 import com.opensymphony.xwork2.ValidationAwareSupport;
@@ -17,14 +17,20 @@ public class HouseController extends ValidationAwareSupport implements
 
 	private String id;
 	private House house = new House();
-	
+
 	private IHouseEngine houseEngine;
 
-	// GET /test/1
+	// GET /house/House_id
 	public HttpHeaders show() {
-		house = houseEngine.getById(id);
-		System.out.println(id + "");
+		house.setName(houseEngine.getById(id).getName());
+		house.setId("perico");
+
 		return new DefaultHttpHeaders("show");
+	}
+
+	// GET /house
+	public HttpHeaders index() {
+		return new DefaultHttpHeaders("index");
 	}
 
 	public void validate() {

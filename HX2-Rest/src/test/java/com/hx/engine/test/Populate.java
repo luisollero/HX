@@ -12,7 +12,7 @@ import com.hx.model.util.HXKeys;
 
 /**
  * Rellena los campos base de la DB
- * @author kineas
+ * @author Luis Ollero
  *
  */
 public class Populate extends TestBase {
@@ -119,14 +119,14 @@ public class Populate extends TestBase {
 		personality = new Personality();
 		personality.setHouse(new House(HXKeys.COMSTAR));
 		personality.setId("0");
-		personality.setCompleteName("Kineas Liao");
+		personality.setCompleteName("Luis Ollero Liao");
 		getPersonalityEngine().saveOrUpdate(personality);
 		
 		personality = new Personality();
 		personality.setHouse(new House(HXKeys.COMSTAR));
 		personality.setId("1");
 //		User user = new User();
-//		user.setId("Kineas");
+//		user.setId("Luis Ollero");
 //		personality.setUser(user);
 		getPersonalityEngine().saveOrUpdate(personality);
 		

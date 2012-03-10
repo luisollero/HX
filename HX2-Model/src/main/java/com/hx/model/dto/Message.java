@@ -15,8 +15,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * Mensajes enviados por los jugadores entre sí.
- * @author kineas
+ * Messages sent among players
+ * @author luisollero
  *
  */
 @Entity

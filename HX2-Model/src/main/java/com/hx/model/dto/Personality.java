@@ -21,7 +21,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * @author Kineas
+ * @author Luis Ollero
  *
  */
 @Entity

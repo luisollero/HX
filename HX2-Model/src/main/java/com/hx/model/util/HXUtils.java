@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 /**
  * Clase de utilidades para el proyecto Highexplosive.
  * 
- * @author kineas
+ * @author Luis Ollero
  * 
  */
 public class HXUtils {

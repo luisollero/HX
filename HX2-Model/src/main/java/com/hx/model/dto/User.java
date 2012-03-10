@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
  * Application users.
- * @author kineas
+ * @author Luis Ollero
  *
  */
 @Entity

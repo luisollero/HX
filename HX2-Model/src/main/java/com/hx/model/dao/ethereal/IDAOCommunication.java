@@ -7,7 +7,7 @@ import com.hx.model.dao.IDAOCommon;
 import com.hx.model.dto.Communication;
 
 /**
- * @author kineas
+ * @author Luis Ollero
  *
  */
 public interface IDAOCommunication extends IDAOCommon<Communication> {

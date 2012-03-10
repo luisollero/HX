@@ -13,7 +13,7 @@ import org.hibernate.annotations.FetchMode;
 
 /**
  * Sector. Entidad mínima de carácter geográfico.
- * @author kineas
+ * @author Luis Ollero
  *
  */
 @Entity

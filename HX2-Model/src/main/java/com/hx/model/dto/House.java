@@ -11,8 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
- * Facción en el juego. Candidata a convertirse en un tipo enumerado.
- * @author kineas
+ * Faction in the game.
+ * @author Luis Ollero
  *
  */
 @Entity
@@ -21,14 +21,14 @@ public class House {
 
 	@Id
 	@Column(name="hx_house_id", nullable=false)
-	private String id;		// Identificador de la casa
+	private String id;
 	@Column(name="hx_house_name", nullable=false)
-	private String name;	// Nombre de la casa
+	private String name;
 	@Column(name="hx_house_alternate_name")
-	private String alternateName;	// Nombre alternativo de la casa
+	private String alternateName; // Alternative (long) name for the house
 	
 	@OneToMany(mappedBy="house")
-	private Set<Sector> sectors = new HashSet<Sector>();  // Conjunto de sectores de la casa
+	private Set<Sector> sectors = new HashSet<Sector>();  // Sectors owned by the house
 	
 	@OneToMany(mappedBy="houseReference", cascade=CascadeType.ALL)
 	private Set<HouseRelation>	houseRelationsReference = new HashSet<HouseRelation>();
@@ -124,7 +124,6 @@ public class House {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return id + " || " + name;
 	}
 	

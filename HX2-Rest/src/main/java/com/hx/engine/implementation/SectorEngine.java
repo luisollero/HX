@@ -12,7 +12,7 @@ import com.hx.model.dto.Sector;
  * Clase de utilidad para facilitar el control de transacciones en el trabajo
  * con sectores.
  * 
- * @author kineas
+ * @author Luis Ollero
  * 
  */
 public class SectorEngine implements ISectorEngine {

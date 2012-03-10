@@ -15,11 +15,10 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * Mensajes enviados por los jugadores como comunicación oficial al resto de
- * jugadores. Según el nivel del jugador el mensaje puede ser publicado en la
- * portada o en "páginas interiores"
+ * Messages sent as "declarations" to the rest of the players. Depending on the
+ * level of a player this will be published in the correspondent section
  * 
- * @author kineas
+ * @author Luis Ollero
  * 
  */
 @Entity
@@ -29,26 +28,25 @@ public class Communication {
 	@Id
 	@Column(name = "hx_communications_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;  //ID auto-generada del mensaje
+	private Integer id;
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "hx_communications_from", referencedColumnName = "hx_user_id")
-	private User from;  //Usuario que envía el mensaje
+	private User from; // User that sends the communication
 
 	@Column(name = "hx_communications_subject", length = 25)
-	private String subject;  //Título del mensaje
+	private String subject;
 
 	@Column(name = "hx_communications_message", length = 5000)
-	private String message;  //Cuerpo del mensaje
+	private String message; // Body
 
 	@Column(name = "hx_communications_sending_date")
-	private Date sendingDate;  //Fecha de envío
+	private Date sendingDate;
 
-	@Column(name="hx_communications_level")
-	private int level;  //Nivel del envio.
-	
-	// GETTER'S AND SETTER's
+	@Column(name = "hx_communications_level")
+	private int level; // Level of the communication
+
 	public Integer getId() {
 		return id;
 	}

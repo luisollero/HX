@@ -11,7 +11,7 @@ import com.hx.model.dto.Personality;
  * Clase de utilidad para facilitar el control de transacciones en el trabajo
  * con personajes.
  * 
- * @author kineas
+ * @author Luis Ollero
  * 
  */
 public class PersonalityEngine implements IPersonalityEngine {

@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * Por lo dicho antes, cuando algo afecte a una relación debería, de hecho,
  * afectar siempre a dos.
  * 
- * @author kineas
+ * @author Luis Ollero
  * 
  */
 @Entity

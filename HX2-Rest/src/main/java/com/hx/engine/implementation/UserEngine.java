@@ -12,7 +12,7 @@ import com.hx.model.dto.User;
  * Clase de utilidad para facilitar el control de transacciones en el trabajo
  * con Usuarios.
  * 
- * @author kineas
+ * @author Luis Ollero
  * 
  */
 public class UserEngine implements IUserEngine {

@@ -14,7 +14,7 @@ import org.hibernate.annotations.FetchMode;
 
 /**
  * Regimientos. Unidades mínimas de combate.
- * @author kineas
+ * @author Luis Ollero
  *
  */
 @Entity

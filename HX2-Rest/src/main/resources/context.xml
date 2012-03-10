@@ -45,9 +45,15 @@
 	<bean id="personalityEngine" class="com.hx.engine.implementation.PersonalityEngine" autowire="byName">
 		<property name="daoPersonality" ref="daoPersonality"/>
 	</bean>
+	<bean id="communicationEngine" class="com.hx.engine.implementation.CommunicationEngine" autowire="byName">
+		<property name="daoCommunication" ref="daoCommunication"/>
+	</bean>
 	
 	<!-- Controllers -->
 	<bean id="houseController" class="com.hx.rest.action.HouseController" scope="prototype">
 		<property name="houseEngine" ref="houseEngine"/>
+	</bean>
+	<bean id="communicationController" class="com.hx.rest.action.CommunicationController" scope="prototype">
+		<property name="communicationEngine" ref="communicationEngine"/>
 	</bean>
 </beans>

@@ -7,7 +7,7 @@ import com.hx.model.dao.IDAOCommon;
 import com.hx.model.dto.Message;
 
 /**
- * @author kineas
+ * @author Luis Ollero
  *
  */
 public interface IDAOMessage extends IDAOCommon<Message> {
