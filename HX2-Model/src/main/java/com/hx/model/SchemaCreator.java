@@ -33,8 +33,6 @@ public class SchemaCreator implements ApplicationContextAware {
 		configuration.setProperty("hibernate.connection.username", dataSource.getUser());
 		configuration.setProperty("hibernate.connection.password", dataSource.getPassword());
 
-		
-		
 		@SuppressWarnings("unchecked")
 		List<Class<?>> annotatedClasses = (List<Class<?>>) applicationContext
 				.getBean("annotatedClasses", List.class);
@@ -44,16 +42,8 @@ public class SchemaCreator implements ApplicationContextAware {
 		}
 
 		SchemaExport schemaExport = new SchemaExport(configuration);
+		schemaExport.drop(true, false);
 		schemaExport.create(false, true);
-//		TODO generar un script SQL (generate schema)
-//		Problemas con el ";" después de cada linea
-//		configuration.generateSchemaCreationScript(new MySQL5InnoDBDialect());
-//		SchemaExport schemaExport = new SchemaExport(configuration);
-//		schemaExport.setOutputFile(
-//			"/home/agarcia/workspace/model/src/main/databases/global/create_DIXIRED-schema.sql");
-//		schemaExport.setFormat(true);
-//		schemaExport.create(true, true);
-		
 	}
 
 	@Override

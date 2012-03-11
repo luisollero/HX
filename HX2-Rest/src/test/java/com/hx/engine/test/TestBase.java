@@ -8,6 +8,7 @@ import org.apache.log4j.SimpleLayout;
 import org.junit.Before;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.hx.engine.ICommunicationEngine;
 import com.hx.engine.IHouseEngine;
 import com.hx.engine.IPersonalityEngine;
 import com.hx.engine.IRegimentEngine;
@@ -50,6 +51,10 @@ public class TestBase {
 
 	public IRegimentEngine getRegimentEngine() {
 		return (IRegimentEngine) context.getBean("regimentEngine", IRegimentEngine.class);
+	}
+	
+	public ICommunicationEngine getCommunicationEngine() {
+		return (ICommunicationEngine) context.getBean("communicationEngine", ICommunicationEngine.class);
 	}
 
 }

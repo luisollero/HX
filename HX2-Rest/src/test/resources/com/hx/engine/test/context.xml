@@ -29,7 +29,7 @@
 	<import resource="classpath:/com/hx/model/persistence.xml"/>
 	<import resource="classpath:/com/hx/model/dao/ethereal/dao.xml"/>
 
-	<!-- Motores -->
+	<!-- Engines -->
 	<bean id="userEngine" class="com.hx.engine.implementation.UserEngine">
 		<property name="daoUser" ref="daoUser"/>
 	</bean>
@@ -45,5 +45,8 @@
 	<bean id="personalityEngine" class="com.hx.engine.implementation.PersonalityEngine">
 		<property name="daoPersonality" ref="daoPersonality"/>
 	</bean>	
+	<bean id="communicationEngine" class="com.hx.engine.implementation.CommunicationEngine">
+		<property name="daoCommunication" ref="daoCommunication"/>
+	</bean>
 
 </beans>

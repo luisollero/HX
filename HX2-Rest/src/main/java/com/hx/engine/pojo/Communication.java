@@ -1,11 +1,13 @@
 package com.hx.engine.pojo;
 
+import java.util.Date;
+
 /**
  * 
  * @author Luis Ollero
  *
  */
-public class Communication  {
+public class Communication implements Pojo {
 
 	private Integer communicationId;
 	private Integer fromId;
@@ -87,6 +89,15 @@ public class Communication  {
 
 	public void setKarma(Integer karma) {
 		this.karma = karma;
+	}
+
+	public Object toDTO() {
+		com.hx.model.dto.Communication comm = new com.hx.model.dto.Communication();
+		comm.setId(this.communicationId);
+		comm.setMessage(this.getBody());
+		comm.setSendingDate(new Date(this.time));
+		comm.setSubject(this.subject);
+		return comm;
 	}
 
 }

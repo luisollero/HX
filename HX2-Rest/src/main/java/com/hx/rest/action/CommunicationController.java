@@ -1,5 +1,7 @@
 package com.hx.rest.action;
 
+import java.util.Collection;
+
 import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,22 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.hx.engine.ICommunicationEngine;
 import com.hx.engine.pojo.Communication;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAwareSupport;
 
-public class CommunicationController extends ValidationAwareSupport implements
-		ModelDriven<Communication>, Validateable {
-
-	private static final long serialVersionUID = 6134808879242484608L;
+public class CommunicationController implements ModelDriven<Object> {
 
 	private String id;
 	private Communication communication = new Communication();
+	private Collection<Communication> list;
 	
 	private ICommunicationEngine communicationEngine;
 
 	// GET /test/1
 	public HttpHeaders show() {
-//		communication.setName(houseEngine.getById(id).getName());
+		// communication.setName(houseEngine.getById(id).getName());
 		communication.setCommunicationId(1);
 		communication.setFromId(1);
 		communication.setFromName("from name");
@@ -31,16 +29,29 @@ public class CommunicationController extends ValidationAwareSupport implements
 		communication.setKarma(2);
 		communication.setBody("Body");
 		communication.setFavorited(true);
-		
+
 		return new DefaultHttpHeaders("show");
 	}
 
-	public void validate() {
-		communication.setBody("validate");
+	public HttpHeaders index() {
+		list = communicationEngine.findAll();
+		return new DefaultHttpHeaders("index");
+	}
+	
+	// POST /communication
+	public HttpHeaders create() throws Exception {
+
+		return new DefaultHttpHeaders("success");
 	}
 
-	public Communication getModel() {
-		return communication;
+	// PUT /communication/1
+	public String update() throws Exception {
+		communicationEngine.saveOrUpdate((com.hx.model.dto.Communication)communication.toDTO());
+		return "success";
+	}
+
+	public Object getModel() {
+		return (list != null ? list : communication);
 	}
 
 	public String getId() {
@@ -55,7 +66,5 @@ public class CommunicationController extends ValidationAwareSupport implements
 	public void setCommunicationEngine(ICommunicationEngine communicationEngine) {
 		this.communicationEngine = communicationEngine;
 	}
-	
-	
 
 }

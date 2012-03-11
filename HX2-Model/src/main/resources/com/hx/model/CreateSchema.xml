@@ -28,5 +28,6 @@
 	<import resource="classpath:/com/hx/model/dataSources.xml" />
 	<import resource="classpath:/com/hx/model/annotatedClasses.xml" />
 	<import resource="classpath:/com/hx/model/persistence.xml" />
+	<import resource="classpath:/com/hx/model/dao/ethereal/dao.xml" />
 
 </beans>

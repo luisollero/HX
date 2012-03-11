@@ -1,33 +1,47 @@
 package com.hx.engine.test;
 
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Test;
 
+import com.hx.model.dto.Communication;
 import com.hx.model.dto.Experience;
 import com.hx.model.dto.House;
 import com.hx.model.dto.Personality;
 import com.hx.model.dto.Regiment;
 import com.hx.model.dto.Sector;
+import com.hx.model.dto.User;
+import com.hx.model.dto.UserStatus;
 import com.hx.model.util.HXKeys;
 
 /**
- * Rellena los campos base de la DB
+ * Fill the DB. FIXME: Move from here.
  * @author Luis Ollero
  *
  */
 public class Populate extends TestBase {
+
+	private User user1;
+	private User user2;
+	private Personality personality;
 
 	/**
 	 * Comenta lo que no sea necesario que se regenere
 	 */
 	@Test
 	public void populate() {
-		insertHouses();
-		insertSectors();
-		insertRegiments();
-		insertPersonalities();
+//		insertHouses();
+//		insertSectors();
+//		insertRegiments();
+		insertUsers();
+		insertCommunications();
+//		insertPersonalities();
 	}
 	
+
 	/**
 	 * Casas
 	 */
@@ -78,6 +92,19 @@ public class Populate extends TestBase {
 		
 	}
 
+	
+	private void insertCommunications() {
+		Communication comm = new Communication();
+		comm.setSubject("Dummy subject");
+		comm.setMessage("Dummy message");
+		comm.setPublishedIn("Star of Sian");
+		comm.setSendingDate(new Date());
+		comm.setLevel(0);
+		comm.setFrom(personality);
+		getCommunicationEngine().saveOrUpdate(comm);
+	}
+
+	
 	/**
 	 * 
 	 * Guarda un sector
@@ -114,47 +141,55 @@ public class Populate extends TestBase {
 	}
 	
 	public void insertPersonalities() {
-		Personality personality;
 		
+
+//		getPersonalityEngine().saveOrUpdate(personality);
+		
+//		personality = new Personality();
+//		personality.setHouse(new House(HXKeys.COMSTAR));
+//		personality.setId("1");
+//		getPersonalityEngine().saveOrUpdate(personality);
+//		
+//		personality = new Personality();
+//		personality.setHouse(new House(HXKeys.DAVION));
+//		personality.setId("1");
+//		getPersonalityEngine().saveOrUpdate(personality);
+//		
+//		personality = new Personality();
+//		personality.setHouse(new House(HXKeys.KURITA));
+//		personality.setId("2");
+//		getPersonalityEngine().saveOrUpdate(personality);
+//		
+//		
+//		personality = new Personality();
+//		personality.setHouse(new House(HXKeys.LIAO));
+//		personality.setId("3");
+//		getPersonalityEngine().saveOrUpdate(personality);
+//
+//		personality = new Personality();
+//		personality.setHouse(new House(HXKeys.MARIK));
+//		personality.setId("4");
+//		getPersonalityEngine().saveOrUpdate(personality);
+		
+	}
+
+	private void insertUsers() {
+		Set<Personality> set = new HashSet<Personality>();
 		personality = new Personality();
 		personality.setHouse(new House(HXKeys.COMSTAR));
 		personality.setId("0");
-		personality.setCompleteName("Luis Ollero Liao");
-		getPersonalityEngine().saveOrUpdate(personality);
+		personality.setCompleteName("Kineas Liao");
+		set.add(personality);
 		
-		personality = new Personality();
-		personality.setHouse(new House(HXKeys.COMSTAR));
-		personality.setId("1");
-//		User user = new User();
-//		user.setId("Luis Ollero");
-//		personality.setUser(user);
-		getPersonalityEngine().saveOrUpdate(personality);
-		
-		personality = new Personality();
-		personality.setHouse(new House(HXKeys.DAVION));
-		personality.setId("1");
-		getPersonalityEngine().saveOrUpdate(personality);
-		
-		personality = new Personality();
-		personality.setHouse(new House(HXKeys.KURITA));
-		personality.setId("2");
-		getPersonalityEngine().saveOrUpdate(personality);
-		
-		
-		personality = new Personality();
-		personality.setHouse(new House(HXKeys.LIAO));
-		personality.setId("3");
-		getPersonalityEngine().saveOrUpdate(personality);
-
-		personality = new Personality();
-		personality.setHouse(new House(HXKeys.MARIK));
-		personality.setId("4");
-		getPersonalityEngine().saveOrUpdate(personality);
+		user1  = new User();
+		user1.setId("Luis Ollero");
+		user1.setPersonalities(set);
+		user1.setStatus(UserStatus.ACTIVE);
+		getUserEngine().saveOrUpdate(user1);
 		
 	}
-	
 	/**
-	 * Regimientos.
+	 * Regiments.
 	 */
 	private void insertRegiments() {
 		

@@ -18,6 +18,6 @@ public interface IHouseEngine {
 	void delete(House house);
 
 	@Transactional
-	Collection<House> findAll();
+	Collection<com.hx.engine.pojo.House> findAll();
 
 }

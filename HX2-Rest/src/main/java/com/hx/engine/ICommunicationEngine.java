@@ -18,6 +18,6 @@ public interface ICommunicationEngine {
 	void delete(Communication communication);
 
 	@Transactional
-	Collection<Communication> findAll();
+	Collection<com.hx.engine.pojo.Communication> findAll();
 
 }

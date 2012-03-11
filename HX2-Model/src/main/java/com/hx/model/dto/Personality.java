@@ -36,7 +36,9 @@ public class Personality {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@OneToOne(mappedBy="personality")
+	@ManyToOne
+	@Fetch(FetchMode.SELECT)
+	@JoinColumn(name="hx_personality_user", referencedColumnName="hx_user_id")
 	private User user;
 	
 	@OneToOne(mappedBy="lord")
@@ -53,7 +55,7 @@ public class Personality {
 	private String completeName;
 	
 	@OneToMany(mappedBy="personality")
-	private Set<Sector> sectors = new HashSet<Sector>();  // Conjunto de sectores controlados por el pj
+	private Set<Sector> sectors = new HashSet<Sector>();  // Sectors ruled by the PC
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
@@ -122,6 +124,7 @@ public class Personality {
 	public void setHome(Sector home) {
 		this.home = home;
 	}
+	
 	@Override
 	public String toString() {
 		return this.completeName + " || " + this.user.toString();

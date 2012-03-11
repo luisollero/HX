@@ -32,8 +32,8 @@ public class Communication {
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "hx_communications_from", referencedColumnName = "hx_user_id")
-	private User from; // User that sends the communication
+	@JoinColumn(name = "hx_communications_from", referencedColumnName = "hx_personality_id")
+	private Personality from; // User that sends the communication
 
 	@Column(name = "hx_communications_subject", length = 25)
 	private String subject;
@@ -41,6 +41,9 @@ public class Communication {
 	@Column(name = "hx_communications_message", length = 5000)
 	private String message; // Body
 
+	@Column(name = "hx_communications_published", length = 30)
+	private String publishedIn;
+	
 	@Column(name = "hx_communications_sending_date")
 	private Date sendingDate;
 
@@ -55,11 +58,11 @@ public class Communication {
 		this.id = id;
 	}
 
-	public User getFrom() {
+	public Personality getFrom() {
 		return from;
 	}
 
-	public void setFrom(User from) {
+	public void setFrom(Personality from) {
 		this.from = from;
 	}
 
@@ -93,6 +96,14 @@ public class Communication {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	public String getPublishedIn() {
+		return publishedIn;
+	}
+
+	public void setPublishedIn(String publishedIn) {
+		this.publishedIn = publishedIn;
 	}
 
 	@Override

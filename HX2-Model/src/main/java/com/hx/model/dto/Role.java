@@ -4,12 +4,12 @@
 package com.hx.model.dto;
 
 /**
- * Rol de un personaje. 
+ * Personality role. 
  * @author Luis Ollero
  * 
  */
 public enum Role {
 
-	ADMINISTRADOR, PRIMUS, CAPISCOL, PRINCIPE, DUQUE, NOBLE
+	PRIMUS, MARTIAL_PRECENTOR, PRECENTOR, PRINCE, DUKE, NOBLE, MERCENARY
 	
 }
