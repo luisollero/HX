@@ -1,9 +1,25 @@
-WHAT IS?
+WHAT IS THIS?
 
 Highexplosive is not a clone of Ogame, Travian or similar browser games. Highexplosive is a role and strategy game, with game directors that could consent in the violation of the rules if the circumstance is appropiate.
 
-Highexplosive is an asynchronous turn game. A player chooses between multiple options at the pace he wants and, after he is done, he presses the end turn button. Whenever all the princes of the different houses have pressed this end turn button, the turn ends and a new one starts. This will be explained in detail below.
-
 Highexplosive is a social game, but not massive. This means that the number of players are very limited towards what the game directors consider. In a first place, I will recommend about 6 players per house for a total number o 36 people in a session. Of course, this number is flexible and later experiences could move it towards a bigger (or smaller) figure. 
 
-In Highexplosive players took the role of one (and only one) noble of a powerful planet confederation called House. They can decide in the economy, the politics, espionage or warfare of their portion of universe. How powerful a player is, is determined by his level in the hierarchy of the House.  Varying from the control of the whole House (called, the prince), to the control of a single sector within the reign (a minor noble).  Of course, during the game, the position of the different nobles could be changed by external or internal happenings.
+In Highexplosive players took the role of one (and only one) noble of a powerful planet confederation called House. The players team up with the rest of the players in their House fighting against the rest factions. They can decide in the economy, the politics, espionage or warfare of their portion of universe. How powerful a player is, is determined by his level in the hierarchy of the House.  Varying from the control of the whole faction (called, the prince), to the control of a single sector within the reign (a minor noble).  Of course, during the game, the position of the different nobles could be changed by external or internal events.
+
+THE TECHNOLOGY BEHIND:
+
+There are two separate parts in the development of Highexplosive. The first one is the server side, consisting in three different Java (Maven) projects as described below:
+
+- Persistence. Is where the dynamic creation of DAOs and handling their methods take place. Its a simple Maven project.
+- Model. Where the DAOs are declared and the Model is constructed. All the entities are annotated. It is a Maven project, using Spring as dependency management. The DB properties are also declared here (I have used MySql as default, in the schema HX). Use CreateSchema class to create the DB structure and Population to create the initial (dummy) data.
+- Rest. I tried to create an agnostic way of exposing the data so any kind of client should be (in theory) able to work against the server. Technology used is Maven + Spring + Struts (REST plugin). The project accepts either xml or Json, but for all the examples I used the latter. The result of the build is a WAR file that I use to deploy in a Tomcat app container.
+
+In the client side, I started an Android application able to communicate with the server (retrieve data, store it, etc...) but any other kind of client should be possible (Web, desktop, smartphone...). As I don't really expect to finish it soon, I set the target API to ICS (4.0) but changing it to a minor version should be easy modifying just a few of things. (JSONReader cames to my mind right now).
+
+THE CREATOR:
+
+Luis Ollero, spanish dev working currently in Amsterdam. You can find me:
+
+Mail: luisollero@gmail.com
+Twitter: luisollero
+Google+: https://plus.google.com/114199839078346023401/about
