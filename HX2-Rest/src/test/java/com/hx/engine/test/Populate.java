@@ -12,6 +12,7 @@ import com.hx.model.dto.Experience;
 import com.hx.model.dto.House;
 import com.hx.model.dto.Personality;
 import com.hx.model.dto.Regiment;
+import com.hx.model.dto.Scope;
 import com.hx.model.dto.Sector;
 import com.hx.model.dto.User;
 import com.hx.model.dto.UserStatus;
@@ -99,7 +100,7 @@ public class Populate extends TestBase {
 		comm.setMessage("Dummy message");
 		comm.setPublishedIn("Star of Sian");
 		comm.setSendingDate(new Date());
-		comm.setLevel(0);
+		comm.setScope(Scope.INNER_SPHERE);
 		comm.setFrom(personality);
 		getCommunicationEngine().saveOrUpdate(comm);
 	}

@@ -6,6 +6,7 @@ import com.hx.model.dto.Communication;
 import com.hx.model.dto.House;
 import com.hx.model.dto.Personality;
 import com.hx.model.dto.Role;
+import com.hx.model.dto.Scope;
 import com.hx.model.dto.Sector;
 import com.hx.model.dto.User;
 import com.hx.model.dto.UserStatus;
@@ -29,6 +30,11 @@ public class Population {
 	// Personalities
 	private static Personality kineasLiao;
 
+	private static User tsunami;
+
+	private static Personality vitorDavion;
+
+	// Here we go
 	public static void main(String[] args) {
 		config.setUp();
 		insertFactions();
@@ -113,28 +119,55 @@ public class Population {
 		luisOllero.setMail("luisollero@gmail.com");
 		luisOllero.setName("Luis Ollero");
 		config.getDaoUser().saveOrUpdate(luisOllero);
+		
+		tsunami  = new User();
+		tsunami.setId("1");
+		tsunami.setStatus(UserStatus.ACTIVE);
+		tsunami.setApplication("Test application");
+		tsunami.setMail("tsunami@tsunami.com");
+		tsunami.setName("Tsunami");
+		config.getDaoUser().saveOrUpdate(tsunami);
 	}
 	
 	private static void insertPersonalities() {
 		kineasLiao = new Personality();
 		kineasLiao.setId("0");
-		kineasLiao.setHouse(comstar);
+		kineasLiao.setHouse(liao);
 		kineasLiao.setName("Kineas");
 		kineasLiao.setCompleteName("Kineas Liao");
 		kineasLiao.setUser(luisOllero);
 		kineasLiao.setInfluence(0);
-		kineasLiao.setRole(Role.PRIMUS);
+		kineasLiao.setRole(Role.PRINCE);
 		config.getDaoPersonality().saveOrUpdate(kineasLiao);
+		
+		vitorDavion = new Personality();
+		vitorDavion.setId("1");
+		vitorDavion.setHouse(davion);
+		vitorDavion.setName("Vitor");
+		vitorDavion.setCompleteName("Vitor Davion");
+		vitorDavion.setUser(tsunami);
+		vitorDavion.setInfluence(0);
+		vitorDavion.setRole(Role.PRINCE);
+		config.getDaoPersonality().saveOrUpdate(vitorDavion);
 	}
 
 	private static void insertCommunications() {
 		Communication comm = new Communication();
-		comm.setSubject("Dummy subject");
-		comm.setMessage("Dummy message");
+		comm.setSubject("The troops attacking New Syrtis!");
+		comm.setMessage("In an unexpected turn of announcements, our brave troops are advancing without problems over the defenses of the Federated Suns.");
 		comm.setPublishedIn("Star of Sian");
 		comm.setSendingDate(new Date());
-		comm.setLevel(kineasLiao.getInfluence());
+		comm.setScope(Scope.INNER_SPHERE);
 		comm.setFrom(kineasLiao);
+		config.getDaoCommunication().saveOrUpdate(comm);
+		
+		comm = new Communication();
+		comm.setSubject("Our troops exercising in New Syrtis");
+		comm.setMessage("Our troops are currently playing some war games in turtle bay. We encourage our citizens not to move over there during the next days.");
+		comm.setPublishedIn("Herald of New Syrtis");
+		comm.setSendingDate(new Date());
+		comm.setScope(Scope.INNER_SPHERE);
+		comm.setFrom(vitorDavion);
 		config.getDaoCommunication().saveOrUpdate(comm);
 	}
 }
