@@ -12,7 +12,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * Sector. Entidad mínima de carácter geográfico.
+ * Sector. Minimum geographic entity.
  * @author Luis Ollero
  *
  */
@@ -64,13 +64,21 @@ public class Sector {
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="hx_sector_personality", referencedColumnName="hx_personality_id")
-	private Personality personality;		// Duque que gobierna el sector
+	private Personality personality;		// Who rules de sector
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="hx_sector_suplyline", referencedColumnName="hx_suplyline_id")
 	private SuplyLine suplyLine;		// Pertenece o no a una línea de suministros
 	
+	public Sector(String homeSectorId) {
+		this.id = homeSectorId;
+	}
+	
+	public Sector() {
+		// TODO Auto-generated constructor stub
+	}
+
 	//Setters and getters
 	public String getId() {
 		return id;

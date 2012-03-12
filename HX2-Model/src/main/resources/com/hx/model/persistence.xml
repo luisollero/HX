@@ -30,8 +30,6 @@
                 <prop key="c3p0.max_size">${c3p0.max_size}</prop>
                 <prop key="c3p0.max_statements">${c3p0.max_statements}</prop>
                 <prop key="c3p0.timeout">${c3p0.timeout}</prop>
-				<!-- Sólo actualiza si ha habido cambios -->
-				<!-- <prop key="hibernate.hbm2ddl.auto">validate</prop> -->
 			</props>
 		</property>
 
@@ -43,11 +41,6 @@
 					<bean
 						class="org.springframework.orm.hibernate3.support.IdTransferringMergeEventListener" />
   				</entry>
-<!--
-   				<entry key="pre-delete">
- 					<bean class="com.hx.cms.PreDeleteListener"/>
-   				</entry>
--->
             </map>
 		</property>
 
@@ -56,19 +49,6 @@
 
 	<bean id="backofficeInterceptor" class="com.hx.model.Interceptor"/>
 	<alias name="backofficeInterceptor" alias="applicationInterceptor"/>
-	
-	<!-- Beans de los interceptors para hibernate se encuentra declarado en el contexto components.xml del proyecto cms.components
-		<bean id="preDeleteInterceptor" class="com.hx.cms.PreDeleteInterceptor" parent="backofficeInterceptor" /> -->
-	
-	<!-- El bean que realiza esta acción de interceptor se encuentra en el contexto components.xml del cms.
-	Ya que necesita acceso a otros ds. Vease que se utiliza un alias para asignarla a "applicationInterceptor", Ejemplo:
-			
-			<alias name="backofficeInterceptor" alias="applicationInterceptor"/> 
-			<alias name="preDeleteInterceptor" alias="applicationInterceptor"/>
-	
-		Se usa el alias "preDeleteInterceptor" si estamos usando el 
-	contexto cms.components, sino, usaremos el alias "backofficeInterceptor". 
-	Como ejemplo tenemos el contexto aggregator-manager, que utiliza el alias backoffice -->
 	
 	<bean id="sessionFactory" parent="commonSessionFactory">
 		<property name="dataSource" ref="dataSource" />
