@@ -31,16 +31,25 @@ public class UserEngine implements IUserEngine {
 		daoUser.saveOrUpdate(user);									
 	}
 	
-	public User getById(String id) {
-		return daoUser.getById(id);
+	public com.hx.engine.pojo.User getById(String id) {
+		User aux = daoUser.getById(id);
+		if (aux != null) {
+			return new com.hx.engine.pojo.User(aux);
+		}
+		return new com.hx.engine.pojo.User("no");
 	}
 	
 	public void delete(User user) {
 		daoUser.delete(user);
 	}
 	
-	public Collection<User> findAll() {
-		return daoUser.find();
+	public Collection<com.hx.engine.pojo.User> findAll() {
+		Collection<com.hx.engine.pojo.User> returnList = new ArrayList<com.hx.engine.pojo.User>();
+		Collection<User> list = daoUser.find();
+		for (User user : list) {
+			returnList.add(new com.hx.engine.pojo.User(user));
+		}
+		return returnList;
 	}
 	
 	public ArrayList<User> findByPersonality(Personality personality) {

@@ -83,84 +83,111 @@ public class Sector {
 	public String getId() {
 		return id;
 	}
+
 	public Integer getDepth() {
 		return depth;
 	}
+
 	public void setDepth(Integer depth) {
 		this.depth = depth;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getProduction() {
 		return production;
 	}
+
 	public void setProduction(Integer production) {
 		this.production = production;
 	}
+
 	public Integer getCoordX() {
 		return coordX;
 	}
+
 	public void setCoordX(Integer coordX) {
 		this.coordX = coordX;
 	}
+
 	public Integer getCoordY() {
 		return coordY;
 	}
+
 	public void setCoordY(Integer coordY) {
 		this.coordY = coordY;
 	}
+
 	public Integer getDefenseBonus() {
 		return defenseBonus;
 	}
+
 	public void setDefenseBonus(Integer defenseBonus) {
 		this.defenseBonus = defenseBonus;
 	}
+
 	public Integer getHappiness() {
 		return happiness;
 	}
+
 	public void setHappiness(Integer happiness) {
 		this.happiness = happiness;
 	}
+
 	public House getLoyalty() {
 		return loyalty;
 	}
+
 	public void setLoyalty(House loyalty) {
 		this.loyalty = loyalty;
 	}
+
 	public House getHouse() {
 		return house;
 	}
+
 	public void setHouse(House house) {
 		this.house = house;
 	}
+
 	public Boolean getDisputed() {
 		return disputed;
 	}
+
 	public void setDisputed(Boolean disputed) {
 		this.disputed = disputed;
 	}
+
 	public SuplyLine getSuplyLine() {
 		return suplyLine;
 	}
+
 	public void setSuplyLine(SuplyLine suplyLine) {
 		this.suplyLine = suplyLine;
 	}
+
 	public Personality getPersonality() {
 		return personality;
 	}
+
 	public void setPersonality(Personality personality) {
 		this.personality = personality;
 	}
+
 	public Personality getLord() {
 		return lord;
 	}
+
 	public void setLord(Personality lord) {
 		this.lord = lord;
 	}

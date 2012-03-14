@@ -15,13 +15,13 @@ public interface IUserEngine {
 	void saveOrUpdate(final User user);
 	
 	@Transactional
-	User getById(String id);
+	com.hx.engine.pojo.User getById(String id);
 	
 	@Transactional
 	void delete(User user);
 	
 	@Transactional
-	Collection<User> findAll();
+	Collection<com.hx.engine.pojo.User> findAll();
 
 	@Transactional
 	ArrayList<User> findByPersonality(Personality personality);
