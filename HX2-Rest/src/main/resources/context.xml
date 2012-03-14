@@ -55,6 +55,7 @@
 	</bean>
 	<bean id="communicationController" class="com.hx.rest.action.CommunicationController" scope="prototype">
 		<property name="communicationEngine" ref="communicationEngine"/>
+		<property name="personalityEngine" ref="personalityEngine"/>
 	</bean>
 	<bean id="userController" class="com.hx.rest.action.UserController" scope="prototype">
 		<property name="userEngine" ref="userEngine"/>

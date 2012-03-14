@@ -14,22 +14,18 @@ public class CommunicationEngine implements ICommunicationEngine {
 	public Collection<com.hx.engine.pojo.Communication> findAll() {
 		Collection<Communication> list = daoCommunication.findWithLazies();
 		ArrayList<com.hx.engine.pojo.Communication> returnList = new ArrayList<com.hx.engine.pojo.Communication>();
-		com.hx.engine.pojo.Communication pojo;
 		for (Communication comm : list) {
-			pojo = new com.hx.engine.pojo.Communication();
-			pojo.setCommunicationId(comm.getId());
-			pojo.setFromName(comm.getFrom().getCompleteName());
-			pojo.setPublishedIn(comm.getPublishedIn());
-			returnList.add(pojo);
+			returnList.add(new com.hx.engine.pojo.Communication(comm));
 		}
 		return returnList;
 	}
 
-	public Communication getById(String id) {
-		if (id != null) {
-			return daoCommunication.getById(id);
+	public com.hx.engine.pojo.Communication getById(String id) {
+		Communication comm = daoCommunication.getById(id);
+		if (comm != null) {
+			return new com.hx.engine.pojo.Communication(comm);
 		}
-		return new Communication();
+		return new com.hx.engine.pojo.Communication(-1);
 	}
 
 	public void saveOrUpdate(Communication communication) {

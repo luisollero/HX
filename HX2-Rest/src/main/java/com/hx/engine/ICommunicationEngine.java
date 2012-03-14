@@ -12,7 +12,7 @@ public interface ICommunicationEngine {
 	void saveOrUpdate(final Communication communication);
 
 	@Transactional
-	Communication getById(String id);
+	com.hx.engine.pojo.Communication getById(String id);
 
 	@Transactional
 	void delete(Communication communication);

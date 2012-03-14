@@ -10,7 +10,7 @@ import java.util.Date;
 public class Communication implements Pojo {
 
 	private Integer communicationId;
-	private Integer fromId;
+	private String fromId;
 	private String fromName;
 	private String publishedIn;
 	private String subject;
@@ -18,6 +18,24 @@ public class Communication implements Pojo {
 	private long time;
 	private boolean favorited;
 	private Integer karma;
+
+	public Communication(Integer id) {
+		this.communicationId = id;
+	}
+
+	public Communication(com.hx.model.dto.Communication comm) {
+		this.communicationId = comm.getId();
+		this.body = comm.getMessage();
+		this.fromId = comm.getFrom().getId();
+		this.fromName = comm.getFrom().getName();
+		this.karma = comm.getKarma();
+		this.publishedIn = comm.getPublishedIn();
+		this.subject = comm.getSubject();
+		this.time = comm.getSendingDate().getTime();
+	}
+
+	public Communication() {
+	}
 
 	public Integer getCommunicationId() {
 		return communicationId;
@@ -27,11 +45,11 @@ public class Communication implements Pojo {
 		this.communicationId = communicationId;
 	}
 
-	public Integer getFromId() {
+	public String getFromId() {
 		return fromId;
 	}
 
-	public void setFromId(Integer fromId) {
+	public void setFromId(String fromId) {
 		this.fromId = fromId;
 	}
 
