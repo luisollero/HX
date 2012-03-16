@@ -7,15 +7,18 @@ import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.highexplosive.client.HXJsonUtils;
+import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
+import com.highexplosive.client.model.Character;
 import com.highexplosive.client.model.Declaration;
+import com.highexplosive.client.model.Role;
 import com.viewpagerindicator.TitleProvider;
 
 public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
@@ -33,6 +36,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	
 	private ListView declarationsListView = null;
 	private ArrayList<Declaration> declarationList = null;
+	private ArrayList<Declaration> factionDeclarationList = null;
 
 	public ViewPagerAdapter(Context context) {
 		this.ctx = context;
@@ -63,13 +67,15 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_LATEST:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_latest, null);
 
+			((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map.json");
+
 			DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
 			declarationsListView = (ListView) linearLayout.findViewById(R.id.mainDeclarationList);
 			declarationsListView.setAdapter(messageAdapter);
 
 			if (declarationList == null) {
 				declarationList = new ArrayList<Declaration>();
-				declarationList = HXJsonUtils.getDeclarationList(ctx);
+				declarationList = HxJsonUtils.getDeclarationList(ctx);
 			}
 
 			for (Declaration declaration : declarationList) {
@@ -80,6 +86,22 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 			break;
 		case POSITION_HOUSE:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_house, null);
+			
+			((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
+			
+			DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+			declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);
+			declarationsListView.setAdapter(houseDeclarationsAdapter);
+
+			if (factionDeclarationList == null) {
+				factionDeclarationList = new ArrayList<Declaration>();
+				factionDeclarationList = HxJsonUtils.getDeclarationList(ctx);
+			}
+
+			for (Declaration declaration : factionDeclarationList) {
+				houseDeclarationsAdapter.add(declaration);
+			}
+			
 			((ViewPager) collection).addView(linearLayout, 0);
 			break;
 		case POSITION_MESSAGES:
@@ -88,6 +110,17 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 			break;
 		case POSITION_PROFILE:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_profile, null);
+			Character character = HxJsonUtils.getCharacterDetail(ctx, 0);
+			
+			((TextView)linearLayout.findViewById(R.id.profileName)).setText(character.getName());
+			((TextView)linearLayout.findViewById(R.id.profileKarma)).setText("" + character.getKarma());
+			((TextView)linearLayout.findViewById(R.id.profileDeclarations)).setText("" + character.getNumberOfDeclarations());
+			((TextView)linearLayout.findViewById(R.id.profileRole)).setText(Role.values()[character.getRole()].name());
+			((TextView)linearLayout.findViewById(R.id.profileSince)).setText(DateUtils
+					.formatDateTime(ctx, character.getCreationDate(),
+							DateUtils.FORMAT_24HOUR));
+			((TextView)linearLayout.findViewById(R.id.profileBio)).setText(character.getName());
+			
 			((ViewPager) collection).addView(linearLayout, 0);
 			break;
 		default:

@@ -23,6 +23,11 @@ public final class R {
         public static final int gd_shrink_from_topleft_to_bottomright=0x7f04000b;
         public static final int gd_shrink_from_topright_to_bottomleft=0x7f04000c;
     }
+    public static final class array {
+        public static final int register_comroles_array=0x7f0c0001;
+        public static final int register_factions_array=0x7f0c0002;
+        public static final int register_isroles_array=0x7f0c0000;
+    }
     public static final class attr {
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -840,6 +845,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int default_title_indicator_selected_bold=0x7f070002;
     }
     public static final class color {
+        public static final int color_comstar=0x7f060015;
+        public static final int color_davion=0x7f060011;
+        public static final int color_kurita=0x7f060012;
+        public static final int color_liao=0x7f060013;
+        public static final int color_marik=0x7f060010;
+        public static final int color_steiner=0x7f060014;
         public static final int default_circle_indicator_fill_color=0x7f060008;
         public static final int default_circle_indicator_page_color=0x7f060009;
         public static final int default_circle_indicator_stroke_color=0x7f06000a;
@@ -856,8 +867,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int vpi__bright_foreground_holo_light=0x7f060003;
         public static final int vpi__bright_foreground_inverse_holo_dark=0x7f060006;
         public static final int vpi__bright_foreground_inverse_holo_light=0x7f060007;
-        public static final int vpi__dark_theme=0x7f060010;
-        public static final int vpi__light_theme=0x7f060011;
+        public static final int vpi__dark_theme=0x7f060016;
+        public static final int vpi__light_theme=0x7f060017;
     }
     public static final class dimen {
         public static final int default_circle_indicator_radius=0x7f090000;
@@ -961,18 +972,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gd_tab_indicator_selected=0x7f020049;
         public static final int gd_tab_indicator_unselected=0x7f02004a;
         public static final int ic_launcher=0x7f02004b;
-        public static final int option_gradient=0x7f02004c;
-        public static final int vpi__tab_indicator=0x7f02004d;
-        public static final int vpi__tab_selected_focused_holo=0x7f02004e;
-        public static final int vpi__tab_selected_holo=0x7f02004f;
-        public static final int vpi__tab_selected_pressed_holo=0x7f020050;
-        public static final int vpi__tab_unselected_focused_holo=0x7f020051;
-        public static final int vpi__tab_unselected_holo=0x7f020052;
-        public static final int vpi__tab_unselected_pressed_holo=0x7f020053;
+        public static final int logo=0x7f02004c;
+        public static final int option_gradient=0x7f02004d;
+        public static final int vpi__tab_indicator=0x7f02004e;
+        public static final int vpi__tab_selected_focused_holo=0x7f02004f;
+        public static final int vpi__tab_selected_holo=0x7f020050;
+        public static final int vpi__tab_selected_pressed_holo=0x7f020051;
+        public static final int vpi__tab_unselected_focused_holo=0x7f020052;
+        public static final int vpi__tab_unselected_holo=0x7f020053;
+        public static final int vpi__tab_unselected_pressed_holo=0x7f020054;
     }
     public static final class id {
         public static final int backInDetail=0x7f05001b;
         public static final int bottom=0x7f05000d;
+        public static final int button1=0x7f05004b;
         public static final int center=0x7f050012;
         public static final int center_horizontal=0x7f050011;
         public static final int center_vertical=0x7f050010;
@@ -985,6 +998,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int declarationSubjectInDetail=0x7f05001f;
         public static final int declarationTime=0x7f05001e;
         public static final int empty=0x7f050007;
+        public static final int factionDeclarationList=0x7f050041;
+        public static final int factionMap=0x7f050040;
         public static final int gd_action_bar=0x7f050017;
         public static final int gd_action_bar_content_view=0x7f050019;
         public static final int gd_action_bar_home_item=0x7f050023;
@@ -1012,25 +1027,43 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gdi_scroll=0x7f05002d;
         public static final int hdpi=0x7f05000a;
         public static final int horizontal=0x7f050000;
-        public static final int imageView1=0x7f05003c;
-        public static final int isMap=0x7f05003a;
-        public static final int latest=0x7f050039;
+        public static final int imageView1=0x7f050037;
+        public static final int isMap=0x7f050043;
+        public static final int latest=0x7f050042;
         public static final int ldpi=0x7f050008;
         public static final int left=0x7f05000e;
-        public static final int mainDeclarationList=0x7f05003b;
+        public static final int loginButton=0x7f05003c;
+        public static final int loginPass=0x7f05003b;
+        public static final int loginRegister=0x7f05003d;
+        public static final int loginUser=0x7f050039;
+        public static final int mainDeclarationList=0x7f050044;
         public static final int mdpi=0x7f050009;
         public static final int multiple=0x7f050014;
         public static final int none=0x7f050002;
         public static final int normal=0x7f050005;
         public static final int plusOneInDetail=0x7f05001a;
+        public static final int profileBio=0x7f050048;
+        public static final int profileDeclarations=0x7f05004a;
+        public static final int profileKarma=0x7f050047;
+        public static final int profileName=0x7f050045;
+        public static final int profileRole=0x7f050046;
+        public static final int profileSince=0x7f050049;
+        public static final int registerButton=0x7f050051;
+        public static final int registerFaction=0x7f05004e;
+        public static final int registerMail=0x7f05004d;
+        public static final int registerMotivation=0x7f050050;
+        public static final int registerRole=0x7f05004f;
+        public static final int registerUser=0x7f05004c;
         public static final int right=0x7f05000f;
         public static final int single=0x7f050013;
-        public static final int title=0x7f050037;
+        public static final int textView1=0x7f050038;
+        public static final int textView2=0x7f05003a;
+        public static final int title=0x7f05003e;
         public static final int top=0x7f05000c;
         public static final int triangle=0x7f050003;
         public static final int underline=0x7f050004;
         public static final int vertical=0x7f050001;
-        public static final int viewpager=0x7f050038;
+        public static final int viewpager=0x7f05003f;
         public static final int xhdpi=0x7f05000b;
     }
     public static final class integer {
@@ -1070,21 +1103,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gd_tab_indicator=0x7f03001d;
         public static final int gd_text_item_view=0x7f03001e;
         public static final int gd_thumbnail_item_view=0x7f03001f;
-        public static final int main=0x7f030020;
-        public static final int main_house=0x7f030021;
-        public static final int main_latest=0x7f030022;
-        public static final int main_messages=0x7f030023;
-        public static final int main_profile=0x7f030024;
-        public static final int vpi__tab=0x7f030025;
+        public static final int login=0x7f030020;
+        public static final int main=0x7f030021;
+        public static final int main_house=0x7f030022;
+        public static final int main_latest=0x7f030023;
+        public static final int main_messages=0x7f030024;
+        public static final int main_profile=0x7f030025;
+        public static final int register=0x7f030026;
+        public static final int vpi__tab=0x7f030027;
     }
     public static final class string {
         public static final int app_name=0x7f0b001c;
-        public static final int declaration_content=0x7f0b002a;
-        public static final int declaration_from=0x7f0b0026;
-        public static final int declaration_published=0x7f0b0027;
-        public static final int declaration_subject=0x7f0b0029;
-        public static final int declaration_time=0x7f0b0028;
+        public static final int declaration_content=0x7f0b002b;
+        public static final int declaration_from=0x7f0b0027;
+        public static final int declaration_published=0x7f0b0028;
+        public static final int declaration_subject=0x7f0b002a;
+        public static final int declaration_time=0x7f0b0029;
         public static final int dummy_text=0x7f0b001d;
+        public static final int dummy_text_long=0x7f0b001e;
         public static final int gd_add=0x7f0b000b;
         public static final int gd_all_friends=0x7f0b0017;
         public static final int gd_compass=0x7f0b0010;
@@ -1113,15 +1149,41 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gd_take_photo=0x7f0b0007;
         public static final int gd_talk=0x7f0b0002;
         public static final int gd_trashcan=0x7f0b0015;
-        public static final int main_arrow_left=0x7f0b002b;
-        public static final int section_house=0x7f0b001f;
-        public static final int section_house_header=0x7f0b0023;
-        public static final int section_latest=0x7f0b001e;
-        public static final int section_latest_header=0x7f0b0022;
-        public static final int section_messages=0x7f0b0020;
-        public static final int section_messages_header=0x7f0b0024;
-        public static final int section_profile=0x7f0b0021;
-        public static final int section_profile_header=0x7f0b0025;
+        public static final int login_button=0x7f0b0035;
+        public static final int login_logo=0x7f0b0039;
+        public static final int login_password=0x7f0b0038;
+        public static final int login_register=0x7f0b0036;
+        public static final int login_user=0x7f0b0037;
+        /**      <string name="main_arrow_left">&lt;-</string> 
+         */
+        public static final int main_arrow_left=0x7f0b002c;
+        public static final int profile_bio=0x7f0b0030;
+        public static final int profile_declarations=0x7f0b0033;
+        public static final int profile_endturn=0x7f0b0034;
+        public static final int profile_image=0x7f0b002d;
+        public static final int profile_karma=0x7f0b0031;
+        public static final int profile_name=0x7f0b002e;
+        public static final int profile_role=0x7f0b002f;
+        public static final int profile_since=0x7f0b0032;
+        public static final int register_button=0x7f0b003f;
+        public static final int register_cancel=0x7f0b0041;
+        public static final int register_comstar=0x7f0b0044;
+        public static final int register_faction=0x7f0b003c;
+        public static final int register_fill_all_fields=0x7f0b0042;
+        public static final int register_mail=0x7f0b003d;
+        public static final int register_motivation=0x7f0b003a;
+        public static final int register_ok=0x7f0b0040;
+        public static final int register_popup=0x7f0b0043;
+        public static final int register_role=0x7f0b003b;
+        public static final int register_user=0x7f0b003e;
+        public static final int section_house=0x7f0b0020;
+        public static final int section_house_header=0x7f0b0024;
+        public static final int section_latest=0x7f0b001f;
+        public static final int section_latest_header=0x7f0b0023;
+        public static final int section_messages=0x7f0b0021;
+        public static final int section_messages_header=0x7f0b0025;
+        public static final int section_profile=0x7f0b0022;
+        public static final int section_profile_header=0x7f0b0026;
     }
     public static final class style {
         public static final int GreenDroid=0x7f0a000d;

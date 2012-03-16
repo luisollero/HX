@@ -2,39 +2,39 @@ package com.highexplosive.client.model;
 
 public class Character {
 
-	private int characterId;
-	private int house;
-	private int userId;
-	private int positionInHouse;
+	private String characterId;
+	private String house;
+	private String userId;
+	private int role;
 
 	private String name;
 	private String bio;
 	private int karma;
 	private int numberOfDeclarations;
-	private int creationDate;
+	private long creationDate;
 	private boolean turnEnded;
 
-	public int getCharacterId() {
+	public String getCharacterId() {
 		return characterId;
 	}
 
-	public void setCharacterId(int characterId) {
+	public void setCharacterId(String characterId) {
 		this.characterId = characterId;
 	}
 
-	public int getHouse() {
+	public String getHouse() {
 		return house;
 	}
 
-	public void setHouse(int house) {
+	public void setHouse(String house) {
 		this.house = house;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -54,12 +54,12 @@ public class Character {
 		this.bio = bio;
 	}
 
-	public int getPositionInHouse() {
-		return positionInHouse;
+	public int getRole() {
+		return role;
 	}
 
-	public void setPositionInHouse(int positionInHouse) {
-		this.positionInHouse = positionInHouse;
+	public void setRole(int role) {
+		this.role = role;
 	}
 
 	public int getKarma() {
@@ -86,12 +86,22 @@ public class Character {
 		this.numberOfDeclarations = numberOfDeclarations;
 	}
 
-	public int getCreationDate() {
+	public long getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(int creationDate) {
+	public void setCreationDate(long creationDate) {
 		this.creationDate = creationDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Character [characterId=" + characterId + ", house=" + house
+				+ ", userId=" + userId + ", positionInHouse=" + role
+				+ ", name=" + name + ", bio=" + bio + ", karma=" + karma
+				+ ", numberOfDeclarations=" + numberOfDeclarations
+				+ ", creationDate=" + creationDate + ", turnEnded=" + turnEnded
+				+ "]";
+	}
+	
 }

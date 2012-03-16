@@ -4,7 +4,7 @@ package com.highexplosive.client.model;
 /**
  * POJO for declarations in the game
  * 
- * @author luis.pena
+ * @author Luis Ollero
  * 
  */
 public class Declaration {

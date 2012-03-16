@@ -11,10 +11,29 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.highexplosive.client.model.Declaration;
+import com.highexplosive.client.model.Character;
 
-public class HXJsonUtils {
+public class HxJsonUtils {
 
-	private static final String TAG = HXJsonUtils.class.getSimpleName();
+	private static final String TAG = HxJsonUtils.class.getSimpleName();
+
+	/**
+	 * Get the full character from the server
+	 * @param context
+	 * @param declarationId
+	 * @return
+	 */
+	public static Character getCharacterDetail(Context context, int characterId) {
+		Character character = null;
+		try {
+			character = parseCharacter(context.getAssets().open(
+					"json/type_character.json"));
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return character;
+	}
+	
 
 	/**
 	 * Get the full declaration from the server
@@ -41,15 +60,58 @@ public class HXJsonUtils {
 	public static ArrayList<Declaration> getDeclarationList(Context context) {
 		ArrayList<Declaration> declarationList = null;
 		try {
-			declarationList = parseDeclarationList(context.getAssets().open(
-					"json/type_declaration_list.json"));
+			if (HxConstants.ONLINE_MODE) {
+				declarationList = parseDeclarationList(retrieveJSonFromUrl("URL_TO_DECLARATIONS"));
+			} else {
+				declarationList = parseDeclarationList(context.getAssets().open(
+						"json/type_declaration_list.json"));
+			}
 		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 		}
 		return declarationList;
 	}
 
+
 	// Private and aux methods
+	private static Character parseCharacter(InputStream is) {
+		Character character = new Character();
+		JsonReader reader;
+		try {
+			reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+
+			reader.beginObject();
+			while (reader.hasNext()) {
+				String name = reader.nextName();
+				if (name.equals("playerid")) {
+					character.setCharacterId(reader.nextString());
+				} else if (name.equals("name")) {
+					character.setName(reader.nextString());
+				} else if (name.equals("faction")) {
+					character.setHouse(reader.nextString());
+				} else if (name.equals("karma")) {
+					character.setKarma(reader.nextInt());
+				} else if (name.equals("role")) {
+					character.setRole(reader.nextInt());
+				} else if (name.equals("bio")) {
+					character.setBio(reader.nextString());
+				} else if (name.equals("creationdate")) {
+					character.setCreationDate(reader.nextLong());
+				} else if (name.equals("declarations")) {
+					character.setNumberOfDeclarations(reader.nextInt());
+				} else if (name.equals("endedturn")) {
+					character.setTurnEnded(reader.nextBoolean());
+				}
+			}
+			reader.endObject();
+		} catch (UnsupportedEncodingException e) {
+			Log.e(TAG, e.getMessage());
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return character;
+	}
+	
 	private static ArrayList<Declaration> parseDeclarationList(InputStream is) {
 		ArrayList<Declaration> declarationList = new ArrayList<Declaration>();
 		JsonReader reader;
@@ -162,4 +224,8 @@ public class HXJsonUtils {
 		return declaration;
 	}
 
+	private static InputStream retrieveJSonFromUrl(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

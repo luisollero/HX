@@ -19,8 +19,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.highexplosive.client.HXConstants;
-import com.highexplosive.client.HXJsonUtils;
+import com.highexplosive.client.HxConstants;
+import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
 import com.highexplosive.client.model.Declaration;
 
@@ -48,7 +48,7 @@ public class DeclarationDetailActivity extends Activity {
 	 * @param declarationId
 	 */
 	private void retrieveFullDeclaration(int declarationId) {
-		declaration = HXJsonUtils.getDeclarationDetail(this,
+		declaration = HxJsonUtils.getDeclarationDetail(this,
 				declarationId);
 		Log.v(TAG, declaration.toString());
 
@@ -87,7 +87,7 @@ public class DeclarationDetailActivity extends Activity {
 
 	/**
 	 * Update the karma of the declaration
-	 * @author luis.pena
+	 * @author Luis Ollero
 	 *
 	 */
 	private class UpdateKarma extends AsyncTask<Integer, Void, String> {
@@ -95,7 +95,7 @@ public class DeclarationDetailActivity extends Activity {
 		protected String doInBackground(Integer... integers) {
 			String response = "";
 
-			if (HXConstants.ONLINE_MODE) {
+			if (HxConstants.ONLINE_MODE) {
 				DefaultHttpClient client = new DefaultHttpClient();
 				HttpPut httpGet = new HttpPut("url_to_upload_URL" + "declarationId" + integers[0]
 						+ "upvote" +  integers[1]);

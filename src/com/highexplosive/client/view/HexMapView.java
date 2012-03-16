@@ -45,51 +45,55 @@ public class HexMapView extends View {
 	private Integer sizeX = 0;
 	private Integer sizeY = 0;
 
-    private static HexGridCell mCellMetrics = new HexGridCell(CELL_RADIUS);
+    private static HexGridCell cellMetrics = new HexGridCell(CELL_RADIUS);
+    private boolean mapInitialized = false;
     
     public HexMapView(Context context, AttributeSet set) {
     	super(context, set);
     	this.context = context;
-    	createMap();
     }
     
 
 	protected void onDraw(Canvas canvas) {
 
-		Paint mPaint = new Paint();
-		mPaint.setStrokeWidth(8); 
-		mPaint.setColor(Color.TRANSPARENT); 
-		mPaint.setStyle(Paint.Style.FILL); 
-		mPaint.setAntiAlias(true); // no jagged edges, etc.
-
-		for (int j = 0; j < sizeX; j++) {
-			for (int i = 0; i < sizeY; i++) {
-				mCellMetrics.setCellIndex(i, j);
-				if (cellGrid[j][i] != 0) {
-
-					mCellMetrics.computeCorners(mCornersX, mCornersY);
-					Path path = mCellMetrics.createPath();
-					switch (cellGrid[j][i]) {
-					case HOUSE_KURITA:
-						paintCell(Color.RED, canvas, mPaint, path);
-						break;
-					case HOUSE_DAVION:
-						paintCell(Color.YELLOW, canvas, mPaint, path);
-						break;
-					case HOUSE_LIAO:
-						paintCell(Color.GREEN, canvas, mPaint, path);
-						break;
-					case HOUSE_MARIK:
-						paintCell(Color.MAGENTA, canvas, mPaint, path);
-						break;
-					case HOUSE_STEINER:
-						paintCell(Color.GRAY, canvas, mPaint, path);
-						break;
-					default:
-						break;
+		if (mapInitialized) {
+			Paint mPaint = new Paint();
+			mPaint.setStrokeWidth(8); 
+			mPaint.setColor(Color.TRANSPARENT); 
+			mPaint.setStyle(Paint.Style.FILL); 
+			mPaint.setAntiAlias(true); // no jagged edges, etc.
+			
+			for (int j = 0; j < sizeX; j++) {
+				for (int i = 0; i < sizeY; i++) {
+					cellMetrics.setCellIndex(i, j);
+					if (cellGrid[j][i] != 0) {
+						
+						cellMetrics.computeCorners(mCornersX, mCornersY);
+						Path path = cellMetrics.createPath();
+						switch (cellGrid[j][i]) {
+						case HOUSE_KURITA:
+							paintCell(Color.RED, canvas, mPaint, path);
+							break;
+						case HOUSE_DAVION:
+							paintCell(Color.YELLOW, canvas, mPaint, path);
+							break;
+						case HOUSE_LIAO:
+							paintCell(Color.GREEN, canvas, mPaint, path);
+							break;
+						case HOUSE_MARIK:
+							paintCell(Color.MAGENTA, canvas, mPaint, path);
+							break;
+						case HOUSE_STEINER:
+							paintCell(Color.GRAY, canvas, mPaint, path);
+							break;
+						default:
+							break;
+						}
 					}
 				}
 			}
+		} else {
+			super.onDraw(canvas);
 		}
 	}
 
@@ -113,14 +117,14 @@ public class HexMapView extends View {
 	/**
 	 * Read the JSon map and create the required structure for it
 	 */
-	private void createMap() {
+	public void createMap(String mapURI) {
 		if (cellGrid != null) {
 			return;
 		}
 		JsonReader reader;
 		try {
 			reader = new JsonReader(new InputStreamReader(context.getAssets()
-					.open("map/hx_map.json"), "UTF-8"));
+						.open(mapURI), "UTF-8"));
 
 			reader.beginObject();
 			while (reader.hasNext()) {
@@ -136,6 +140,7 @@ public class HexMapView extends View {
 			Log.e(TAG, e.getMessage());
 		}
 
+		mapInitialized = true;
 
 	}
 

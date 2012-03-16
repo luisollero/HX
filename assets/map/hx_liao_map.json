@@ -1,0 +1,143 @@
+{"map": {
+	"size": [5, 5],
+    "column": {
+    	"nCol": 0,
+	    "tile": {
+	        "name": "unknown",
+	        "y": 0,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 1,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "West",
+	        "y": 2,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 3,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 4,
+	        "faction": "false"
+	    }
+	},
+	"column": {
+    	"nCol": 1,
+	    "tile": {
+	        "name": "unknown",
+	        "y": 0,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 1,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 2,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 3,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 4,
+	        "faction": "liao"
+	    }
+	},
+	"column": {
+    	"nCol": 2,
+	    "tile": {
+	        "name": "North",
+	        "y": 0,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 1,
+	        "faction": "davion"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 2,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 3,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "South",
+	        "y": 4,
+	        "faction": "false"
+	    }
+	},
+	"column": {
+    	"nCol": 3,
+	    "tile": {
+	        "name": "unknown",
+	        "y": 0,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 1,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 2,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 3,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 4,
+	        "faction": "false"
+	    }
+	},
+	"column": {
+    	"nCol": 4,
+	    "tile": {
+	        "name": "unknown",
+	        "y": 0,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 1,
+	        "faction": "false"
+	    },
+	    "tile": {
+	        "name": "East",
+	        "y": 2,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 3,
+	        "faction": "liao"
+	    },
+	    "tile": {
+	        "name": "unknown",
+	        "y": 4,
+	        "faction": "false"
+	    }
+	}
+}}    

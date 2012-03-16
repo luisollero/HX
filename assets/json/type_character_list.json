@@ -3,18 +3,18 @@
     	"playerid" : 0,
     	"name": "Candance Liao",
     	"faction": "liao",
-    	"role": 0,
+    	"role": 0
 	},
 	"character": {
     	"playerid" : 1,
     	"name": "Hirohito Kurita",
     	"faction": "kurita",
-    	"role": 0,
+    	"role": 0
 	},
 	"character": {
     	"playerid" : 2,
     	"name": "Victor Davion",
     	"faction": "davion",
-    	"role": 0,
+    	"role": 0
 	}
 }}
