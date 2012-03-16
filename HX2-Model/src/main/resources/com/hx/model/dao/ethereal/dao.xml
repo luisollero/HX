@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+    
+	<bean id="daoUser" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.User"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOUser"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+	<bean id="daoHouse" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.House"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOHouse"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+
+	<bean id="daoPersonality" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Personality"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOPersonality"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+ 
+	<bean id="daoRegiment" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Regiment"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAORegiment"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+	<bean id="daoSector" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Sector"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOSector"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+	<bean id="daoTurn" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Turn"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOTurn"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+    <bean id="daoCommunication" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Communication"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOCommunication"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+	
+	<!-- DAO Implementado
+	<bean id="daoPerson" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.backoffice.model.cms.dto.Person"/>
+		<property name="daoClass" value="com.hx.backoffice.model.cms.dao.hibernate3.DAOPerson"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+	
+	DAO NO IMPLEMENTADO
+	<bean id="daoPersonCategory" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.backoffice.model.cms.dto.PersonCategory"/>
+		<property name="daoClass" value="com.hx.backoffice.model.cms.dao.IDAOPersonCategory"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+ 	-->
+</beans>

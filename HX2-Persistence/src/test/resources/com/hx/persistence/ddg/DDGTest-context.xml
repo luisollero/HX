@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		destroy-method="close"
+		p:driverClassName="org.hsqldb.jdbcDriver"
+		p:url="jdbc:hsqldb:mem:com.hx.persistence.ddg.DDGTest"
+		p:username="sa"
+		p:password=""/>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+
+		<property name="dataSource" ref="dataSource"/>
+
+		<property name="configurationClass" value="org.hibernate.cfg.AnnotationConfiguration"/>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.HSQLDialect
+				</prop>
+			</props>
+		</property>
+
+		<property name="annotatedClasses">
+			<list>
+				<value>com.hx.persistence.ddg.User</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" class="com.hx.persistence.tx.impl.TransactionManagerImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="userDao" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.persistence.ddg.User"/>
+		<property name="daoClass" value="com.hx.persistence.ddg.UserDao"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+</beans>

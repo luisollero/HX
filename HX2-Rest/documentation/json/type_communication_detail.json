@@ -1,0 +1,11 @@
+{
+	"communication_id" : 1,
+	"from_id": 1,
+	"from_name": "Kineas Liao",
+	"published": "Capela Bulletin",
+	"subject": "Testing communications",
+	"body": "Just another communication test that I try to figure out how to represent it. Also will be good to have some special characters like: !¡?¿ñÑ - _ .<.> And now some crap ijsbdisbhd djsbfds bfudbsf bdsufbdusbf d fusubudsf ds fudsf dusb",
+	"time": 122202001,
+	"favorited": true,
+	"karma": 1
+}
