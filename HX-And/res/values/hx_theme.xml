@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.HX" parent="Theme.GreenDroid.NoTitleBar">
+        <!-- GreenDroid -->
+        <item name="gdActionBarTitleColor">@android:color/white</item>
+        <item name="gdActionBarBackground">@drawable/action_bar_background</item>
+        <item name="gdActionBarDividerDrawable">@drawable/action_bar_divider</item>
+        <item name="gdActionBarDividerWidth">2dp</item>
+        <item name="gdActionBarTitleStyle">@style/GreenDroid.Widget.ActionBar.Title</item>
+    </style>
+
+    <style name="Header" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HX</string>
+    
+    <string name="dummy_text">Dummy text</string>
+
+    <string name="section_latest">Latest</string>
+    <string name="section_house">House</string>
+    <string name="section_messages">Messages</string>
+    <string name="section_profile">Profile</string>
+    
+    <string name="section_latest_header">INNER SPHERE</string>
+    <string name="section_house_header">HOUSE</string>
+    <string name="section_messages_header">MESSAGES</string>
+    <string name="section_profile_header">PROFILE</string>
+    
+    
+    <string name="declaration_from">From: </string>
+    <string name="declaration_published">Published in: </string>
+    <string name="declaration_time">Time: </string>
+    <string name="declaration_subject">Subject: </string>
+    <string name="declaration_content">Content: </string>
+    
+    <string name="main_arrow_left">&lt;-</string>
+
+</resources>

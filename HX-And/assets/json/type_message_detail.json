@@ -1,0 +1,9 @@
+"message": {
+	"message_id": 1,
+	"from_id": 1,
+	"from_name": "Kineas Liao",
+	"to_name": ["Victor Davion","Hohiro Kurita"],
+	"to_id": [2, 3],
+	"subject": "No comments",
+	"body": "Just trying to test some messages here. Now a bit of lorem ipsum homemade aos;h daowhdoudhbas oubdwub ubdpudb dubd uwe dbuewabdwubdwe dwe"
+}
