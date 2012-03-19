@@ -113,7 +113,6 @@ public class Population {
 	
 	private static void insertUsers() {
 		luisOllero  = new User();
-		luisOllero.setId("0");
 		luisOllero.setStatus(UserStatus.ACTIVE);
 		luisOllero.setApplication("Test application");
 		luisOllero.setMail("luisollero@gmail.com");
@@ -121,7 +120,6 @@ public class Population {
 		config.getDaoUser().saveOrUpdate(luisOllero);
 		
 		tsunami  = new User();
-		tsunami.setId("1");
 		tsunami.setStatus(UserStatus.ACTIVE);
 		tsunami.setApplication("Test application");
 		tsunami.setMail("tsunami@tsunami.com");

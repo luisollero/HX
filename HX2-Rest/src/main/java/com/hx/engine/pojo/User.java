@@ -3,12 +3,18 @@ package com.hx.engine.pojo;
 
 public class User implements Pojo {
 
-	private String id;
+	private Integer id;
 	private String pass;
 	private String mail;
 	private String name;
 	private String application;
+	private String favoriteHouseId;
+	private String favoriteRole;
 
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public User(com.hx.model.dto.User user) {
 		setApplication(user.getApplication());
 		setId(user.getId());
@@ -17,15 +23,15 @@ public class User implements Pojo {
 		setName(user.getName());
 	}
 
-	public User(String id) {
+	public User(Integer id) {
 		this.id = id;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -59,6 +65,22 @@ public class User implements Pojo {
 
 	public void setApplication(String application) {
 		this.application = application;
+	}
+
+	public String getFavoriteHouseId() {
+		return favoriteHouseId;
+	}
+
+	public void setFavoriteHouseId(String favoriteHouseId) {
+		this.favoriteHouseId = favoriteHouseId;
+	}
+
+	public String getFavoriteRole() {
+		return favoriteRole;
+	}
+
+	public void setFavoriteRole(String favoriteRole) {
+		this.favoriteRole = favoriteRole;
 	}
 
 	public Object toDTO() {

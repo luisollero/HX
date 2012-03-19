@@ -6,9 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * Application users.
@@ -21,8 +28,9 @@ import javax.persistence.Table;
 public class User {
 
 	@Id
-	@Column(name = "hx_user_id")
-	private String id;
+	@Column(name = "hx_user_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	@Column(name = "hx_user_pass")
 	private String pass;
 	@Column(name = "hx_user_mail")
@@ -31,6 +39,15 @@ public class User {
 	private String name;
 	@Column(name = "hx_user_application")
 	private String application;
+	
+	@Column(name = "hx_user_favrole")
+	@Enumerated(EnumType.STRING)
+	private Role favoriteRole;
+	
+	@ManyToOne
+	@Fetch(FetchMode.SELECT)
+	@JoinColumn(name = "hx_user_favhouse", referencedColumnName = "hx_house_id")
+	private House favoriteHouse;
 
 	@Column(name = "hx_user_status")
 	@Enumerated(EnumType.STRING)
@@ -39,11 +56,11 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private Set<Personality> personalities;
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -93,6 +110,22 @@ public class User {
 
 	public String getName() {
 		return name;
+	}
+	
+	public Role getFavoriteRole() {
+		return favoriteRole;
+	}
+
+	public void setFavoriteRole(Role favoriteRole) {
+		this.favoriteRole = favoriteRole;
+	}
+
+	public House getFavoriteHouse() {
+		return favoriteHouse;
+	}
+
+	public void setFavoriteHouse(House favoriteHouse) {
+		this.favoriteHouse = favoriteHouse;
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class UserEngine implements IUserEngine {
 		if (aux != null) {
 			return new com.hx.engine.pojo.User(aux);
 		}
-		return new com.hx.engine.pojo.User("no");
+		return new com.hx.engine.pojo.User(-1);
 	}
 	
 	public void delete(User user) {

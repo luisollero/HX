@@ -30,7 +30,6 @@ public class HXModelTest {
 			public Object call() throws Exception {
 
 				User user = new User();
-				user.setId("1");
 				try {
 					getDaoUser().saveOrUpdate(user);					
 				}
@@ -48,7 +47,6 @@ public class HXModelTest {
 			public Object call() throws Exception {
 
 				User user = new User();
-				user.setId("1");
 				try {
 					getDaoUser().delete(user);					
 				}
@@ -73,7 +71,6 @@ public class HXModelTest {
 
 				Collection<User> list = new ArrayList<User>();
 				User user = new User();
-				user.setId("1");
 				list.add(user);
 				try {
 					getDaoUser().saveOrUpdateAll(list);					
@@ -92,7 +89,6 @@ public class HXModelTest {
 			public Object call() throws Exception {
 
 				User user = new User();
-				user.setId("1");
 				try {
 					getDaoUser().deleteAll(getDaoUser().find());					
 				}

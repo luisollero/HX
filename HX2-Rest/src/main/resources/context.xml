@@ -59,5 +59,6 @@
 	</bean>
 	<bean id="userController" class="com.hx.rest.action.UserController" scope="prototype">
 		<property name="userEngine" ref="userEngine"/>
+		<property name="houseEngine" ref="houseEngine"/>
 	</bean>
 </beans>

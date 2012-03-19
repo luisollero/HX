@@ -18,7 +18,7 @@ public class RestTest extends TestBase {
 	
 	@Test
 	public void init() {
-		postTest();
+		postUserTest();
 //		putTest();
 //		deleteTest();
 	}
@@ -46,17 +46,6 @@ public class RestTest extends TestBase {
 		HttpPost request = new HttpPost(
 				"http://localhost:8080/HX2-Rest/communication");
 		ResponseHandler<String> handler = new BasicResponseHandler();
-
-		/*
-		 * communication.setCommunicationId(1);
-		communication.setFromId(1);
-		communication.setFromName("from name");
-		communication.setSubject("subject");
-		communication.setPublishedIn("Tallin mensk");
-		communication.setKarma(2);
-		communication.setBody("Body");
-		communication.setFavorited(true);
-		 */
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
 		nameValuePairs.add(new BasicNameValuePair("fromId", "1"));
@@ -67,6 +56,33 @@ public class RestTest extends TestBase {
 				"Whatever but a thousand times " +
 				"Whatever but a thousand times " +
 				"Whatever but a thousand times "));
+		
+		try {
+			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			result = httpclient.execute(request, handler);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httpclient.getConnectionManager().shutdown();
+		}
+
+		if (result != null)
+			System.out.println(result);
+	}
+	
+	private void postUserTest() {
+		String result = null;
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost request = new HttpPost(
+				"http://localhost:8080/HX2-Rest/user");
+		ResponseHandler<String> handler = new BasicResponseHandler();
+		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+		nameValuePairs.add(new BasicNameValuePair("name", "Uno Quepasaba"));
+		nameValuePairs.add(new BasicNameValuePair("application", "I want to join this wonderful game. Foo."));
+		nameValuePairs.add(new BasicNameValuePair("mail", "test@highexplosive.net"));
+		nameValuePairs.add(new BasicNameValuePair("role", "PRIMUS"));
+		nameValuePairs.add(new BasicNameValuePair("house", "COMSTAR"));
 		
 		try {
 			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));

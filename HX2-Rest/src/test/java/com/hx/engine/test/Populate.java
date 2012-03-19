@@ -183,7 +183,7 @@ public class Populate extends TestBase {
 		set.add(personality);
 		
 		user1  = new User();
-		user1.setId("Luis Ollero");
+//		user1.setId("Luis Ollero");
 		user1.setPersonalities(set);
 		user1.setStatus(UserStatus.ACTIVE);
 		getUserEngine().saveOrUpdate(user1);

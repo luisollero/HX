@@ -10,7 +10,7 @@ public class Personality implements Pojo {
 
 	private String id;
 	private Role role;
-	private String userId;
+	private Integer userId;
 	private String homeSectorId;
 	private Integer influence;
 	private String factionId;
@@ -59,11 +59,11 @@ public class Personality implements Pojo {
 		this.role = role;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
