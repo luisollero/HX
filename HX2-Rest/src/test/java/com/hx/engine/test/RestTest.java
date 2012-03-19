@@ -19,6 +19,7 @@ public class RestTest extends TestBase {
 	@Test
 	public void init() {
 		postUserTest();
+//		postCommunicationTest();
 //		putTest();
 //		deleteTest();
 	}
@@ -40,7 +41,7 @@ public class RestTest extends TestBase {
 //
 //	}
 
-	private void postTest() {
+	private void postCommunicationTest() {
 		String result = null;
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(
@@ -81,8 +82,8 @@ public class RestTest extends TestBase {
 		nameValuePairs.add(new BasicNameValuePair("name", "Uno Quepasaba"));
 		nameValuePairs.add(new BasicNameValuePair("application", "I want to join this wonderful game. Foo."));
 		nameValuePairs.add(new BasicNameValuePair("mail", "test@highexplosive.net"));
-		nameValuePairs.add(new BasicNameValuePair("role", "PRIMUS"));
-		nameValuePairs.add(new BasicNameValuePair("house", "COMSTAR"));
+		nameValuePairs.add(new BasicNameValuePair("favoriteRole", "PRIMUS"));
+		nameValuePairs.add(new BasicNameValuePair("favoriteHouseId", "COMSTAR"));
 		
 		try {
 			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));

@@ -49,10 +49,6 @@ public class User {
 	@JoinColumn(name = "hx_user_favhouse", referencedColumnName = "hx_house_id")
 	private House favoriteHouse;
 
-	@Column(name = "hx_user_status")
-	@Enumerated(EnumType.STRING)
-	private UserStatus status;
-
 	@OneToMany(mappedBy="user")
 	private Set<Personality> personalities;
 
@@ -78,14 +74,6 @@ public class User {
 
 	public void setApplication(String application) {
 		this.application = application;
-	}
-
-	public UserStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(UserStatus status) {
-		this.status = status;
 	}
 
 	public Set<Personality> getPersonalities() {
@@ -137,8 +125,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", pass=" + pass + ", mail=" + mail
 				+ ", name=" + name + ", application=" + application
-				+ ", status=" + status + ", personalities=" + personalities
-				+ "]";
+				+ ", favoriteRole=" + favoriteRole + ", favoriteHouse="
+				+ favoriteHouse + ", personalities=" + personalities + "]";
 	}
 
 	

@@ -113,14 +113,12 @@ public class Population {
 	
 	private static void insertUsers() {
 		luisOllero  = new User();
-		luisOllero.setStatus(UserStatus.ACTIVE);
 		luisOllero.setApplication("Test application");
 		luisOllero.setMail("luisollero@gmail.com");
 		luisOllero.setName("Luis Ollero");
 		config.getDaoUser().saveOrUpdate(luisOllero);
 		
 		tsunami  = new User();
-		tsunami.setStatus(UserStatus.ACTIVE);
 		tsunami.setApplication("Test application");
 		tsunami.setMail("tsunami@tsunami.com");
 		tsunami.setName("Tsunami");
@@ -136,6 +134,7 @@ public class Population {
 		kineasLiao.setUser(luisOllero);
 		kineasLiao.setInfluence(0);
 		kineasLiao.setRole(Role.PRINCE);
+		kineasLiao.setStatus(UserStatus.ACTIVE);
 		config.getDaoPersonality().saveOrUpdate(kineasLiao);
 		
 		vitorDavion = new Personality();
@@ -146,6 +145,7 @@ public class Population {
 		vitorDavion.setUser(tsunami);
 		vitorDavion.setInfluence(0);
 		vitorDavion.setRole(Role.PRINCE);
+		vitorDavion.setStatus(UserStatus.ACTIVE);
 		config.getDaoPersonality().saveOrUpdate(vitorDavion);
 	}
 

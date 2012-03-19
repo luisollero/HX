@@ -48,7 +48,9 @@ public class Personality {
 	private Sector home;
 
 	@Column(name = "hx_personality_status")
-	private Integer status;
+	@Enumerated(EnumType.STRING)
+	private UserStatus status;
+	
 	@Column(name = "hx_personality_influence")
 	private Integer influence;
 	@Column(name = "hx_personality_name")
@@ -85,11 +87,11 @@ public class Personality {
 		this.house = house;
 	}
 
-	public Integer getStatus() {
+	public UserStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
 
