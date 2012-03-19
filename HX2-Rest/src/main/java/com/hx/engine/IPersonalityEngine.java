@@ -13,7 +13,7 @@ public interface IPersonalityEngine {
 	void saveOrUpdate(final Personality user);
 	
 	@Transactional
-	Personality getById(String id);
+	com.hx.engine.pojo.Personality getById(String id);
 	
 	@Transactional
 	void delete(Personality user);

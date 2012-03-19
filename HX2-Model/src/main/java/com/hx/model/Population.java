@@ -127,7 +127,6 @@ public class Population {
 	
 	private static void insertPersonalities() {
 		kineasLiao = new Personality();
-		kineasLiao.setId("0");
 		kineasLiao.setHouse(liao);
 		kineasLiao.setName("Kineas");
 		kineasLiao.setCompleteName("Kineas Liao");
@@ -138,7 +137,6 @@ public class Population {
 		config.getDaoPersonality().saveOrUpdate(kineasLiao);
 		
 		vitorDavion = new Personality();
-		vitorDavion.setId("1");
 		vitorDavion.setHouse(davion);
 		vitorDavion.setName("Vitor");
 		vitorDavion.setCompleteName("Vitor Davion");

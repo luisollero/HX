@@ -8,7 +8,7 @@ import com.hx.model.dto.Sector;
 
 public class Personality implements Pojo {
 
-	private String id;
+	private Integer id;
 	private Role role;
 	private Integer userId;
 	private String homeSectorId;
@@ -30,6 +30,14 @@ public class Personality implements Pojo {
 		// TODO Sets!
 	}
 	
+	public Personality() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Personality(Integer i) {
+		this.id = i;
+	}
+
 	public Object toDTO() {
 		com.hx.model.dto.Personality anotherPersonality = new com.hx.model.dto.Personality();
 		anotherPersonality.setId(this.id);
@@ -43,11 +51,11 @@ public class Personality implements Pojo {
 		return anotherPersonality;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

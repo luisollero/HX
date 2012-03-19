@@ -10,7 +10,7 @@ import java.util.Date;
 public class Communication implements Pojo {
 
 	private Integer communicationId;
-	private String fromId;
+	private Integer fromId;
 	private String fromName;
 	private String publishedIn;
 	private String subject;
@@ -45,11 +45,11 @@ public class Communication implements Pojo {
 		this.communicationId = communicationId;
 	}
 
-	public String getFromId() {
+	public Integer getFromId() {
 		return fromId;
 	}
 
-	public void setFromId(String fromId) {
+	public void setFromId(Integer fromId) {
 		this.fromId = fromId;
 	}
 

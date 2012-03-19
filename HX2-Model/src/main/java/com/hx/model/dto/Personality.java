@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -31,8 +33,9 @@ import org.hibernate.annotations.FetchMode;
 public class Personality {
 
 	@Id
-	@Column(name = "hx_personality_id")
-	private String id;
+	@Column(name = "hx_personality_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
 	@Column(name = "hx_personality_role", length = 20)
 	@Enumerated(EnumType.STRING)
@@ -71,11 +74,11 @@ public class Personality {
 	private Set<Communication> upvotedSet = new HashSet<Communication>();
 
 	// GETTERS AND SETTERS
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -5,6 +5,7 @@ import java.util.Collection;
 import com.hx.engine.IPersonalityEngine;
 import com.hx.model.dao.ethereal.IDAOPersonality;
 import com.hx.model.dto.Personality;
+import com.hx.model.dto.User;
 
 
 /**
@@ -26,8 +27,12 @@ public class PersonalityEngine implements IPersonalityEngine {
 		this.daoPersonality = daoPersonality;
 	}
 
-	public Personality getById(String id) {
-		return daoPersonality.getById(id);
+	public com.hx.engine.pojo.Personality getById(String id) {
+		Personality aux = daoPersonality.getById(id);
+		if (aux != null) {
+			return new com.hx.engine.pojo.Personality(aux);
+		}
+		return new com.hx.engine.pojo.Personality(-1);
 	}
 	
 	public void saveOrUpdate(final Personality personality) {

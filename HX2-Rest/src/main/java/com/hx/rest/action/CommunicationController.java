@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.hx.engine.ICommunicationEngine;
 import com.hx.engine.IPersonalityEngine;
 import com.hx.engine.pojo.Communication;
+import com.hx.model.dto.Personality;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class CommunicationController implements ModelDriven<Object> {
@@ -44,7 +45,7 @@ public class CommunicationController implements ModelDriven<Object> {
 		communication.setPublishedIn(published);
 		
 		com.hx.model.dto.Communication comm = (com.hx.model.dto.Communication) communication.toDTO();
-		comm.setFrom(personalityEngine.getById(fromId));
+		comm.setFrom((Personality) personalityEngine.getById(fromId).toDTO());
 		communicationEngine.saveOrUpdate(comm);
 
 		return new DefaultHttpHeaders("success");
