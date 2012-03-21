@@ -1,6 +1,5 @@
 package com.hx.engine;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,7 +14,7 @@ public interface ISectorEngine {
 	void saveOrUpdate(final Sector sector);
 
 	@Transactional
-	Sector getById(String id);
+	com.hx.engine.pojo.Sector getById(String id);
 
 	@Transactional
 	void delete(Sector sector);
@@ -24,22 +23,21 @@ public interface ISectorEngine {
 	Collection<Sector> findAll();
 
 	/**
-	 * Devuelve un {@link ArrayList} con los sectores vecinos del {@link Sector}
-	 * pasado como filtro.
+	 * Returns an {@link ArrayList} with the neighboring sectors.
 	 * 
-	 * @param central
+	 * @param central - Central {@link Sector}
 	 * @return
 	 */
 	@Transactional
 	ArrayList<Sector> getNeighbours(Sector central);
 
 	/**
-	 * Devuelve todos los {@link Sector} para una casa pasada como filtro.
-	 * @param aux
+	 * Return all the {@link Sector} .
+	 * @param ownerHouse - {@link House} owner of the sectors.
 	 * @return
 	 */
 	@Transactional
-	Collection<Sector> findByHouse(House aux);
+	Collection<Sector> findByHouse(House ownerHouse);
 
 	/**
 	 * Devuelve todos los {@link Sector} un nombre.

@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hx.engine.IHouseEngine;
 import com.hx.engine.IPersonalityEngine;
+import com.hx.engine.ISectorEngine;
 import com.hx.engine.IUserEngine;
 import com.hx.engine.pojo.Personality;
 import com.hx.model.dto.Role;
+import com.hx.model.dto.Sector;
 import com.hx.model.dto.User;
 import com.hx.model.dto.UserStatus;
 import com.opensymphony.xwork2.ModelDriven;
@@ -31,7 +33,8 @@ public class PersonalityController implements ModelDriven<Object> {
 	private IUserEngine userEngine;
 	private IPersonalityEngine personalityEngine;
 	private IHouseEngine houseEngine;
-
+	private ISectorEngine sectorEngine;
+	
 	// GET /personality/personality_id
 	public HttpHeaders show() {
 		personality = personalityEngine.getById(id);
@@ -49,13 +52,13 @@ public class PersonalityController implements ModelDriven<Object> {
 		personality = new Personality();
 		personality.setName(name);
 		personality.setCompleteName(completeName);
-		personality.setHomeSectorId(homeSectorId);
 		personality.setInfluence(0);
 		
 		com.hx.model.dto.Personality newPersonality = (com.hx.model.dto.Personality) personality.toDTO();
 		newPersonality.setHouse(houseEngine.getById(houseId));
 		newPersonality.setRole(Role.valueOf(role));
 		newPersonality.setUser((User) userEngine.getById(userId).toDTO());
+		newPersonality.setHome((Sector) sectorEngine.getById(homeSectorId).toDTO());
 		newPersonality.setStatus(UserStatus.PENDIENT);
 		
 		personalityEngine.saveOrUpdate(newPersonality);

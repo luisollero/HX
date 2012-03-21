@@ -80,23 +80,22 @@ public class Population {
 	
 	private static void insertSectors() {
 		
-		saveSector("0,0", "Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
-		saveSector("0,2", "Dieron", 0, 2, 5, 2, false, 5, kurita, kurita, 7);
-		saveSector("1,1", "Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
-		saveSector("2,-2", "New Aragon", 2, -2, 2, 1, false, 5, davion, davion, 3);
-		saveSector("2,0", "Addicks", 2, 0, 4, 2, false, 5, davion, davion, 7);
-		saveSector("1,-1", "Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
-		saveSector("1,-3", "Aldebaran", 1, -3, 6, 2, false, 4, liao, liao, 8);
-		saveSector("0,-2", "Carver V", 0, -2, 3, 1, false, 4, liao, liao, 5);
-		saveSector("-1,-1", "Irian", -1, -1, 7, 2, false, 5, marik, marik, 10);
-		saveSector("-1,1", "New Earth", -1, 1, 3, 2, false, 5, steiner, steiner, 4);
+		saveSector("Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
+		saveSector("Dieron", 0, 2, 5, 2, false, 5, kurita, kurita, 7);
+		saveSector("Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
+		saveSector("New Aragon", 2, -2, 2, 1, false, 5, davion, davion, 3);
+		saveSector("Addicks", 2, 0, 4, 2, false, 5, davion, davion, 7);
+		saveSector("Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
+		saveSector("Aldebaran", 1, -3, 6, 2, false, 4, liao, liao, 8);
+		saveSector("Carver V", 0, -2, 3, 1, false, 4, liao, liao, 5);
+		saveSector("Irian", -1, -1, 7, 2, false, 5, marik, marik, 10);
+		saveSector("New Earth", -1, 1, 3, 2, false, 5, steiner, steiner, 4);
 		
 	}
 	
-	private static void saveSector(String id, String name, int coordX, int coordY, int defenseBonus,
+	private static void saveSector(String name, int coordX, int coordY, int defenseBonus,
 			int depth, boolean disputed, int happiness, House house, House loyalty, int production) {
 		Sector sector = new Sector();
-		sector.setId(id);
 		sector.setName(name);
 		sector.setCoordX(coordX);
 		sector.setCoordY(coordY);

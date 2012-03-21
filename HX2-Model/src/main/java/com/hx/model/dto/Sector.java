@@ -2,6 +2,8 @@ package com.hx.model.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,16 +23,17 @@ import org.hibernate.annotations.FetchMode;
 public class Sector {
 
 	@Id
-	@Column(name="hx_sector_id")
-	private String id; 			// Compuesta por las coordenadas (x,y) con su signo. ("-1+1" por ejemplo)
+	@Column(name = "hx_sector_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
 	@Column(name="hx_sector_name")
-	private String name;		// Nombre del sector
+	private String name;
 	
 	@Column(name="hx_sector_coord_x")
-	private Integer coordX;		// Eje X
+	private Integer coordX;		// Axis X
 	@Column(name="hx_sector_coord_y")
-	private Integer coordY;		// Eje Y
+	private Integer coordY;		// Axis Y
 	
 	@Column(name="hx_sector_depth")
 	private Integer depth;		// Profundidad del sector, (i.e. densidad de planetas)
@@ -49,7 +52,7 @@ public class Sector {
 	
 	@OneToOne(optional=true)
 	@JoinColumn(name="hx_sector_lord")
-	private Personality lord;	// Personaje que se encuentra en el sector. (Puede ser un un noble menor o un duque)
+	private Personality lord;	// Direct owner of the sector
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
@@ -71,7 +74,7 @@ public class Sector {
 	@JoinColumn(name="hx_sector_suplyline", referencedColumnName="hx_suplyline_id")
 	private SuplyLine suplyLine;		// Pertenece o no a una línea de suministros
 	
-	public Sector(String homeSectorId) {
+	public Sector(Integer homeSectorId) {
 		this.id = homeSectorId;
 	}
 	
@@ -80,7 +83,7 @@ public class Sector {
 	}
 
 	//Setters and getters
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -92,7 +95,7 @@ public class Sector {
 		this.depth = depth;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -5,7 +5,6 @@ import java.util.Collection;
 import com.hx.engine.IPersonalityEngine;
 import com.hx.model.dao.ethereal.IDAOPersonality;
 import com.hx.model.dto.Personality;
-import com.hx.model.dto.User;
 
 
 /**

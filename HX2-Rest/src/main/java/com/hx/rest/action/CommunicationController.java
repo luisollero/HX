@@ -38,7 +38,6 @@ public class CommunicationController implements ModelDriven<Object> {
 	
 	// POST /communication
 	public HttpHeaders create() throws Exception {
-//		communication.setCommunicationId(new Integer(id));
 		communication = new Communication();
 		communication.setSubject(subject);
 		communication.setBody(body);

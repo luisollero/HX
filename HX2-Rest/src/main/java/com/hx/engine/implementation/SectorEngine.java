@@ -39,8 +39,12 @@ public class SectorEngine implements ISectorEngine {
 		return daoSector.find();
 	}
 
-	public Sector getById(String id) {
-		return daoSector.getById(id);
+	public com.hx.engine.pojo.Sector getById(String id) {
+		Sector auxSector = daoSector.getById(id);
+		if (auxSector != null) {
+			return new com.hx.engine.pojo.Sector(auxSector);
+		}
+		return new com.hx.engine.pojo.Sector(-1);
 	}
 
 	public ArrayList<Sector> getNeighbours(Sector central) {
@@ -51,12 +55,13 @@ public class SectorEngine implements ISectorEngine {
 		// Posiciones de los vecinos
 		// (x-1,y-1),(x-1,y+1),(x,y+2),(x+1,y+1),(x+1,y-1),(x,y-2)
 
-		result.add(daoSector.getById((x - 1) + "," + (y - 1)));
-		result.add(daoSector.getById((x - 1) + "," + (y + 1)));
-		result.add(daoSector.getById((x) + "," + (y + 2)));
-		result.add(daoSector.getById((x + 1) + "," + (y + 1)));
-		result.add(daoSector.getById((x + 1) + "," + (y - 1)));
-		result.add(daoSector.getById((x) + "," + (y - 2)));
+		//FIXME: User coords
+//		result.add(daoSector.getById((x - 1) + "," + (y - 1)));
+//		result.add(daoSector.getById((x - 1) + "," + (y + 1)));
+//		result.add(daoSector.getById((x) + "," + (y + 2)));
+//		result.add(daoSector.getById((x + 1) + "," + (y + 1)));
+//		result.add(daoSector.getById((x + 1) + "," + (y - 1)));
+//		result.add(daoSector.getById((x) + "," + (y - 2)));
 
 		return result;
 	}
