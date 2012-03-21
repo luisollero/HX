@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <string name="app_name">HX</string>
     
     <string name="dummy_text">Dummy text</string>
+    <string name="dummy_text_long">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 
     <string name="section_latest">Latest</string>
     <string name="section_house">House</string>
@@ -15,13 +16,61 @@
     <string name="section_messages_header">MESSAGES</string>
     <string name="section_profile_header">PROFILE</string>
     
-    
     <string name="declaration_from">From: </string>
     <string name="declaration_published">Published in: </string>
     <string name="declaration_time">Time: </string>
     <string name="declaration_subject">Subject: </string>
     <string name="declaration_content">Content: </string>
     
-    <string name="main_arrow_left">&lt;-</string>
+<!--     <string name="main_arrow_left">&lt;-</string> -->
+    <string name="main_arrow_left">Back</string>
+    
+    <string name="profile_image">Profile image</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_role">Role</string>
+    <string name="profile_bio">Bio</string>
+    <string name="profile_karma">Karma</string>
+    <string name="profile_since">Registered since</string>
+    <string name="profile_declarations">Declarations</string>
+    <string name="profile_endturn">End Turn</string>
+    
+    <string name="login_button">Sign in</string>
+    <string name="login_register">No Account? Register here</string>
+    <string name="login_user">User</string>
+    <string name="login_password">Password</string>
+    <string name="login_logo">Highexplosive logo</string>
+    
+    <string name="register_motivation">Motivation</string>
+    <string name="register_role">Role</string>
+    <string name="register_faction">Faction</string>
+    <string name="register_mail">Mail</string>
+    <string name="register_user">User</string>
+    <string name="register_button">Register</string>
+    <string name="register_ok">Ok</string>
+    <string name="register_cancel">Cancel</string>
+    <string name="register_fill_all_fields">Please, fill all the fields</string>
+    <string name="register_popup">Please, realize that Highexplosive is a full RPG. This means the registering process is manually made so it may take some hours to get a response from your Game Director. For more information, visit the official webpage of the project</string>
+    <string name="register_comstar">Comstar</string>
+    
+    <string-array name="register_isroles_array">
+        <item>Prince</item>
+        <item>Duke</item>
+        <item>Noble</item>
+    </string-array>
 
+    <string-array name="register_comroles_array">
+        <item>Precentor</item>
+        <item>Primus</item>
+    </string-array>
+
+    <string-array name="register_factions_array">
+        <item>Comstar</item>
+        <item>Davion</item>
+        <item>Kurita</item>
+        <item>Liao</item>
+        <item>Marik</item>
+        <item>Steiner</item>
+    </string-array>
+    
+    
 </resources>

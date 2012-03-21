@@ -5,13 +5,6 @@
     android:orientation="vertical"
     android:id="@+id/latest"  >
 
-    <TextView
-        android:layout_gravity="center"
-        style="@style/Header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/section_latest_header" />
-    
     <com.highexplosive.client.view.HexMapView
         android:id="@+id/isMap"
         android:layout_weight="1"
