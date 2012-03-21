@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_marik">#ff0000</color>
+    <color name="color_davion">#ff0000</color>
+    <color name="color_kurita">#ff0000</color>
+    <color name="color_liao">#00ff00</color>
+    <color name="color_steiner">#0000ff</color>
+    <color name="color_comstar">#c0c0c0</color>
+</resources>

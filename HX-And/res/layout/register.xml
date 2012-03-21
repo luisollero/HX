@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="40dp" >
+
+    <TableRow android:layout_marginTop="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_user"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/registerUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:inputType="textNoSuggestions"
+            android:singleLine="true" >
+
+            <requestFocus />
+        </EditText>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_mail"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/registerMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_faction"
+            android:textSize="18dp" />
+
+        <Spinner
+            android:id="@+id/registerFaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_role"
+            android:textSize="18dp" />
+
+        <Spinner
+            android:id="@+id/registerRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:gravity="right" />
+    </TableRow>
+
+    <TableRow android:layout_marginTop="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_motivation"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/registerMotivation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:inputType="textLongMessage"
+            android:lines="10"
+            android:singleLine="false" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:gravity="right" >
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_button" />
+    </TableRow>
+
+</TableLayout>
