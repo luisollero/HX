@@ -34,27 +34,27 @@ public class Interceptor extends EmptyInterceptor implements
 		super.onDelete(entity, id, state, propertyNames, types);
 	}
 	
-	// Antes de actualizar una entidad
+	// Before updating an entity
 	@Override
 	public boolean onFlushDirty(Object entity, Serializable id,
 			Object[] currentState, Object[] previousState,
 			String[] propertyNames, Type[] types) {
 		
 		String message = "'onFlushDirty' para el objeto "
-			+ entity.getClass().getName() + " con id = '" + id + "'";
+			+ entity.getClass().getName() + " con toString = '" + entity.toString() + "'";
 
 		_log.debug(message);
 		return super.onFlushDirty(entity, id, currentState, previousState,
 				propertyNames, types);
 	}
 	
-	// Antes de dar de alta una entidad
+	// Before saving an entity
 	@Override
 	public boolean onSave(Object entity, Serializable id, Object[] state,
 			String[] propertyNames, Type[] types) {
 		
 		String message = "'onFlushDirty' para el objeto "
-			+ entity.getClass().getName() + " con id = '" + id + "'";
+			+ entity.getClass().getName() + " con toString = '" + entity.toString() + "'";
 
 		_log.debug(message);
 		return super.onSave(entity, id, state, propertyNames, types);

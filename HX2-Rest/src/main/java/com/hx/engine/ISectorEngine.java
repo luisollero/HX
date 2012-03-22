@@ -1,7 +1,6 @@
 package com.hx.engine;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +19,7 @@ public interface ISectorEngine {
 	void delete(Sector sector);
 
 	@Transactional
-	Collection<Sector> findAll();
+	ArrayList<com.hx.engine.pojo.Sector> findAll();
 
 	/**
 	 * Returns an {@link ArrayList} with the neighboring sectors.
@@ -29,7 +28,7 @@ public interface ISectorEngine {
 	 * @return
 	 */
 	@Transactional
-	ArrayList<Sector> getNeighbours(Sector central);
+	ArrayList<Sector> getNeighbors(Sector central);
 
 	/**
 	 * Return all the {@link Sector} .
@@ -37,13 +36,13 @@ public interface ISectorEngine {
 	 * @return
 	 */
 	@Transactional
-	Collection<Sector> findByHouse(House ownerHouse);
+	ArrayList<com.hx.engine.pojo.Sector> findByHouse(House ownerHouse);
 
 	/**
 	 * Devuelve todos los {@link Sector} un nombre.
 	 * @return
 	 */
 	@Transactional
-	Collection<Sector> findByName(String name);
+	ArrayList<com.hx.engine.pojo.Sector> findByName(String name);
 
 }

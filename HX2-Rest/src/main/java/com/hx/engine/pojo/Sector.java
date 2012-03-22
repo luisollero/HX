@@ -10,6 +10,8 @@ public class Sector implements Pojo {
 	private Integer id;
 	private Integer coordX;
 	private Integer coordY;
+	private String name;
+	private String house;
 
 	public Sector(int id) {
 		this.id = id;
@@ -19,6 +21,12 @@ public class Sector implements Pojo {
 		this.id = auxSector.getId();
 		this.coordX = auxSector.getCoordX();
 		this.coordY = auxSector.getCoordY();
+		this.name = auxSector.getName();
+		this.house = auxSector.getHouse().getId();
+	}
+
+	public Sector() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Object toDTO() {
@@ -26,6 +34,7 @@ public class Sector implements Pojo {
 		sector.setId(id);
 		sector.setCoordX(coordX);
 		sector.setCoordY(coordY);
+		sector.setName(name);
 		return sector;
 	}
 
@@ -51,6 +60,22 @@ public class Sector implements Pojo {
 
 	public void setCoordY(Integer coordY) {
 		this.coordY = coordY;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getHouse() {
+		return house;
+	}
+
+	public void setHouse(String house) {
+		this.house = house;
 	}
 	
 }

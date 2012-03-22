@@ -26,7 +26,7 @@ public class PopulationConfigurator {
 
 		this.configureLog4j();
 
-		context = new ClassPathXmlApplicationContext("CreateSchema.xml",
+		context = new ClassPathXmlApplicationContext("PopulationConfig.xml",
 				this.getClass());
 		
 		getTransactionManager().openReadWriteSession();
@@ -43,7 +43,7 @@ public class PopulationConfigurator {
 	private TransactionManager getTransactionManager() {
 		return getBean("transactionManager", TransactionManager.class);
 	}
-
+	
 	private <T> T getBean(String name, Class<T> clazz) {
 		@SuppressWarnings("unchecked")
 		T t = (T) context.getBean(name, clazz);
@@ -97,5 +97,9 @@ public class PopulationConfigurator {
 
 	protected IDAOTurn getDaoTurn() {
 		return getBean("daoTurn", IDAOTurn.class);
+	}
+
+	public void flush() {
+		getTransactionManager().getCurrentSession().flush();
 	}
 }

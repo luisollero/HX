@@ -221,7 +221,14 @@ public class Sector {
 
 	@Override
 	public String toString() {
-		return id + " || " + name;
+		return "Sector [id=" + id + ", name=" + name + ", coordX=" + coordX
+				+ ", coordY=" + coordY + ", depth=" + depth + ", disputed="
+				+ disputed + ", production=" + production + ", defenseBonus="
+				+ defenseBonus + ", happiness=" + happiness + ", lord=" + lord
+				+ ", loyalty=" + loyalty + ", house=" + house
+				+ ", personality=" + personality + ", suplyLine=" + suplyLine
+				+ "]";
 	}
+
 	
 }

@@ -2,10 +2,11 @@ package com.hx.model.util;
 
 public class HXKeys {
 	
-	//ID del Usuario logado
+	// User Id
 	public static String LOGGED_USER = "LOGGED_USER";
+	public static final String LOGGED_HOUSE = "LOGGED_HOUSE";
 
-	//ID de las casas
+	// House id's
 	public final static String COMSTAR = "COMSTAR";
 	public final static String KURITA = "KURITA";
 	public final static String DAVION = "DAVION";
@@ -13,17 +14,22 @@ public class HXKeys {
 	public final static String MARIK = "MARIK";
 	public final static String STEINER = "STEINER";
 
-	public static final String LOGGED_HOUSE = "LOGGED_HOUSE";
-	
-	//Niveles de usuario
-	public static Integer ADMINISTRADOR = 0;
-	public static Integer COMSTAR_2 = 1;
-	public static Integer COMSTAR_1 = 2;
-	public static Integer PRINCIPE = 3;
-	public static Integer DUQUE = 4;
-	public static Integer NOBLE = 5;
+	// Minor factions
+	public static final String TAURUS = "TAURUS";
+	public static final String CANOPUS = "CANOPUS";
+	public static final String CIRCINUS = "CIRCINUS";
+	public static final String ILLYRIAN = "ILLYRIAN";
+	public static final String MARIAN = "MARIAN";
+	public static final String OBERON = "OBERON";
+	public static final String OUTERWORLDS = "OUTERWORLDS";
+	public static final String TORTUGA = "TORTUGA";
+	public static final String ELYSSIA = "ELYSSIA";
+	public static final String VALKYRIATE = "VALKYRIATE";
+	public static final String LOTHARIO = "LOTHARIO ";
 
-	//Casas
+	// Special sectors
+	public static final String DISPUTED = "DISPUTED";
+	public static final String UNEXPLORED = "UNEXPLORED";
 	
 	//Estado usuario
 	public static Integer USUARIO_PENDIENTE = 0;

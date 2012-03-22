@@ -124,7 +124,10 @@ public class House {
 
 	@Override
 	public String toString() {
-		return id + " || " + name;
+		return "House [id=" + id + ", name=" + name + ", alternateName="
+				+ alternateName + ", sectors=" + sectors
+				+ ", houseRelationsReference=" + houseRelationsReference
+				+ ", houseRelationsDestiny=" + houseRelationsDestiny + "]";
 	}
-	
+
 }

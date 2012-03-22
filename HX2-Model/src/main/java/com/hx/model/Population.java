@@ -1,5 +1,6 @@
 package com.hx.model;
 
+import java.io.InputStream;
 import java.util.Date;
 
 import com.hx.model.dto.Communication;
@@ -37,8 +38,6 @@ public class Population {
 	private static Sector quentin;
 	private static Sector tikonov;
 
-
-
 	// Here we go
 	public static void main(String[] args) {
 		config.setUp();
@@ -53,48 +52,80 @@ public class Population {
 	
 	private static void insertFactions() {
 
-		comstar = new House(HXKeys.COMSTAR);
-		comstar.setName("Comstar");
-		config.getDaoHouse().saveOrUpdate(comstar);
-
-		davion = new House(HXKeys.DAVION);
-		davion.setName("House Davion");
-		davion.setAlternateName("Federated Suns");
-		config.getDaoHouse().saveOrUpdate(davion);
-
-		liao = new House(HXKeys.LIAO);
-		liao.setName("House Liao");
-		liao.setAlternateName("Capellan Confederation");
-		config.getDaoHouse().saveOrUpdate(liao);
+		comstar = createFaction(HXKeys.COMSTAR, "Comstar", null);
+		liao = createFaction(HXKeys.LIAO, "House Liao", "Capellan Confederation");
+		davion = createFaction(HXKeys.DAVION, "House Davion", "Federated Suns");
+		kurita = createFaction(HXKeys.KURITA, "House Kurita", "Draconis Combine");
+		steiner = createFaction(HXKeys.STEINER, "House Steiner", "Lyran Commonwealth");
+		marik = createFaction(HXKeys.MARIK, "House Marik", "Free Worlds League");
 		
-		kurita = new House(HXKeys.KURITA);
-		kurita.setName("House Kurita");
-		kurita.setAlternateName("Draconis Combine");
-		config.getDaoHouse().saveOrUpdate(kurita);
-
-		steiner = new House(HXKeys.STEINER);
-		steiner.setName("House Steiner");
-		steiner.setAlternateName("Lyran Commonwealth");
-		config.getDaoHouse().saveOrUpdate(steiner);
-
-		marik = new House(HXKeys.MARIK);
-		marik.setName("House Marik");
-		marik.setAlternateName("Free Worlds League");
-		config.getDaoHouse().saveOrUpdate(marik);
+		createFaction(HXKeys.TAURUS, "Taurus Concordate", null);
+		createFaction(HXKeys.CANOPUS, "Canopus Magistry", null);
+		createFaction(HXKeys.CIRCINUS, "Circinus Federation", null);
+		createFaction(HXKeys.TORTUGA, "Tortuga Dominion", null);
+		createFaction(HXKeys.ILLYRIAN, "Illyrian Palatinate", null);
+		createFaction(HXKeys.MARIAN, "Marian Hegemony", null);
+		createFaction(HXKeys.OBERON, "Oberon Confederation", null);
+		createFaction(HXKeys.OUTERWORLDS, "Outer Worlds Alliance", null);
+		createFaction(HXKeys.LOTHARIO, "Lothario League", null);
+		createFaction(HXKeys.ELYSSIA, "Elyssia Fields", null);
+		createFaction(HXKeys.VALKYRIATE, "Great Valkyriate", null);
+		
+		createFaction(HXKeys.UNEXPLORED, "Unexplored", null);
+		createFaction(HXKeys.DISPUTED, "Disputed", null);
+		
+		config.flush();
 	}
-	
+
+
 	private static void insertSectors() {
+		String map = null;
+		Integer coordX, coordY = null;
+		String name = null;
+		Sector sector = null;
 		
-		terra = saveSector("Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
-		saveSector("Dieron", 0, 2, 5, 2, false, 5, kurita, kurita, 7);
-		quentin = saveSector("Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
-		saveSector("New Aragon", 2, -2, 2, 1, false, 5, davion, davion, 3);
-		saveSector("Addicks", 2, 0, 4, 2, false, 5, davion, davion, 7);
-		tikonov = saveSector("Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
-		saveSector("Aldebaran", 1, -3, 6, 2, false, 4, liao, liao, 8);
-		saveSector("Carver V", 0, -2, 3, 1, false, 4, liao, liao, 5);
-		saveSector("Irian", -1, -1, 7, 2, false, 5, marik, marik, 10);
-		saveSector("New Earth", -1, 1, 3, 2, false, 5, steiner, steiner, 4);
+		InputStream in = Population.class
+                .getResourceAsStream("/regular_map.dat");
+		if (in != null) {
+			map = convertStreamToString(in);
+			String[] mapArrayLines = map.split("\n");
+			for (int i = 0; i < mapArrayLines.length; i++) {
+				String[] line = mapArrayLines[i].split(",");
+				String[] coords = line[0].split("-");
+				coordX = Integer.valueOf(coords[0]);
+				coordY = Integer.valueOf(coords[1]);
+				name = line[1];
+				
+				House house = config.getDaoHouse().getById(line[2].trim());
+				if (house == null) {
+					System.out.println(line[2].trim());
+				}
+				System.out.println(house.toString());
+				
+				sector = saveSector(name, coordX, coordY, 100, 2, false, 5, house,
+						house, 100);
+				
+				// Special cases. Saved apart for the dummy data
+				if (name.equals("Terra"))
+					terra = sector;
+				if (name.equals("Quentin"))
+					quentin = sector;
+				if (name.equals("Tikonov"))
+					tikonov = sector;
+			}
+		}
+		
+		
+//		terra = saveSector("Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
+//		saveSector("Dieron", 0, 2, 5, 2, false, 5, kurita, kurita, 7);
+//		quentin = saveSector("Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
+//		saveSector("New Aragon", 2, -2, 2, 1, false, 5, davion, davion, 3);
+//		saveSector("Addicks", 2, 0, 4, 2, false, 5, davion, davion, 7);
+//		tikonov = saveSector("Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
+//		saveSector("Aldebaran", 1, -3, 6, 2, false, 4, liao, liao, 8);
+//		saveSector("Carver V", 0, -2, 3, 1, false, 4, liao, liao, 5);
+//		saveSector("Irian", -1, -1, 7, 2, false, 5, marik, marik, 10);
+//		saveSector("New Earth", -1, 1, 3, 2, false, 5, steiner, steiner, 4);
 		
 	}
 	
@@ -174,4 +205,21 @@ public class Population {
 		comm.setFrom(vitorDavion);
 		config.getDaoCommunication().saveOrUpdate(comm);
 	}
+	
+	private static House createFaction(String houseId, String houseName, String alternateName) {
+		House house = new House(houseId);
+		house.setName(houseName);
+		house.setAlternateName(alternateName);
+		config.getDaoHouse().saveOrUpdate(house);
+		return house;
+	}
+	
+	public static String convertStreamToString(java.io.InputStream is) {
+	    try {
+	        return new java.util.Scanner(is).useDelimiter("\\A").next();
+	    } catch (java.util.NoSuchElementException e) {
+	        return "";
+	    }
+	}
+
 }

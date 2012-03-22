@@ -50,15 +50,11 @@
 	</bean>
 	
 	<!-- Controllers -->
-	<bean id="houseController" class="com.hx.rest.action.HouseController" scope="prototype">
-		<property name="houseEngine" ref="houseEngine"/>
-	</bean>
 	<bean id="communicationController" class="com.hx.rest.action.CommunicationController" scope="prototype">
 		<property name="communicationEngine" ref="communicationEngine"/>
 		<property name="personalityEngine" ref="personalityEngine"/>
 	</bean>
-	<bean id="userController" class="com.hx.rest.action.UserController" scope="prototype">
-		<property name="userEngine" ref="userEngine"/>
+	<bean id="houseController" class="com.hx.rest.action.HouseController" scope="prototype">
 		<property name="houseEngine" ref="houseEngine"/>
 	</bean>
 	<bean id="personalityController" class="com.hx.rest.action.PersonalityController" scope="prototype">
@@ -66,5 +62,12 @@
 		<property name="houseEngine" ref="houseEngine"/>
 		<property name="sectorEngine" ref="sectorEngine"/>
 		<property name="personalityEngine" ref="personalityEngine"/>
+	</bean>
+	<bean id="sectorController" class="com.hx.rest.action.SectorController" scope="prototype">
+		<property name="sectorEngine" ref="sectorEngine"/>
+	</bean>
+	<bean id="userController" class="com.hx.rest.action.UserController" scope="prototype">
+		<property name="userEngine" ref="userEngine"/>
+		<property name="houseEngine" ref="houseEngine"/>
 	</bean>
 </beans>

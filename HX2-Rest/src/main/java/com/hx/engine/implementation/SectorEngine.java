@@ -35,8 +35,15 @@ public class SectorEngine implements ISectorEngine {
 		daoSector.delete(sector);
 	}
 
-	public Collection<Sector> findAll() {
-		return daoSector.find();
+	public ArrayList<com.hx.engine.pojo.Sector> findAll() {
+		Collection<Sector> list = daoSector.find();
+		ArrayList<com.hx.engine.pojo.Sector> returnList = new ArrayList<com.hx.engine.pojo.Sector>();
+		com.hx.engine.pojo.Sector pojo;
+		for (Sector sector : list) {
+			pojo = new com.hx.engine.pojo.Sector(sector);
+			returnList.add(pojo);
+		}
+		return returnList;
 	}
 
 	public com.hx.engine.pojo.Sector getById(Integer id) {
@@ -47,7 +54,7 @@ public class SectorEngine implements ISectorEngine {
 		return new com.hx.engine.pojo.Sector(-1);
 	}
 
-	public ArrayList<Sector> getNeighbours(Sector central) {
+	public ArrayList<Sector> getNeighbors(Sector central) {
 		ArrayList<Sector> result = new ArrayList<Sector>();
 		Integer x = central.getCoordX();
 		Integer y = central.getCoordY();
@@ -72,12 +79,27 @@ public class SectorEngine implements ISectorEngine {
 		return result;
 	}
 
-	public Collection<Sector> findByHouse(House house) {
-		return daoSector.findByHouse(house);
+	public ArrayList<com.hx.engine.pojo.Sector> findByHouse(House house) {
+		Collection<Sector> list = daoSector.findByHouse(house);
+		ArrayList<com.hx.engine.pojo.Sector> returnList = new ArrayList<com.hx.engine.pojo.Sector>();
+		com.hx.engine.pojo.Sector pojo;
+		for (Sector sector : list) {
+			pojo = new com.hx.engine.pojo.Sector(sector);
+			returnList.add(pojo);
+		}
+		return returnList;
+		
 	}
 
-	public Collection<Sector> findByName(String name) {
-		return daoSector.findByName(name);
+	public ArrayList<com.hx.engine.pojo.Sector> findByName(String name) {
+		Collection<Sector> list = daoSector.findByName(name);
+		ArrayList<com.hx.engine.pojo.Sector> returnList = new ArrayList<com.hx.engine.pojo.Sector>();
+		com.hx.engine.pojo.Sector pojo;
+		for (Sector sector : list) {
+			pojo = new com.hx.engine.pojo.Sector(sector);
+			returnList.add(pojo);
+		}
+		return returnList;
 	}
 
 }
