@@ -22,13 +22,13 @@ public class Interceptor extends EmptyInterceptor implements
 		this.applicationContext = arg0;
 	}
 	
-	// Antes de eliminar una entidad
+	// Before deleting an entity
 	@Override
 	public void onDelete(Object entity, Serializable id, Object[] state,
 			String[] propertyNames, Type[] types) {
 		
-		String message = "'onDelete' para el objeto "
-			+ entity.getClass().getName() + " con id = '" + id + "'";
+		String message = "'onDelete' for the object "
+			+ entity.getClass().getName() + " with id = '" + id + "'";
 
 		_log.debug(message);
 		super.onDelete(entity, id, state, propertyNames, types);
@@ -40,8 +40,8 @@ public class Interceptor extends EmptyInterceptor implements
 			Object[] currentState, Object[] previousState,
 			String[] propertyNames, Type[] types) {
 		
-		String message = "'onFlushDirty' para el objeto "
-			+ entity.getClass().getName() + " con toString = '" + entity.toString() + "'";
+		String message = "'onFlushDirty' for the object "
+			+ entity.getClass().getName() + " with toString = '" + entity.toString() + "'";
 
 		_log.debug(message);
 		return super.onFlushDirty(entity, id, currentState, previousState,
@@ -53,8 +53,8 @@ public class Interceptor extends EmptyInterceptor implements
 	public boolean onSave(Object entity, Serializable id, Object[] state,
 			String[] propertyNames, Type[] types) {
 		
-		String message = "'onFlushDirty' para el objeto "
-			+ entity.getClass().getName() + " con toString = '" + entity.toString() + "'";
+		String message = "'onFlushDirty' for the object "
+			+ entity.getClass().getName() + " with toString = '" + entity.toString() + "'";
 
 		_log.debug(message);
 		return super.onSave(entity, id, state, propertyNames, types);

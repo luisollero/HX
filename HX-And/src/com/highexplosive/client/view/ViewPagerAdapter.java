@@ -67,7 +67,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_LATEST:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_latest, null);
 
-			((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map.json");
+			((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
 
 			DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
 			declarationsListView = (ListView) linearLayout.findViewById(R.id.mainDeclarationList);
@@ -87,7 +87,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_HOUSE:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_house, null);
 			
-			((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
+			((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_map_prod.json");
 			
 			DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
 			declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);

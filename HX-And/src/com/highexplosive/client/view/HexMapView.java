@@ -33,7 +33,7 @@ public class HexMapView extends View {
     private static final int HOUSE_MARIK = 5;
 
     private static final int NUM_HEX_CORNERS = 6;
-    private static final int CELL_RADIUS = 40;
+    private static final int CELL_RADIUS = 15;
 
 	private static final String TAG = HexMapView.class.getSimpleName();
 
@@ -113,7 +113,7 @@ public class HexMapView extends View {
 		mPaint.setColor(Color.BLACK);
 		canvas.drawPath(path, mPaint);
 	}
-    
+	
 	/**
 	 * Read the JSon map and create the required structure for it
 	 */
@@ -121,19 +121,54 @@ public class HexMapView extends View {
 		if (cellGrid != null) {
 			return;
 		}
+		
+		cellGrid = new int[30][30];
+		sizeX = 30;
+		sizeY = 30;
+		String faction = null;
+		String sectorName = null;
+		int i = 0,j = 0;
+		
 		JsonReader reader;
 		try {
 			reader = new JsonReader(new InputStreamReader(context.getAssets()
 						.open(mapURI), "UTF-8"));
 
-			reader.beginObject();
+			reader.beginArray();
 			while (reader.hasNext()) {
-				String name = reader.nextName();
-				if (name.equals("map")) {
-					readMap(reader, name);
+				reader.beginObject();
+				while (reader.hasNext()) {
+					String name = reader.nextName();
+					if (name.equals("name")) {
+						sectorName = reader.nextString();
+					} else if (name.equals("coordX")) {
+						i = reader.nextInt();
+					} else if (name.equals("coordY")) {
+						j = reader.nextInt();
+					} else if (name.equals("house")) {
+						faction = reader.nextString();
+					} else if (name.equals("id")) {
+						reader.nextInt();
+					}
 				}
+				
+				if ("LIAO".equals(faction)) {
+					cellGrid[j][i] = HOUSE_LIAO;
+				} else if ("KURITA".equals(faction)) {
+					cellGrid[j][i] = HOUSE_KURITA;
+				} else if ("STEINER".equals(faction)) {
+					cellGrid[j][i] = HOUSE_STEINER;
+				} else if ("DAVION".equals(faction)) {
+					cellGrid[j][i] = HOUSE_DAVION;
+				} else if ("MARIK".equals(faction)) {
+					cellGrid[j][i] = HOUSE_MARIK;
+				} else {
+					cellGrid[j][i] = NOT_VISIBLE;
+				}
+				
+				reader.endObject();
 			}
-			reader.endObject();
+			reader.endArray();
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.getMessage());
 		} catch (IOException e) {
@@ -144,78 +179,6 @@ public class HexMapView extends View {
 
 	}
 
-	/**
-	 * Map
-	 * @param reader
-	 * @param name
-	 * @throws IOException
-	 */
-	private void readMap(JsonReader reader, String name) throws IOException {
-		reader.beginObject();
-
-		while (reader.hasNext()) {
-			name = reader.nextName();
-			if (name.equals("size")) {
-				ArrayList<Integer> list = new ArrayList<Integer>();
-				reader.beginArray();
-				while (reader.hasNext()) {
-					list.add(reader.nextInt());
-				}
-				reader.endArray();
-				cellGrid = new int[list.get(0)][list.get(1)];
-				sizeX = list.get(0);
-				sizeY = list.get(1);
-			} else if (name.equals("column")) {
-				reader.beginObject();
-				readColumn(reader, name);
-				reader.endObject();
-			}
-		}
-		reader.endObject();
-	}
-	
-	/**
-	 * Column 
-	 * @param reader
-	 * @param name
-	 * @throws IOException
-	 */
-	private void readColumn(JsonReader reader, String name) throws IOException {
-		int i = 0;
-		int j = 0;
-		while (reader.hasNext()) {
-			name = reader.nextName();
-			if (name.equals("nCol")) {
-				i = reader.nextInt();
-			} else if (name.equals("tile")) {
-				reader.beginObject();
-				while (reader.hasNext()) {
-					name = reader.nextName();
-					if (name.equals("name")) {
-						reader.nextString();
-					} else if (name.equals("y")) {
-						j = reader.nextInt();
-					} else if (name.equals("faction")) {
-						String faction = reader.nextString();
-						if ("liao".equals(faction)) {
-							cellGrid[i][j] = HOUSE_LIAO;
-						} else if ("kurita".equals(faction)) {
-							cellGrid[i][j] = HOUSE_KURITA;
-						} else if ("steiner".equals(faction)) {
-							cellGrid[i][j] = HOUSE_STEINER;
-						} else if ("davion".equals(faction)) {
-							cellGrid[i][j] = HOUSE_DAVION;
-						} else if ("marik".equals(faction)) {
-							cellGrid[i][j] = HOUSE_MARIK;
-						} else {
-							cellGrid[i][j] = NOT_VISIBLE;
-						}
-					}
-				}
-				reader.endObject();
-			}
-		}
-	}
 
 //	@Override
 //	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

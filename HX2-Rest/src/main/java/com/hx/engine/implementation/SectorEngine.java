@@ -36,7 +36,7 @@ public class SectorEngine implements ISectorEngine {
 	}
 
 	public ArrayList<com.hx.engine.pojo.Sector> findAll() {
-		Collection<Sector> list = daoSector.find();
+		Collection<Sector> list = daoSector.findWithLazies();
 		ArrayList<com.hx.engine.pojo.Sector> returnList = new ArrayList<com.hx.engine.pojo.Sector>();
 		com.hx.engine.pojo.Sector pojo;
 		for (Sector sector : list) {

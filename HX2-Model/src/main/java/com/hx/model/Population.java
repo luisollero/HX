@@ -105,7 +105,7 @@ public class Population {
 				sector = saveSector(name, coordX, coordY, 100, 2, false, 5, house,
 						house, 100);
 				
-				// Special cases. Saved apart for the dummy data
+				// Special cases. Saved apart for use with the dummy data
 				if (name.equals("Terra"))
 					terra = sector;
 				if (name.equals("Quentin"))
@@ -114,18 +114,6 @@ public class Population {
 					tikonov = sector;
 			}
 		}
-		
-		
-//		terra = saveSector("Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
-//		saveSector("Dieron", 0, 2, 5, 2, false, 5, kurita, kurita, 7);
-//		quentin = saveSector("Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
-//		saveSector("New Aragon", 2, -2, 2, 1, false, 5, davion, davion, 3);
-//		saveSector("Addicks", 2, 0, 4, 2, false, 5, davion, davion, 7);
-//		tikonov = saveSector("Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
-//		saveSector("Aldebaran", 1, -3, 6, 2, false, 4, liao, liao, 8);
-//		saveSector("Carver V", 0, -2, 3, 1, false, 4, liao, liao, 5);
-//		saveSector("Irian", -1, -1, 7, 2, false, 5, marik, marik, 10);
-//		saveSector("New Earth", -1, 1, 3, 2, false, 5, steiner, steiner, 4);
 		
 	}
 	
@@ -214,6 +202,17 @@ public class Population {
 		return house;
 	}
 	
+	/**
+	 * Extracted from StackOverflow website:
+	 * 
+	 * I learned this trick from "Stupid Scanner tricks" article. The reason it
+	 * works is because Scanner iterates over tokens in the stream, and in this
+	 * case we separate tokens using "beginning of the input boundary" (\A) thus
+	 * giving us only one token for the entire contents of the stream.
+	 * 
+	 * @param is
+	 * @return
+	 */
 	public static String convertStreamToString(java.io.InputStream is) {
 	    try {
 	        return new java.util.Scanner(is).useDelimiter("\\A").next();
