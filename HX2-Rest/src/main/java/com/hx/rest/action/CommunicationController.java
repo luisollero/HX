@@ -7,7 +7,6 @@ import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hx.engine.ICommunicationEngine;
-import com.hx.engine.IPersonalityEngine;
 import com.hx.engine.pojo.Communication;
 import com.hx.model.dto.Personality;
 import com.opensymphony.xwork2.ModelDriven;
@@ -23,7 +22,6 @@ public class CommunicationController implements ModelDriven<Object> {
 	private Collection<Communication> list;
 	
 	private ICommunicationEngine communicationEngine;
-	private IPersonalityEngine personalityEngine;
 
 	// GET /test/1
 	public HttpHeaders show() {
@@ -44,7 +42,7 @@ public class CommunicationController implements ModelDriven<Object> {
 		communication.setPublishedIn(published);
 		
 		com.hx.model.dto.Communication comm = (com.hx.model.dto.Communication) communication.toDTO();
-		comm.setFrom((Personality) personalityEngine.getById(Integer.valueOf(fromId)).toDTO());
+		comm.setFrom((Personality) new com.hx.engine.pojo.Personality(Integer.valueOf(fromId)).toDTO());
 		communicationEngine.saveOrUpdate(comm);
 
 		return new DefaultHttpHeaders("success");
@@ -105,9 +103,4 @@ public class CommunicationController implements ModelDriven<Object> {
 		this.communicationEngine = communicationEngine;
 	}
 	
-	@Autowired
-	public void setPersonalityEngine(IPersonalityEngine personalityEngine) {
-		this.personalityEngine = personalityEngine;
-	}
-
 }
