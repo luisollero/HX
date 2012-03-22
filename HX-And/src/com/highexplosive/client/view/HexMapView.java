@@ -122,9 +122,9 @@ public class HexMapView extends View {
 			return;
 		}
 		
-		cellGrid = new int[30][30];
-		sizeX = 30;
-		sizeY = 30;
+		cellGrid = new int[25][28];
+		sizeX = 25;
+		sizeY = 28;
 		String faction = null;
 		String sectorName = null;
 		int i = 0,j = 0;

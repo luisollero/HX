@@ -1,143 +1,191 @@
-{"map": {
-	"size": [5, 5],
-    "column": {
-    	"nCol": 0,
-	    "tile": {
-	        "name": "unknown",
-	        "y": 0,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 1,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "West",
-	        "y": 2,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 3,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 4,
-	        "faction": "false"
-	    }
-	},
-	"column": {
-    	"nCol": 1,
-	    "tile": {
-	        "name": "unknown",
-	        "y": 0,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 1,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 2,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 3,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 4,
-	        "faction": "liao"
-	    }
-	},
-	"column": {
-    	"nCol": 2,
-	    "tile": {
-	        "name": "North",
-	        "y": 0,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 1,
-	        "faction": "davion"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 2,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 3,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "South",
-	        "y": 4,
-	        "faction": "false"
-	    }
-	},
-	"column": {
-    	"nCol": 3,
-	    "tile": {
-	        "name": "unknown",
-	        "y": 0,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 1,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 2,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 3,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 4,
-	        "faction": "false"
-	    }
-	},
-	"column": {
-    	"nCol": 4,
-	    "tile": {
-	        "name": "unknown",
-	        "y": 0,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 1,
-	        "faction": "false"
-	    },
-	    "tile": {
-	        "name": "East",
-	        "y": 2,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 3,
-	        "faction": "liao"
-	    },
-	    "tile": {
-	        "name": "unknown",
-	        "y": 4,
-	        "faction": "false"
-	    }
-	}
-}}    
+[
+   {
+      "id":3116,
+      "name":"Exedor",
+      "coordY":17,
+      "house":"LIAO",
+      "coordX":12
+   },
+   {
+      "id":3136,
+      "name":"Carver V",
+      "coordY":13,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3138,
+      "name":"Wazan",
+      "coordY":15,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3139,
+      "name":"Masterson",
+      "coordY":16,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3140,
+      "name":"Krin",
+      "coordY":17,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3141,
+      "name":"Sian",
+      "coordY":18,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3142,
+      "name":"Betelgeuse",
+      "coordY":19,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3143,
+      "name":"Principia",
+      "coordY":20,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3144,
+      "name":"New Roland",
+      "coordY":21,
+      "house":"LIAO",
+      "coordX":13
+   },
+   {
+      "id":3160,
+      "name":"Tikonov",
+      "coordY":13,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3161,
+      "name":"Aldebaran",
+      "coordY":14,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3162,
+      "name":"St Andre",
+      "coordY":15,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3163,
+      "name":"Sarna",
+      "coordY":16,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3164,
+      "name":"Capela",
+      "coordY":17,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3165,
+      "name":"Hexcare",
+      "coordY":18,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3166,
+      "name":"Grand Base",
+      "coordY":19,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3167,
+      "name":"Buenos Aires",
+      "coordY":20,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3168,
+      "name":"Borden",
+      "coordY":21,
+      "house":"LIAO",
+      "coordX":14
+   },
+   {
+      "id":3185,
+      "name":"Achemar",
+      "coordY":14,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3186,
+      "name":"New Hessen",
+      "coordY":15,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3187,
+      "name":"Ares",
+      "coordY":16,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3188,
+      "name":"Denbar",
+      "coordY":17,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3189,
+      "name":"Ziliang",
+      "coordY":18,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3190,
+      "name":"Madras",
+      "coordY":19,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3191,
+      "name":"Vard",
+      "coordY":20,
+      "house":"LIAO",
+      "coordX":15
+   },
+   {
+      "id":3212,
+      "name":"St Ives",
+      "coordY":17,
+      "house":"LIAO",
+      "coordX":16
+   },
+   {
+      "id":3215,
+      "name":"Mitchel",
+      "coordY":20,
+      "house":"LIAO",
+      "coordX":16
+   }
+]

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.hx.engine.ISectorEngine;
 import com.hx.engine.pojo.Sector;
+import com.hx.model.dto.House;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class SectorController implements ModelDriven<Object> {
 
 	private String id;
+	private String houseId;
 	private Sector sector = new Sector();
 	private Collection<Sector> list;
 
@@ -23,10 +25,19 @@ public class SectorController implements ModelDriven<Object> {
 		sector = sectorEngine.getById(Integer.valueOf(id));
 		return new DefaultHttpHeaders("show");
 	}
+	
+	// GET /sector/id/retrieve
+	public HttpHeaders retrieve() {
+		return new DefaultHttpHeaders("show");
+	}
 
-	// GET /sector
+	// GET /sector.json || /sector.json?houseId=COMSTAR
 	public HttpHeaders index() {
-		list = sectorEngine.findAll();
+		if (houseId == null) {
+			list = sectorEngine.findAll();
+		} else {
+			list = sectorEngine.findByHouse(new House(houseId));
+		}
 		return new DefaultHttpHeaders("index");
 	}
 
@@ -40,6 +51,14 @@ public class SectorController implements ModelDriven<Object> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getHouseId() {
+		return houseId;
+	}
+
+	public void setHouseId(String houseId) {
+		this.houseId = houseId;
 	}
 
 	@Autowired

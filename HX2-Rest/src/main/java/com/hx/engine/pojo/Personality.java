@@ -22,7 +22,6 @@ public class Personality implements Pojo {
 		this.id = anotherPersonality.getId();
 		this.completeName = anotherPersonality.getCompleteName();
 		this.factionId = anotherPersonality.getHouse().getId();
-		this.homeSectorId = anotherPersonality.getHome().getId();
 		this.influence = anotherPersonality.getInfluence();
 		this.name = anotherPersonality.getName();
 		this.role = anotherPersonality.getRole();
