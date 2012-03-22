@@ -44,7 +44,7 @@ public class CommunicationController implements ModelDriven<Object> {
 		communication.setPublishedIn(published);
 		
 		com.hx.model.dto.Communication comm = (com.hx.model.dto.Communication) communication.toDTO();
-		comm.setFrom((Personality) personalityEngine.getById(fromId).toDTO());
+		comm.setFrom((Personality) personalityEngine.getById(Integer.valueOf(fromId)).toDTO());
 		communicationEngine.saveOrUpdate(comm);
 
 		return new DefaultHttpHeaders("success");

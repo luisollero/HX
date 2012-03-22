@@ -39,7 +39,7 @@ public class SectorEngine implements ISectorEngine {
 		return daoSector.find();
 	}
 
-	public com.hx.engine.pojo.Sector getById(String id) {
+	public com.hx.engine.pojo.Sector getById(Integer id) {
 		Sector auxSector = daoSector.getById(id);
 		if (auxSector != null) {
 			return new com.hx.engine.pojo.Sector(auxSector);
@@ -56,6 +56,12 @@ public class SectorEngine implements ISectorEngine {
 		// (x-1,y-1),(x-1,y+1),(x,y+2),(x+1,y+1),(x+1,y-1),(x,y-2)
 
 		//FIXME: User coords
+		result.addAll(daoSector.findByCoordXAndCoordY(x - 1, y - 1));
+		result.addAll(daoSector.findByCoordXAndCoordY(x - 1, y + 1));
+		result.addAll(daoSector.findByCoordXAndCoordY(x, y + 2));
+		result.addAll(daoSector.findByCoordXAndCoordY(x - 1, y - 1));
+		result.addAll(daoSector.findByCoordXAndCoordY(x - 1, y - 1));
+		result.addAll(daoSector.findByCoordXAndCoordY(x - 1, y - 1));
 //		result.add(daoSector.getById((x - 1) + "," + (y - 1)));
 //		result.add(daoSector.getById((x - 1) + "," + (y + 1)));
 //		result.add(daoSector.getById((x) + "," + (y + 2)));

@@ -61,4 +61,10 @@
 		<property name="userEngine" ref="userEngine"/>
 		<property name="houseEngine" ref="houseEngine"/>
 	</bean>
+	<bean id="personalityController" class="com.hx.rest.action.PersonalityController" scope="prototype">
+		<property name="userEngine" ref="userEngine"/>
+		<property name="houseEngine" ref="houseEngine"/>
+		<property name="sectorEngine" ref="sectorEngine"/>
+		<property name="personalityEngine" ref="personalityEngine"/>
+	</bean>
 </beans>

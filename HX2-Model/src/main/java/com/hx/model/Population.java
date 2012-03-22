@@ -26,13 +26,18 @@ public class Population {
 	
 	// Users
 	private static User luisOllero;
+	private static User tsunami;
 	
 	// Personalities
 	private static Personality kineasLiao;
-
-	private static User tsunami;
-
 	private static Personality vitorDavion;
+
+	// Sectors
+	private static Sector terra;
+	private static Sector quentin;
+	private static Sector tikonov;
+
+
 
 	// Here we go
 	public static void main(String[] args) {
@@ -80,12 +85,12 @@ public class Population {
 	
 	private static void insertSectors() {
 		
-		saveSector("Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
+		terra = saveSector("Terra", 0, 0, 100, 2, false, 5, comstar, comstar, 100);
 		saveSector("Dieron", 0, 2, 5, 2, false, 5, kurita, kurita, 7);
-		saveSector("Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
+		quentin = saveSector("Quentin", 1, 1, 5, 2, false, 5, davion, davion, 7);
 		saveSector("New Aragon", 2, -2, 2, 1, false, 5, davion, davion, 3);
 		saveSector("Addicks", 2, 0, 4, 2, false, 5, davion, davion, 7);
-		saveSector("Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
+		tikonov = saveSector("Tikonov", 1, -1, 7, 2, false, 5, liao, liao, 12);
 		saveSector("Aldebaran", 1, -3, 6, 2, false, 4, liao, liao, 8);
 		saveSector("Carver V", 0, -2, 3, 1, false, 4, liao, liao, 5);
 		saveSector("Irian", -1, -1, 7, 2, false, 5, marik, marik, 10);
@@ -93,7 +98,7 @@ public class Population {
 		
 	}
 	
-	private static void saveSector(String name, int coordX, int coordY, int defenseBonus,
+	private static Sector saveSector(String name, int coordX, int coordY, int defenseBonus,
 			int depth, boolean disputed, int happiness, House house, House loyalty, int production) {
 		Sector sector = new Sector();
 		sector.setName(name);
@@ -108,6 +113,8 @@ public class Population {
 		sector.setProduction(production);
 		
 		config.getDaoSector().saveOrUpdate(sector);
+		
+		return sector;
 	}
 	
 	private static void insertUsers() {
@@ -133,6 +140,7 @@ public class Population {
 		kineasLiao.setInfluence(0);
 		kineasLiao.setRole(Role.PRINCE);
 		kineasLiao.setStatus(UserStatus.ACTIVE);
+		kineasLiao.setHome(tikonov);
 		config.getDaoPersonality().saveOrUpdate(kineasLiao);
 		
 		vitorDavion = new Personality();
@@ -143,6 +151,7 @@ public class Population {
 		vitorDavion.setInfluence(0);
 		vitorDavion.setRole(Role.PRINCE);
 		vitorDavion.setStatus(UserStatus.ACTIVE);
+		vitorDavion.setHome(quentin);
 		config.getDaoPersonality().saveOrUpdate(vitorDavion);
 	}
 

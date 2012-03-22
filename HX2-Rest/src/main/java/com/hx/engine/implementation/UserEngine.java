@@ -9,8 +9,7 @@ import com.hx.model.dto.Personality;
 import com.hx.model.dto.User;
 
 /**
- * Clase de utilidad para facilitar el control de transacciones en el trabajo
- * con Usuarios.
+ * Engine for working with users against the database
  * 
  * @author Luis Ollero
  * 
@@ -31,7 +30,7 @@ public class UserEngine implements IUserEngine {
 		daoUser.saveOrUpdate(user);									
 	}
 	
-	public com.hx.engine.pojo.User getById(String id) {
+	public com.hx.engine.pojo.User getById(Integer id) {
 		User aux = daoUser.getById(id);
 		if (aux != null) {
 			return new com.hx.engine.pojo.User(aux);

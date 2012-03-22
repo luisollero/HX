@@ -26,7 +26,7 @@ public class PersonalityEngine implements IPersonalityEngine {
 		this.daoPersonality = daoPersonality;
 	}
 
-	public com.hx.engine.pojo.Personality getById(String id) {
+	public com.hx.engine.pojo.Personality getById(Integer id) {
 		Personality aux = daoPersonality.getById(id);
 		if (aux != null) {
 			return new com.hx.engine.pojo.Personality(aux);

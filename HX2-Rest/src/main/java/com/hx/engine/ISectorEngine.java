@@ -14,7 +14,7 @@ public interface ISectorEngine {
 	void saveOrUpdate(final Sector sector);
 
 	@Transactional
-	com.hx.engine.pojo.Sector getById(String id);
+	com.hx.engine.pojo.Sector getById(Integer id);
 
 	@Transactional
 	void delete(Sector sector);

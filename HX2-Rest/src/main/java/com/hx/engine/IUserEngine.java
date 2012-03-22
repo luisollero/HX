@@ -15,7 +15,7 @@ public interface IUserEngine {
 	void saveOrUpdate(final User user);
 	
 	@Transactional
-	com.hx.engine.pojo.User getById(String id);
+	com.hx.engine.pojo.User getById(Integer id);
 	
 	@Transactional
 	void delete(User user);

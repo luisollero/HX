@@ -37,7 +37,7 @@ public class PersonalityController implements ModelDriven<Object> {
 	
 	// GET /personality/personality_id
 	public HttpHeaders show() {
-		personality = personalityEngine.getById(id);
+		personality = personalityEngine.getById(Integer.valueOf(id));
 		return new DefaultHttpHeaders("show");
 	}
 
@@ -57,8 +57,8 @@ public class PersonalityController implements ModelDriven<Object> {
 		com.hx.model.dto.Personality newPersonality = (com.hx.model.dto.Personality) personality.toDTO();
 		newPersonality.setHouse(houseEngine.getById(houseId));
 		newPersonality.setRole(Role.valueOf(role));
-		newPersonality.setUser((User) userEngine.getById(userId).toDTO());
-		newPersonality.setHome((Sector) sectorEngine.getById(homeSectorId).toDTO());
+		newPersonality.setUser((User) userEngine.getById(Integer.valueOf(userId)).toDTO());
+		newPersonality.setHome((Sector) sectorEngine.getById(Integer.valueOf(homeSectorId)).toDTO());
 		newPersonality.setStatus(UserStatus.PENDIENT);
 		
 		personalityEngine.saveOrUpdate(newPersonality);
@@ -102,6 +102,30 @@ public class PersonalityController implements ModelDriven<Object> {
 		this.houseId = houseId;
 	}
 
+	public String getHomeSectorId() {
+		return homeSectorId;
+	}
+
+	public void setHomeSectorId(String homeSectorId) {
+		this.homeSectorId = homeSectorId;
+	}
+
+	public String getCompleteName() {
+		return completeName;
+	}
+
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	@Autowired
 	public void setUserEngine(IUserEngine userEngine) {
 		this.userEngine = userEngine;
@@ -110,6 +134,16 @@ public class PersonalityController implements ModelDriven<Object> {
 	@Autowired
 	public void setHouseEngine(IHouseEngine houseEngine) {
 		this.houseEngine = houseEngine;
+	}
+	
+	@Autowired
+	public void setPersonalityEngine(IPersonalityEngine personalityEngine) {
+		this.personalityEngine = personalityEngine;
+	}
+	
+	@Autowired
+	public void setSectorEngine(ISectorEngine sectorEngine) {
+		this.sectorEngine = sectorEngine;
 	}
 
 }

@@ -12,5 +12,7 @@ public interface IDAOSector extends IDAOCommon<Sector> {
 	Collection<Sector> findByHouse(House house);
 
 	Collection<Sector> findByName(String name);
+	
+	Collection<Sector> findByCoordXAndCoordY(Integer coordX, Integer coordY);
 
 }

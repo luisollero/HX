@@ -13,13 +13,16 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
+import com.hx.model.dto.Role;
+
 public class RestTest extends TestBase {
 	
 	
 	@Test
 	public void init() {
-		postUserTest();
-//		postCommunicationTest();
+//		postUserTest();
+//		postPersonalityTest();
+		postCommunicationTest();
 //		putTest();
 //		deleteTest();
 	}
@@ -98,4 +101,31 @@ public class RestTest extends TestBase {
 			System.out.println(result);
 	}
 
+	private void postPersonalityTest() {
+		String result = null;
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost request = new HttpPost(
+				"http://localhost:8080/HX2-Rest/personality");
+		ResponseHandler<String> handler = new BasicResponseHandler();
+		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);
+		nameValuePairs.add(new BasicNameValuePair("name", "Katrina"));
+		nameValuePairs.add(new BasicNameValuePair("completeName", "Katrina Steiner"));
+		nameValuePairs.add(new BasicNameValuePair("userId", "1"));
+		nameValuePairs.add(new BasicNameValuePair("role", Role.DUKE.name()));
+		nameValuePairs.add(new BasicNameValuePair("houseId", "STEINER"));
+		nameValuePairs.add(new BasicNameValuePair("homeSectorId", "10"));
+		
+		try {
+			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			result = httpclient.execute(request, handler);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httpclient.getConnectionManager().shutdown();
+		}
+
+		if (result != null)
+			System.out.println(result);
+	}
 }

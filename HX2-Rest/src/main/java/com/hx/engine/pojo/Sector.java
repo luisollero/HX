@@ -1,13 +1,18 @@
 package com.hx.engine.pojo;
 
+/**
+ * Simple representation of the {@link com.hx.model.dto.Sector}
+ * @author Luis Ollero
+ *
+ */
 public class Sector implements Pojo {
 	
 	private Integer id;
 	private Integer coordX;
 	private Integer coordY;
 
-	public Sector(int i) {
-		this.id = i;
+	public Sector(int id) {
+		this.id = id;
 	}
 
 	public Sector(com.hx.model.dto.Sector auxSector) {
@@ -17,8 +22,11 @@ public class Sector implements Pojo {
 	}
 
 	public Object toDTO() {
-		// TODO Auto-generated method stub
-		return null;
+		com.hx.model.dto.Sector sector = new com.hx.model.dto.Sector();
+		sector.setId(id);
+		sector.setCoordX(coordX);
+		sector.setCoordY(coordY);
+		return sector;
 	}
 
 	public Integer getId() {

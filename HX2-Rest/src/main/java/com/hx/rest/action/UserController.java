@@ -29,7 +29,7 @@ public class UserController implements ModelDriven<Object> {
 
 	// GET /user/user_id
 	public HttpHeaders show() {
-		user = userEngine.getById(id);
+		user = userEngine.getById(Integer.valueOf(id));
 		return new DefaultHttpHeaders("show");
 	}
 
