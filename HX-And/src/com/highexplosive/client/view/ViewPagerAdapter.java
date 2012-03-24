@@ -35,6 +35,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private Context ctx;
 	
 	private ListView declarationsListView = null;
+	private ListView messagesListView = null;
 	private ArrayList<Declaration> declarationList = null;
 	private ArrayList<Declaration> factionDeclarationList = null;
 
@@ -107,6 +108,11 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 			break;
 		case POSITION_MESSAGES:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_messages, null);
+			
+			DeclarationAdapter messagesAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+			messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
+			messagesListView.setAdapter(messagesAdapter);
+			
 			((ViewPager) collection).addView(linearLayout, 0);
 			break;
 		case POSITION_PROFILE:

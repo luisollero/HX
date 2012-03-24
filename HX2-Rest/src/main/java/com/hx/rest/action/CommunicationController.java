@@ -25,7 +25,7 @@ public class CommunicationController implements ModelDriven<Object> {
 
 	// GET /test/1
 	public HttpHeaders show() {
-		communication = communicationEngine.getById(id);
+		communication = communicationEngine.getById(Integer.valueOf(id));
 		return new DefaultHttpHeaders("show");
 	}
 

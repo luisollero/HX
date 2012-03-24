@@ -13,11 +13,17 @@ import android.util.AttributeSet;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.model.HexGridCell;
 
 
+/**
+ * 
+ * @author Luis Ollero
+ *
+ */
 public class HexMapView extends View {
 
     private static final int NOT_VISIBLE = 0;
@@ -44,6 +50,7 @@ public class HexMapView extends View {
     private static HexGridCell cellMetricsOptimizedMap = null;
     private boolean mapInitialized = false;
     private boolean useOptimizedMap = false;
+	private int cellRadiusOptimizedMap = 0;
     
     public HexMapView(Context context, AttributeSet set) {
     	super(context, set);
@@ -57,7 +64,7 @@ public class HexMapView extends View {
 			mPaint.setStrokeWidth(8); 
 			mPaint.setColor(Color.TRANSPARENT); 
 			mPaint.setStyle(Paint.Style.FILL); 
-			mPaint.setAntiAlias(true); // no jagged edges, etc.
+//			mPaint.setAntiAlias(true); // no jagged edges, etc.
 			if (useOptimizedMap) {
 				useOptimizedMap(canvas, mPaint);
 			} else {
@@ -83,7 +90,12 @@ public class HexMapView extends View {
 	}
 	
 	private void useOptimizedMap(Canvas canvas, Paint paint) {
-		cellMetricsOptimizedMap = new HexGridCell(20);
+		
+		int aux = canvas.getWidth() / cellMap[0].length;
+		cellRadiusOptimizedMap = canvas.getWidth() / cellMap.length;
+		cellRadiusOptimizedMap = cellRadiusOptimizedMap < aux ? cellRadiusOptimizedMap : aux;
+		
+		cellMetricsOptimizedMap = new HexGridCell(cellRadiusOptimizedMap);
 		
 		for (int i = 0; i < cellOptimizedMap.length; i++) {
 			for (int j = 0; j < cellOptimizedMap[i].length; j++) {
@@ -266,7 +278,6 @@ public class HexMapView extends View {
 		for (int i = 0; i < cellMap.length; i++) {
 			for (int j = 0; j < cellMap[i].length; j++) {
 				if (cellMap[i][j] != NOT_VISIBLE) {
-					Log.i(TAG, "i: " + i + " j: " + j);
 					cellOptimizedMap[j - firstX][i - firstY] = cellMap[i][j];
 				}
 			}
@@ -276,14 +287,31 @@ public class HexMapView extends View {
 	}
 
 
-//	@Override
-//	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-//		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-//		this.setMeasuredDimension(parentWidth, parentHeight / 2);
-//		this.setLayoutParams(new LinearLayout.LayoutParams(parentWidth,
-//				parentHeight / 2));
-//		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//	}
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+		
+		if (useOptimizedMap) {
+			int semiSize = (cellOptimizedMap.length * cellRadiusOptimizedMap) / 2; //semi-width of the map
+			int semiWidth = parentWidth / 2; //semi-width of the screen
+			int left = semiWidth - semiSize;
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(parentWidth,
+					parentHeight);
+			lp.setMargins(left, 0, 0, 0);
+			this.setLayoutParams(lp);
+		}
+		
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	}
+	
 
+	@Override
+	protected void finalize() throws Throwable {
+		super.finalize();
+		this.cellMap = null;
+		this.cellOptimizedMap = null;
+		this.mCornersX = null;
+		this.mCornersY = null;
+	}
 }

@@ -20,7 +20,7 @@ public class CommunicationEngine implements ICommunicationEngine {
 		return returnList;
 	}
 
-	public com.hx.engine.pojo.Communication getById(String id) {
+	public com.hx.engine.pojo.Communication getById(Integer id) {
 		Communication comm = daoCommunication.getById(id);
 		if (comm != null) {
 			return new com.hx.engine.pojo.Communication(comm);

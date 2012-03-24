@@ -10,12 +10,25 @@ import android.content.Context;
 import android.util.JsonReader;
 import android.util.Log;
 
-import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Character;
+import com.highexplosive.client.model.Declaration;
+import com.highexplosive.client.model.Message;
 
 public class HxJsonUtils {
 
 	private static final String TAG = HxJsonUtils.class.getSimpleName();
+
+	public static Message getMessageDetail(Context context, int messageId) {
+		Message message = null;
+		try {
+			message = parseMessage(context.getAssets().open(
+					"json/type_message.json"));
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return message;
+	}
+	
 
 	/**
 	 * Get the full character from the server
@@ -74,6 +87,11 @@ public class HxJsonUtils {
 
 
 	// Private and aux methods
+	private static Message parseMessage(InputStream open) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	private static Character parseCharacter(InputStream is) {
 		Character character = new Character();
 		JsonReader reader;
@@ -228,4 +246,5 @@ public class HxJsonUtils {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

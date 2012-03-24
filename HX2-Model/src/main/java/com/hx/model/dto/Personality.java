@@ -53,16 +53,18 @@ public class Personality {
 	@Column(name = "hx_personality_status")
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
-	
+
 	@Column(name = "hx_personality_influence")
 	private Integer influence;
+	
 	@Column(name = "hx_personality_name")
 	private String name;
+	
 	@Column(name = "hx_personality_complete_name")
 	private String completeName;
 
 	@OneToMany(mappedBy = "personality")
-	private Set<Sector> sectors = new HashSet<Sector>(); // Sectors ruled by the PC
+	private Set<Sector> sectors = new HashSet<Sector>(); // Sectors ruled by the 
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
@@ -72,6 +74,10 @@ public class Personality {
 	@ManyToMany(mappedBy = "upvotedSet", targetEntity = com.hx.model.dto.Communication.class, cascade = {
 			CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
 	private Set<Communication> upvotedSet = new HashSet<Communication>();
+
+	@ManyToMany(mappedBy = "to", targetEntity = com.hx.model.dto.Message.class, cascade = {
+			CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
+	private Set<Message> messagesReceived = new HashSet<Message>();
 
 	// GETTERS AND SETTERS
 	public Integer getId() {
@@ -162,9 +168,21 @@ public class Personality {
 		this.upvotedSet = upvotedSet;
 	}
 
+	public Set<Message> getMessagesReceived() {
+		return messagesReceived;
+	}
+
+	public void setMessagesReceived(Set<Message> messagesReceived) {
+		this.messagesReceived = messagesReceived;
+	}
+
 	@Override
 	public String toString() {
-		return this.completeName + " || " + this.user.toString();
+		return "Personality [id=" + id + ", role=" + role + ", user=" + user
+				+ ", home=" + home + ", status=" + status + ", influence="
+				+ influence + ", name=" + name + ", completeName="
+				+ completeName + ", sectors=" + sectors + ", house=" + house
+				+ "]";
 	}
 
 	@Override

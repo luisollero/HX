@@ -2,9 +2,12 @@ package com.hx.model;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.hx.model.dto.Communication;
 import com.hx.model.dto.House;
+import com.hx.model.dto.Message;
 import com.hx.model.dto.Personality;
 import com.hx.model.dto.Role;
 import com.hx.model.dto.Scope;
@@ -46,6 +49,7 @@ public class Population {
 		insertUsers();
 		insertPersonalities();
 		insertCommunications();
+		insertMessages();
 		config.tearDown();
 	}
 
@@ -192,6 +196,20 @@ public class Population {
 		comm.setScope(Scope.INNER_SPHERE);
 		comm.setFrom(vitorDavion);
 		config.getDaoCommunication().saveOrUpdate(comm);
+	}
+	
+	private static void insertMessages() {
+		Message message = new Message();
+		message.setFrom(kineasLiao);
+		message.setSubject("My beloved ally");
+		message.setMessage("Burn in hell!");
+		message.setSendingDate(new Date());
+		
+		Set<Personality> setTo = new HashSet<Personality>();
+		setTo.add(vitorDavion);
+		message.setTo(setTo);
+		
+		config.getDaoMessage().saveOrUpdate(message);
 	}
 	
 	private static House createFaction(String houseId, String houseName, String alternateName) {
