@@ -55,6 +55,12 @@
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
 	
+	<bean id="daoMessage" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Message"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOMessage"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+	
 	<!-- DAO Implementado
 	<bean id="daoPerson" class="com.hx.persistence.ddg.DaoFactoryBean">
 		<property name="pojoClass" value="com.hx.backoffice.model.cms.dto.Person"/>

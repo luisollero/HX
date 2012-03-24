@@ -16,11 +16,18 @@
     <string name="section_messages_header">MESSAGES</string>
     <string name="section_profile_header">PROFILE</string>
     
+    <!-- Declarations -->
     <string name="declaration_from">From: </string>
     <string name="declaration_published">Published in: </string>
     <string name="declaration_time">Time: </string>
     <string name="declaration_subject">Subject: </string>
     <string name="declaration_content">Content: </string>
+    
+    <!-- Messages -->
+    <string name="message_from">From: </string>
+    <string name="message_time">Time: </string>
+    <string name="message_subject">Subject: </string>
+    <string name="message_content">Content: </string>
     
 <!--     <string name="main_arrow_left">&lt;-</string> -->
     <string name="main_arrow_left">Back</string>
@@ -71,6 +78,5 @@
         <item>Marik</item>
         <item>Steiner</item>
     </string-array>
-    
     
 </resources>
