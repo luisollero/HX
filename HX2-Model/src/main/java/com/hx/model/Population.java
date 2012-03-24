@@ -52,24 +52,24 @@ public class Population {
 	
 	private static void insertFactions() {
 
-		comstar = createFaction(HXKeys.COMSTAR, "Comstar", null);
-		liao = createFaction(HXKeys.LIAO, "House Liao", "Capellan Confederation");
-		davion = createFaction(HXKeys.DAVION, "House Davion", "Federated Suns");
-		kurita = createFaction(HXKeys.KURITA, "House Kurita", "Draconis Combine");
-		steiner = createFaction(HXKeys.STEINER, "House Steiner", "Lyran Commonwealth");
-		marik = createFaction(HXKeys.MARIK, "House Marik", "Free Worlds League");
+		comstar = createFaction(HXKeys.FACTION_COMSTAR, "Comstar", null);
+		liao = createFaction(HXKeys.FACTION_LIAO, "House Liao", "Capellan Confederation");
+		davion = createFaction(HXKeys.FACTION_DAVION, "House Davion", "Federated Suns");
+		kurita = createFaction(HXKeys.FACTION_KURITA, "House Kurita", "Draconis Combine");
+		steiner = createFaction(HXKeys.FACTION_STEINER, "House Steiner", "Lyran Commonwealth");
+		marik = createFaction(HXKeys.FACTION_MARIK, "House Marik", "Free Worlds League");
 		
-		createFaction(HXKeys.TAURUS, "Taurus Concordate", null);
-		createFaction(HXKeys.CANOPUS, "Canopus Magistry", null);
-		createFaction(HXKeys.CIRCINUS, "Circinus Federation", null);
-		createFaction(HXKeys.TORTUGA, "Tortuga Dominion", null);
-		createFaction(HXKeys.ILLYRIAN, "Illyrian Palatinate", null);
-		createFaction(HXKeys.MARIAN, "Marian Hegemony", null);
-		createFaction(HXKeys.OBERON, "Oberon Confederation", null);
-		createFaction(HXKeys.OUTERWORLDS, "Outer Worlds Alliance", null);
-		createFaction(HXKeys.LOTHARIO, "Lothario League", null);
-		createFaction(HXKeys.ELYSSIA, "Elyssia Fields", null);
-		createFaction(HXKeys.VALKYRIATE, "Great Valkyriate", null);
+		createFaction(HXKeys.FACTION_TAURUS, "Taurus Concordate", null);
+		createFaction(HXKeys.FACTION_CANOPUS, "Canopus Magistry", null);
+		createFaction(HXKeys.FACTION_CIRCINUS, "Circinus Federation", null);
+		createFaction(HXKeys.FACTION_TORTUGA, "Tortuga Dominion", null);
+		createFaction(HXKeys.FACTION_ILLYRIAN, "Illyrian Palatinate", null);
+		createFaction(HXKeys.FACTION_MARIAN, "Marian Hegemony", null);
+		createFaction(HXKeys.FACTION_OBERON, "Oberon Confederation", null);
+		createFaction(HXKeys.FACTION_OUTERWORLDS, "Outer Worlds Alliance", null);
+		createFaction(HXKeys.FACTION_LOTHARIO, "Lothario League", null);
+		createFaction(HXKeys.FACTION_ELYSSIA, "Elyssia Fields", null);
+		createFaction(HXKeys.FACTION_VALKYRIATE, "Great Valkyriate", null);
 		
 		createFaction(HXKeys.UNEXPLORED, "Unexplored", null);
 		createFaction(HXKeys.DISPUTED, "Disputed", null);

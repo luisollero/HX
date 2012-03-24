@@ -88,6 +88,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_house, null);
 			
 			((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
+			((HexMapView)linearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
 			
 			DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
 			declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);
