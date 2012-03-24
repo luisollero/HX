@@ -1,9 +1,24 @@
-"message": {
-	"message_id": 1,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"to_name": ["Victor Davion","Hohiro Kurita"],
-	"to_id": [2, 3],
-	"subject": "No comments",
-	"body": "Just trying to test some messages here. Now a bit of lorem ipsum homemade aos;h daowhdoudhbas oubdwub ubdpudb dubd uwe dbuewabdwubdwe dwe"
+{
+   "to":[
+      {
+         "id":2,
+         "homeSectorId":0,
+         "completeName":"Vitor Davion",
+         "name":"Vitor",
+         "userId":2,
+         "factionId":"DAVION",
+         "sectorsRuled":[
+
+         ],
+         "influence":0,
+         "role":"PRINCE"
+      }
+   ],
+   "fromId":1,
+   "body":"Burn in hell!",
+   "time":1332627631000,
+   "favorited":false,
+   "subject":"My beloved ally",
+   "fromName":"Kineas",
+   "messageId":1
 }
