@@ -2,16 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="right"
-    android:orientation="vertical" android:background="@drawable/option_gradient">
+    android:orientation="horizontal" android:background="@drawable/option_gradient">
+
+    <CheckBox
+        android:id="@+id/messageCheckBox"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/messageSubject"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:gravity="top"
-        android:textSize="16sp"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:textSize="16sp" />
 
 </LinearLayout>
