@@ -25,7 +25,6 @@ public class DefaultDsMethodConfiguration<B> implements
 	}
 
 	public Method getDaoMethod(Object dao, Method dsMethod) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
