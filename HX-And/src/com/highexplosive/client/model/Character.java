@@ -1,5 +1,7 @@
 package com.highexplosive.client.model;
 
+import java.util.ArrayList;
+
 public class Character {
 
 	private Integer characterId;
@@ -14,7 +16,8 @@ public class Character {
 	private int influence;
 	private int numberOfDeclarations;
 	private long creationDate;
-	private boolean turnEnded;
+	private boolean endedTurn;
+	private ArrayList<Sector> sectorRuled = new ArrayList<Sector>();
 
 	public Integer getCharacterId() {
 		return characterId;
@@ -72,12 +75,12 @@ public class Character {
 		this.influence = influence;
 	}
 
-	public boolean isTurnEnded() {
-		return turnEnded;
+	public boolean isEndedTurn() {
+		return endedTurn;
 	}
 
-	public void setTurnEnded(boolean turnEnded) {
-		this.turnEnded = turnEnded;
+	public void setEndedTurn(boolean endedTurn) {
+		this.endedTurn = endedTurn;
 	}
 
 	public int getNumberOfDeclarations() {
@@ -112,13 +115,21 @@ public class Character {
 		this.sectorId = sectorId;
 	}
 
+	public ArrayList<Sector> getSectorRuled() {
+		return sectorRuled;
+	}
+
+	public void setSectorRuled(ArrayList<Sector> sectorRuled) {
+		this.sectorRuled = sectorRuled;
+	}
+
 	@Override
 	public String toString() {
 		return "Character [characterId=" + characterId + ", house=" + house
 				+ ", userId=" + userId + ", positionInHouse=" + role
 				+ ", name=" + name + ", bio=" + bio + ", karma=" + influence
 				+ ", numberOfDeclarations=" + numberOfDeclarations
-				+ ", creationDate=" + creationDate + ", turnEnded=" + turnEnded
+				+ ", creationDate=" + creationDate + ", turnEnded=" + endedTurn
 				+ "]";
 	}
 	

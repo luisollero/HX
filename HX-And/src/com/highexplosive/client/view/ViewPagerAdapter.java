@@ -8,18 +8,19 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.format.DateUtils;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
 import com.highexplosive.client.model.Character;
 import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
-import com.highexplosive.client.model.Role;
 import com.viewpagerindicator.TitleProvider;
 
 public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
@@ -35,11 +36,13 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	public static int NUM_VIEWS = 4;
 	private Context ctx;
 	
+	private int currentPosition = 0;
 	private ListView declarationsListView = null;
 	private ListView messagesListView = null;
 	private ArrayList<Declaration> declarationList = null;
 	private ArrayList<Declaration> factionDeclarationList = null;
 	private ArrayList<Message> characterMessageList = null;
+	private MessageAdapter messagesAdapter;
 
 	public ViewPagerAdapter(Context context) {
 		this.ctx = context;
@@ -65,9 +68,11 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	public Object instantiateItem(View collection, int position) {
 		LayoutInflater inflater = LayoutInflater.from(ctx);
 		LinearLayout linearLayout = null;
+		currentPosition = position;
 		
 		switch (position) {
 		case POSITION_LATEST:
+			
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_latest, null);
 
 			((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
@@ -111,7 +116,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_MESSAGES:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_messages, null);
 			
-			MessageAdapter messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
+			messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
 			messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
 			messagesListView.setAdapter(messagesAdapter);
 			
@@ -228,5 +233,16 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		}
 		return title;
 	}
+
 	
+	public void deleteMessages() {
+		
+		if (messagesListView != null) {
+			ArrayList<Integer> list = messagesAdapter.getItemsSelected();
+			for (Integer integer : list) {
+				Toast.makeText(ctx, "Id to delete: " + integer, Toast.LENGTH_LONG).show();
+			}
+			
+		}
+	}
 }

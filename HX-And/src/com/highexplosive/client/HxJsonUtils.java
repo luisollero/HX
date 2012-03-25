@@ -13,6 +13,7 @@ import android.util.Log;
 import com.highexplosive.client.model.Character;
 import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
+import com.highexplosive.client.model.Sector;
 
 public class HxJsonUtils {
 
@@ -214,12 +215,10 @@ public class HxJsonUtils {
 					character.setUserId(reader.nextInt());
 				} else if (name.equals("name")) {
 					character.setName(reader.nextString());
-				} else if (name.equals("endedturn")) {
-					//TODO: End turn
+				} else if (name.equals("endedTurn")) {
+					character.setEndedTurn(reader.nextBoolean());
 				} else if (name.equals("sectorsRuled")) {
-					reader.beginArray();
-					//TODO: Sectors ruled
-					reader.endArray();
+					character.setSectorRuled(parseSectorList(reader));
 				}
 			}
 			reader.endObject();
@@ -229,6 +228,41 @@ public class HxJsonUtils {
 			Log.e(TAG, e.getMessage());
 		}
 		return character;
+	}
+
+	private static ArrayList<Sector> parseSectorList(JsonReader reader) throws IOException {
+		ArrayList<Sector> list = new ArrayList<Sector>();
+		reader.beginArray();
+		while (reader.hasNext()) {
+			list.add(parseSector(reader));
+		}
+		reader.endArray();
+		return list;
+	}
+
+	private static Sector parseSector(JsonReader reader) {
+		Sector sector = new Sector();
+		try {
+			reader.beginObject();
+		while (reader.hasNext()) {
+			String name = reader.nextName();
+			if (name.equals("name")) {
+				sector.setName(reader.nextString());
+			} else if (name.equals("coordX")) {
+				sector.setCoordX(reader.nextInt());
+			} else if (name.equals("coordY")) {
+				sector.setCoordY(reader.nextInt());
+			} else if (name.equals("house")) {
+				sector.setFaction(reader.nextString());
+			} else if (name.equals("id")) {
+				sector.setId(reader.nextInt());
+			}
+		}
+		reader.endObject();
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return sector;
 	}
 
 	private static ArrayList<Declaration> parseDeclarationList(JsonReader reader) {
@@ -289,8 +323,8 @@ public class HxJsonUtils {
 	}
 
 
-	private static InputStream retrieveJSonFromUrl(String string) {
-		// TODO Auto-generated method stub
+	private static JsonReader retrieveJSonFromUrl(String string) {
+		// TODO Get JSon From Server URL
 		return null;
 	}
 

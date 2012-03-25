@@ -5,6 +5,7 @@ import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.highexplosive.client.view.ViewPagerAdapter;
@@ -12,6 +13,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 
 public class HxActivity extends GDActivity  {
 	
+	private static final String TAG = HxActivity.class.getName();
 	private ViewPagerAdapter viewPagerAdapter = null;
 	private ViewPager viewPager;
 	
@@ -33,13 +35,19 @@ public class HxActivity extends GDActivity  {
     private void initActionBar() {
 		getActionBar().setTitle("Highexplosive");
 		addActionBarItem(Type.Refresh, 0);
+		addActionBarItem(Type.Trashcan);
 	}
 
     public boolean onHandleActionBarItemClick(ActionBarItem item, int pos) {
 		switch (pos) {
-		case 1:
+		case 0:
 			Toast.makeText(getApplicationContext(),
 					"Refresh", Toast.LENGTH_SHORT).show();
+			break;
+		case 1:
+			if (viewPager.getCurrentItem() == ViewPagerAdapter.POSITION_MESSAGES) {
+				viewPagerAdapter.deleteMessages();
+			}
 			break;
 		default:
 			break;
