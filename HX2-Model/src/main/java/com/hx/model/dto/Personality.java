@@ -78,6 +78,9 @@ public class Personality {
 	@ManyToMany(mappedBy = "to", targetEntity = com.hx.model.dto.Message.class, cascade = {
 			CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
 	private Set<Message> messagesReceived = new HashSet<Message>();
+	
+	@Column(name = "hx_personality_endedturn")
+	private Boolean endedTurn;
 
 	// GETTERS AND SETTERS
 	public Integer getId() {
@@ -176,13 +179,22 @@ public class Personality {
 		this.messagesReceived = messagesReceived;
 	}
 
+	public Boolean getEndedTurn() {
+		return endedTurn;
+	}
+
+	public void setEndedTurn(Boolean endedTurn) {
+		this.endedTurn = endedTurn;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Personality [id=" + id + ", role=" + role + ", user=" + user
 				+ ", home=" + home + ", status=" + status + ", influence="
 				+ influence + ", name=" + name + ", completeName="
-				+ completeName + ", sectors=" + sectors + ", house=" + house
-				+ "]";
+				+ completeName + ", house=" + house + ", endedTurn="
+				+ endedTurn + "]";
 	}
 
 	@Override

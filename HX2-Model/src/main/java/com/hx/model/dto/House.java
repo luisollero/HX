@@ -36,7 +36,6 @@ public class House {
 	private Set<HouseRelation>	houseRelationsDestiny = new HashSet<HouseRelation>();
 
 	public House() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public House(String id) {
