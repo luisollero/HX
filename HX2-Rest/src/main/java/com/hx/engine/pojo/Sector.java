@@ -26,7 +26,6 @@ public class Sector implements Pojo {
 	}
 
 	public Sector() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Object toDTO() {

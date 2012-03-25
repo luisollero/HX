@@ -12,7 +12,6 @@ public class User implements Pojo {
 	private String favoriteRole;
 
 	public User() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public User(com.hx.model.dto.User user) {

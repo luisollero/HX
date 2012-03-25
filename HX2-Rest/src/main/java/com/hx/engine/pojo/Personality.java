@@ -16,7 +16,7 @@ public class Personality implements Pojo {
 	private String factionId;
 	private String name;
 	private String completeName;
-	private Set<Integer> sectorsRuled;
+	private Set<com.hx.engine.pojo.Sector> sectorsRuled;
 	
 	public Personality(com.hx.model.dto.Personality anotherPersonality) {
 		this.id = anotherPersonality.getId();
@@ -26,11 +26,13 @@ public class Personality implements Pojo {
 		this.name = anotherPersonality.getName();
 		this.role = anotherPersonality.getRole();
 		this.userId = anotherPersonality.getUser().getId();
-		// TODO Sets!
+		
+		for (com.hx.model.dto.Sector sector : anotherPersonality.getSectors()) {
+			this.sectorsRuled.add(new com.hx.engine.pojo.Sector(sector));
+		}
 	}
 	
 	public Personality() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Personality(Integer i) {
@@ -106,11 +108,11 @@ public class Personality implements Pojo {
 		this.completeName = completeName;
 	}
 
-	public Set<Integer> getSectorsRuled() {
+	public Set<com.hx.engine.pojo.Sector> getSectorsRuled() {
 		return sectorsRuled;
 	}
 
-	public void setSectorsRuled(Set<Integer> sectorsRuled) {
+	public void setSectorsRuled(Set<com.hx.engine.pojo.Sector> sectorsRuled) {
 		this.sectorsRuled = sectorsRuled;
 	}
 
