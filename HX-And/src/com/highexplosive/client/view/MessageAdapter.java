@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.highexplosive.client.R;
 import com.highexplosive.client.activities.MessageDetailActivity;
-import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
 
 public class MessageAdapter extends ArrayAdapter<Message> {
@@ -43,11 +42,10 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 			LayoutInflater layoutInflater = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = layoutInflater
-					.inflate(R.layout.declaration_row, null);
+					.inflate(R.layout.message_row, null);
 
 			if (items.get(position) != null) {
-				((TextView)view.findViewById(R.id.declarationSubject)).setText(items.get(position).getSubject());
-				((TextView)view.findViewById(R.id.declarationBodyResume)).setText(items.get(position).getBodyResume());
+				((TextView)view.findViewById(R.id.messageSubject)).setText(items.get(position).getSubject());
 				
 				view.setOnClickListener(new OnClickListener() {
 					@Override

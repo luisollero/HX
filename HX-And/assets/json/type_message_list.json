@@ -1,29 +1,26 @@
-{"message": {
-	"message_id": 1,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "No comments",
-	"body_resume": "Just trying to test some messages here ..."
-},
-"message": {
-	"message_id": 2,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "No comments",
-	"body_resume": "Just trying to test some messages here ..."
-},
-"message": {
-	"message_id": 3,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "No comments",
-	"body_resume": "Just trying to test some messages here ..."
-},
-"message": {
-	"message_id": 4,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "No comments",
-	"body_resume": "Just trying to test some messages here ..."
-}
-}    
+[
+   {
+      "to":[
+         {
+            "id":2,
+            "homeSectorId":0,
+            "completeName":"Vitor Davion",
+            "name":"Vitor",
+            "userId":2,
+            "factionId":"DAVION",
+            "sectorsRuled":[
+
+            ],
+            "influence":0,
+            "role":"PRINCE"
+         }
+      ],
+      "body":"Burn in hell!",
+      "fromId":1,
+      "time":1332627631000,
+      "favorited":false,
+      "subject":"My beloved ally",
+      "fromName":"Kineas",
+      "messageId":1
+   }
+]

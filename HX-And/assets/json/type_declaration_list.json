@@ -1,64 +1,24 @@
-{
-"declaration": {
-	"declaration_id" : 1,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-},
-"declaration": {
-	"declaration_id" : 2,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 3,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 4,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 5,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 6,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 7,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 8,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}, 
-"declaration": {
-	"declaration_id" : 9,
-	"from_id": 1,
-	"from_name": "Kineas Liao",
-	"subject": "Testing declarations",
-	"body_resume": "Just another declaration test that I ..."
-}}
+[
+   {
+      "body":"In an unexpected turn of announcements, our brave troops are advancing without problems over the defenses of the Federated Suns.",
+      "fromId":1,
+      "karma":0,
+      "time":1332627631000,
+      "favorited":false,
+      "subject":"The troops attacking New Syrtis!",
+      "publishedIn":"Star of Sian",
+      "fromName":"Kineas",
+      "communicationId":1
+   },
+   {
+      "body":"Our troops are currently playing some war games in turtle bay. We encourage our citizens not to move over there during the next days.",
+      "fromId":2,
+      "karma":0,
+      "time":1332627631000,
+      "favorited":false,
+      "subject":"Our troops exercising in New Syrtis",
+      "publishedIn":"Herald of New Syrtis",
+      "fromName":"Vitor",
+      "communicationId":2
+   }
+]

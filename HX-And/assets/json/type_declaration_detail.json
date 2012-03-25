@@ -1,11 +1,11 @@
-{"declaration": {
-	"declaration_id" : 1,
-	"from_id": "1",
-	"from_name": "Kineas Liao",
-	"published": "Capela Bulletin",
-	"subject": "Testing declarations",
-	"body": "Just another declaration test that I try to figure out how to represent it. Also will be good to have some special characters like: !¡?¿ñÑ - _ .<.> And now some crap ijsbdisbhd djsbfds bfudbsf bdsufbdusbf d fusubudsf ds fudsf dusb",
-	"time": 12222001,
-	"favorited": true,
-	"karma": 1
-}}
+{
+   "karma":0,
+   "fromId":1,
+   "body":"In an unexpected turn of announcements, our brave troops are advancing without problems over the defenses of the Federated Suns.",
+   "time":1332627631000,
+   "favorited":false,
+   "subject":"The troops attacking New Syrtis!",
+   "publishedIn":"Star of Sian",
+   "fromName":"Kineas",
+   "communicationId":1
+}

@@ -18,6 +18,7 @@ import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
 import com.highexplosive.client.model.Character;
 import com.highexplosive.client.model.Declaration;
+import com.highexplosive.client.model.Message;
 import com.highexplosive.client.model.Role;
 import com.viewpagerindicator.TitleProvider;
 
@@ -38,6 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private ListView messagesListView = null;
 	private ArrayList<Declaration> declarationList = null;
 	private ArrayList<Declaration> factionDeclarationList = null;
+	private ArrayList<Message> characterMessageList = null;
 
 	public ViewPagerAdapter(Context context) {
 		this.ctx = context;
@@ -109,9 +111,18 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_MESSAGES:
 			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_messages, null);
 			
-			DeclarationAdapter messagesAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+			MessageAdapter messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
 			messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
 			messagesListView.setAdapter(messagesAdapter);
+			
+			if (characterMessageList == null) {
+				characterMessageList = new ArrayList<Message>();
+				characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
+			}
+			
+			for (Message message : characterMessageList) {
+				messagesAdapter.add(message);
+			}
 			
 			((ViewPager) collection).addView(linearLayout, 0);
 			break;
@@ -120,9 +131,9 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 			Character character = HxJsonUtils.getCharacterDetail(ctx, 0);
 			
 			((TextView)linearLayout.findViewById(R.id.profileName)).setText(character.getName());
-			((TextView)linearLayout.findViewById(R.id.profileKarma)).setText("" + character.getKarma());
+			((TextView)linearLayout.findViewById(R.id.profileKarma)).setText("" + character.getInfluence());
 			((TextView)linearLayout.findViewById(R.id.profileDeclarations)).setText("" + character.getNumberOfDeclarations());
-			((TextView)linearLayout.findViewById(R.id.profileRole)).setText(Role.values()[character.getRole()].name());
+			((TextView)linearLayout.findViewById(R.id.profileRole)).setText(character.getRole());
 			((TextView)linearLayout.findViewById(R.id.profileSince)).setText(DateUtils
 					.formatDateTime(ctx, character.getCreationDate(),
 							DateUtils.FORMAT_24HOUR));

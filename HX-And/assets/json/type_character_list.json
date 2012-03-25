@@ -1,20 +1,20 @@
-{"characterlist": {
-    "character": {
-    	"playerid" : 0,
-    	"name": "Candance Liao",
-    	"faction": "liao",
-    	"role": 0
-	},
-	"character": {
-    	"playerid" : 1,
-    	"name": "Hirohito Kurita",
-    	"faction": "kurita",
-    	"role": 0
-	},
-	"character": {
-    	"playerid" : 2,
-    	"name": "Victor Davion",
-    	"faction": "davion",
-    	"role": 0
-	}
-}}
+[
+   {
+      "id":1,
+      "mail":"luisollero@gmail.com",
+      "application":"Test application",
+      "favoriteHouseId":"",
+      "name":"Luis Ollero",
+      "favoriteRole":"",
+      "pass":""
+   },
+   {
+      "id":2,
+      "mail":"tsunami@tsunami.com",
+      "application":"Test application",
+      "favoriteHouseId":"",
+      "name":"Tsunami",
+      "favoriteRole":"",
+      "pass":""
+   }
+]

@@ -2,23 +2,25 @@ package com.highexplosive.client.model;
 
 public class Character {
 
-	private String characterId;
+	private Integer characterId;
 	private String house;
-	private String userId;
-	private int role;
+	private Integer userId;
+	private String role;
+	private Integer sectorId;
 
 	private String name;
+	private String completeName;
 	private String bio;
-	private int karma;
+	private int influence;
 	private int numberOfDeclarations;
 	private long creationDate;
 	private boolean turnEnded;
 
-	public String getCharacterId() {
+	public Integer getCharacterId() {
 		return characterId;
 	}
 
-	public void setCharacterId(String characterId) {
+	public void setCharacterId(Integer characterId) {
 		this.characterId = characterId;
 	}
 
@@ -30,11 +32,11 @@ public class Character {
 		this.house = house;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -54,20 +56,20 @@ public class Character {
 		this.bio = bio;
 	}
 
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
-	public int getKarma() {
-		return karma;
+	public int getInfluence() {
+		return influence;
 	}
 
-	public void setKarma(int karma) {
-		this.karma = karma;
+	public void setInfluence(int influence) {
+		this.influence = influence;
 	}
 
 	public boolean isTurnEnded() {
@@ -94,11 +96,27 @@ public class Character {
 		this.creationDate = creationDate;
 	}
 
+	public String getCompleteName() {
+		return completeName;
+	}
+
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
+
+	public Integer getSectorId() {
+		return sectorId;
+	}
+
+	public void setSectorId(Integer sectorId) {
+		this.sectorId = sectorId;
+	}
+
 	@Override
 	public String toString() {
 		return "Character [characterId=" + characterId + ", house=" + house
 				+ ", userId=" + userId + ", positionInHouse=" + role
-				+ ", name=" + name + ", bio=" + bio + ", karma=" + karma
+				+ ", name=" + name + ", bio=" + bio + ", karma=" + influence
 				+ ", numberOfDeclarations=" + numberOfDeclarations
 				+ ", creationDate=" + creationDate + ", turnEnded=" + turnEnded
 				+ "]";

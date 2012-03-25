@@ -22,7 +22,6 @@ import android.widget.ToggleButton;
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
-import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
 
 public class MessageDetailActivity extends Activity {
@@ -58,7 +57,7 @@ public class MessageDetailActivity extends Activity {
 		((TextView) findViewById(R.id.messageBody)).setText(message.getBody());
 		
 		// Favorited
-		((ToggleButton) findViewById(R.id.plusOneInDetail)).setChecked(message.isFavorited());
+		((ToggleButton) findViewById(R.id.favoriteInDetail)).setChecked(message.isFavorited());
 
 		// Time
 		((TextView) findViewById(R.id.messageTime)).setText(DateUtils
@@ -68,7 +67,7 @@ public class MessageDetailActivity extends Activity {
 
 	private void initializeButtons() {
 		
-		((ToggleButton) findViewById(R.id.plusOneInDetail)).setOnClickListener(new ToggleButton.OnClickListener() {
+		((ToggleButton) findViewById(R.id.favoriteInDetail)).setOnClickListener(new ToggleButton.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -77,7 +76,7 @@ public class MessageDetailActivity extends Activity {
 			
 		});
 		
-		((Button) findViewById(R.id.backInDetail)).setOnClickListener(new OnClickListener() {
+		((Button) findViewById(R.id.messageBackInDetail)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onBackPressed();

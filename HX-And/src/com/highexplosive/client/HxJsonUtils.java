@@ -18,20 +18,58 @@ public class HxJsonUtils {
 
 	private static final String TAG = HxJsonUtils.class.getSimpleName();
 
+	/**
+	 * Get the full {@link Message} from the server
+	 * @param context
+	 * @param messageId
+	 * @return
+	 */
 	public static Message getMessageDetail(Context context, int messageId) {
 		Message message = null;
 		try {
-			message = parseMessage(context.getAssets().open(
-					"json/type_message.json"));
+			JsonReader reader = null;
+			if (HxConstants.ONLINE_MODE) {
+				// TODO: Implement the online mode
+			} else {
+				reader = new JsonReader(new InputStreamReader(context
+						.getAssets().open("json/type_message_detail.json"),
+						"UTF-8"));
+			}
+			message = parseMessage(reader);
 		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 		}
 		return message;
 	}
-	
+
+	/**
+	 * Get a list of {@link Message} from the server related to a {@link Character}
+	 * @param context
+	 * @param messageId
+	 * @return
+	 */
+	public static ArrayList<Message> getMessageList(Context context,
+			int characterId) {
+		ArrayList<Message> list = null;
+		try {
+			JsonReader reader = null;
+			if (HxConstants.ONLINE_MODE) {
+				// TODO: Implement the online mode
+			} else {
+				reader = new JsonReader(new InputStreamReader(context
+						.getAssets().open("json/type_message_list.json"),
+						"UTF-8"));
+			}
+			list = parseMessageList(reader);
+		} catch (IOException e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return list;
+	}
 
 	/**
 	 * Get the full character from the server
+	 * 
 	 * @param context
 	 * @param declarationId
 	 * @return
@@ -39,26 +77,41 @@ public class HxJsonUtils {
 	public static Character getCharacterDetail(Context context, int characterId) {
 		Character character = null;
 		try {
-			character = parseCharacter(context.getAssets().open(
-					"json/type_character.json"));
+			JsonReader reader = null;
+			if (HxConstants.ONLINE_MODE) {
+				// TODO: Implement the online mode
+			} else {
+				reader = new JsonReader(new InputStreamReader(context
+						.getAssets().open("json/type_character.json"), 
+						"UTF-8"));
+			}
+			character = parseCharacter(reader);
 		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 		}
 		return character;
 	}
-	
 
 	/**
 	 * Get the full declaration from the server
+	 * 
 	 * @param context
 	 * @param declarationId
 	 * @return
 	 */
-	public static Declaration getDeclarationDetail(Context context, int declarationId) {
+	public static Declaration getDeclarationDetail(Context context,
+			int declarationId) {
 		Declaration declaration = null;
 		try {
-			declaration = parseDeclaration(context.getAssets().open(
-					"json/type_declaration_detail.json"));
+			JsonReader reader = null;
+			if (HxConstants.ONLINE_MODE) {
+				// TODO: Implement the online mode
+			} else {
+				reader = new JsonReader(new InputStreamReader(context
+						.getAssets().open("json/type_declaration_detail.json"),
+						"UTF-8"));
+			}
+			declaration = parseDeclaration(reader);
 		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 		}
@@ -67,58 +120,106 @@ public class HxJsonUtils {
 
 	/**
 	 * Get the list of most recent declarations from the server
+	 * 
 	 * @param context
 	 * @return
 	 */
 	public static ArrayList<Declaration> getDeclarationList(Context context) {
 		ArrayList<Declaration> declarationList = null;
 		try {
+			JsonReader reader = null;
 			if (HxConstants.ONLINE_MODE) {
-				declarationList = parseDeclarationList(retrieveJSonFromUrl("URL_TO_DECLARATIONS"));
+				// TODO: Implement the online mode
 			} else {
-				declarationList = parseDeclarationList(context.getAssets().open(
-						"json/type_declaration_list.json"));
+				reader = new JsonReader(new InputStreamReader(context
+						.getAssets().open("json/type_declaration_list.json"),
+						"UTF-8"));
 			}
+			declarationList = parseDeclarationList(reader);
 		} catch (IOException e) {
 			Log.e(TAG, e.getMessage());
 		}
 		return declarationList;
 	}
 
-
-	// Private and aux methods
-	private static Message parseMessage(InputStream open) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	private static Character parseCharacter(InputStream is) {
-		Character character = new Character();
-		JsonReader reader;
+	// ********************************************************************
+	// Private and auxiliary methods
+	// ********************************************************************
+	private static ArrayList<Message> parseMessageList(JsonReader reader) {
+		ArrayList<Message> list = new ArrayList<Message>();
+		Message message = null;
 		try {
-			reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
+			reader.beginArray();
+			while (reader.hasNext()) {
+				message = parseMessage(reader);
+				list.add(message);
+			}
+			reader.endArray();
+		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
+		}
+		return list;
+	}
 
+	private static Message parseMessage(JsonReader reader) throws IOException {
+		Message message = new Message();
+		reader.beginObject();
+		while (reader.hasNext()) {
+			String name = reader.nextName();
+			if (name.equals("body")) {
+				message.setBody(reader.nextString());
+			} else if (name.equals("fromId")) {
+				message.setFromId(reader.nextInt());
+			} else if (name.equals("time")) {
+				message.setTime(reader.nextLong());
+			} else if (name.equals("favorited")) {
+				message.setFavorited(reader.nextBoolean());
+			} else if (name.equals("subject")) {
+				message.setSubject(reader.nextString());
+			} else if (name.equals("fromName")) {
+				message.setFromName(reader.nextString());
+			} else if (name.equals("messageId")) {
+				message.setMessageId(reader.nextInt());
+			} else if (name.equals("to")) {
+				reader.beginArray();
+				while (reader.hasNext()) {
+					parseCharacter(reader);
+				}
+				reader.endArray();
+			}
+		}
+		reader.endObject();
+		return message;
+	}
+
+	private static Character parseCharacter(JsonReader reader) {
+		Character character = new Character();
+		try {
 			reader.beginObject();
 			while (reader.hasNext()) {
 				String name = reader.nextName();
-				if (name.equals("playerid")) {
-					character.setCharacterId(reader.nextString());
+				if (name.equals("id")) {
+					character.setCharacterId(reader.nextInt());
+				} else if (name.equals("completeName")) {
+					character.setCompleteName(reader.nextString());
+				} else if (name.equals("factionId")) {
+					character.setHouse(reader.nextString());
+				} else if (name.equals("influence")) {
+					character.setInfluence(reader.nextInt());
+				} else if (name.equals("role")) {
+					character.setRole(reader.nextString());
+				} else if (name.equals("homeSectorId")) {
+					character.setSectorId(reader.nextInt());
+				} else if (name.equals("userId")) {
+					character.setUserId(reader.nextInt());
 				} else if (name.equals("name")) {
 					character.setName(reader.nextString());
-				} else if (name.equals("faction")) {
-					character.setHouse(reader.nextString());
-				} else if (name.equals("karma")) {
-					character.setKarma(reader.nextInt());
-				} else if (name.equals("role")) {
-					character.setRole(reader.nextInt());
-				} else if (name.equals("bio")) {
-					character.setBio(reader.nextString());
-				} else if (name.equals("creationdate")) {
-					character.setCreationDate(reader.nextLong());
-				} else if (name.equals("declarations")) {
-					character.setNumberOfDeclarations(reader.nextInt());
 				} else if (name.equals("endedturn")) {
-					character.setTurnEnded(reader.nextBoolean());
+					//TODO: End turn
+				} else if (name.equals("sectorsRuled")) {
+					reader.beginArray();
+					//TODO: Sectors ruled
+					reader.endArray();
 				}
 			}
 			reader.endObject();
@@ -129,21 +230,17 @@ public class HxJsonUtils {
 		}
 		return character;
 	}
-	
-	private static ArrayList<Declaration> parseDeclarationList(InputStream is) {
-		ArrayList<Declaration> declarationList = new ArrayList<Declaration>();
-		JsonReader reader;
-		try {
-			reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
 
-			reader.beginObject();
+	private static ArrayList<Declaration> parseDeclarationList(JsonReader reader) {
+		ArrayList<Declaration> declarationList = new ArrayList<Declaration>();
+		Declaration declaration = new Declaration();
+		try {
+			reader.beginArray();
 			while (reader.hasNext()) {
-				String name = reader.nextName();
-				if (name.equals("declaration")) {
-					declarationList.add(readDeclarationInList(reader));
-				}
+				declaration = parseDeclaration(reader);
+				declarationList.add(declaration);	
 			}
-			reader.endObject();
+			reader.endArray();
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.getMessage());
 		} catch (IOException e) {
@@ -153,94 +250,44 @@ public class HxJsonUtils {
 	}
 
 	/**
-	 * "declaration_id" : 1 "from_id": 1, "from_name": "Kineas Liao", "subject":
-	 * "Testing declarations", "body_resume":
-	 * "Just another declaration test that I ..."
 	 * 
 	 * @param reader
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	private static Declaration readDeclarationInList(JsonReader reader) throws IOException {
-		
+	private static Declaration parseDeclaration(JsonReader reader)
+			throws IOException {
+
 		Declaration declaration = new Declaration();
-		
+
 		reader.beginObject();
 		while (reader.hasNext()) {
 			String name = reader.nextName();
-			if (name.equals("declaration_id")) {
+			if (name.equals("communicationId")) {
 				declaration.setDeclarationId(reader.nextInt());
-			} else if (name.equals("from_id")) {
+			} else if (name.equals("fromId")) {
 				declaration.setFromId(reader.nextInt());
-			} else if (name.equals("from_name")) {
+			} else if (name.equals("fromName")) {
 				declaration.setFromName(reader.nextString());
 			} else if (name.equals("subject")) {
 				declaration.setSubject(reader.nextString());
-			} else if (name.equals("body_resume")) {
-				declaration.setBodyResume(reader.nextString());
+			} else if (name.equals("karma")) {
+				declaration.setKarma(reader.nextInt());
+			} else if (name.equals("body")) {
+				declaration.setBody(reader.nextString());
+				declaration.setBodyResume(declaration.getBody().substring(0, 50) + "...");
+			} else if (name.equals("time")) {
+				declaration.setTime(reader.nextLong());
+			} else if (name.equals("favorited")) {
+				declaration.setFavorited(reader.nextBoolean());
+			} else if (name.equals("publishedIn")) {
+				declaration.setPublished(reader.nextString());
 			}
-		} 
+		}
 		reader.endObject();
-		
-		return declaration;
-	}
-
-	private static Declaration parseDeclaration(InputStream is) {
-		
-		Declaration declaration = null;
-		JsonReader reader;
-		try {
-			reader = new JsonReader(new InputStreamReader(is, "UTF-8"));
-
-			reader.beginObject();
-			while (reader.hasNext()) {
-				String name = reader.nextName();
-				if (name.equals("declaration")) {
-					declaration = readDeclaration(reader);
-				}
-			}
-			reader.endObject();
-		} catch (UnsupportedEncodingException e) {
-			Log.e(TAG, e.getMessage());
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		}
-		return declaration;
-	}
-
-	private static Declaration readDeclaration(JsonReader reader) {
-		Declaration declaration = new Declaration();
-
-		try {
-			reader.beginObject();
-			while (reader.hasNext()) {
-				String name = reader.nextName();
-				if (name.equals("declaration_id")) {
-					declaration.setDeclarationId(reader.nextInt());
-				} else if (name.equals("from_id")) {
-					declaration.setFromId(reader.nextInt());
-				} else if (name.equals("from_name")) {
-					declaration.setFromName(reader.nextString());
-				} else if (name.equals("subject")) {
-					declaration.setSubject(reader.nextString());
-				} else if (name.equals("body")) {
-					declaration.setBody(reader.nextString());
-				} else if (name.equals("published")) {
-					declaration.setPublished(reader.nextString());
-				} else if (name.equals("karma")) {
-					declaration.setKarma(reader.nextInt());
-				} else if (name.equals("time")) {
-					declaration.setTime(reader.nextLong());
-				} else if (name.equals("favorited")) {
-					declaration.setFavorited(reader.nextBoolean());
-				}
-			}
-			reader.endObject();
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		}
 
 		return declaration;
 	}
+
 
 	private static InputStream retrieveJSonFromUrl(String string) {
 		// TODO Auto-generated method stub
