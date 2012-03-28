@@ -22,20 +22,26 @@
     <string name="declaration_time">Time: </string>
     <string name="declaration_subject">Subject: </string>
     <string name="declaration_content">Content: </string>
+    <string name="declaration_back">Back</string>
     
     <!-- Messages -->
     <string name="message_from">From: </string>
+    <string name="message_to">To: </string>
     <string name="message_time">Time: </string>
     <string name="message_subject">Subject: </string>
     <string name="message_content">Content: </string>
-    
-    <string name="main_arrow_left">Back</string>
+    <string name="message_favorite">Fav</string>
+    <string name="message_reply">Reply</string>
+    <string name="message_delete">Delete</string>
+    <string name="message_back">Back</string>
+    <string name="message_discard">Discard</string>
+    <string name="message_send">Send</string>
     
     <string name="profile_image">Profile image</string>
     <string name="profile_name">Name</string>
     <string name="profile_role">Role</string>
     <string name="profile_bio">Biography</string>
-    <string name="profile_karma">Influence</string>
+    <string name="profile_influence">Influence</string>
     <string name="profile_since">Registered since</string>
     <string name="profile_declarations">Declarations</string>
     <string name="profile_endturn">End Turn</string>

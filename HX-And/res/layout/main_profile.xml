@@ -44,7 +44,7 @@
 
                 <TextView
                     android:padding="5dip"
-                    android:text="@string/profile_karma"
+                    android:text="@string/profile_influence"
                     android:textColor="#458B00" />
 
                 <TextView

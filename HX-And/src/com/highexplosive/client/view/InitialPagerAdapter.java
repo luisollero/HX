@@ -3,6 +3,7 @@ package com.highexplosive.client.view;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
+import com.highexplosive.client.activities.MessageCreateActivity;
 import com.highexplosive.client.model.Character;
 import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
@@ -270,6 +272,10 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 		return title;
 	}
 
+	public void createMessage() {
+		Intent intent = new Intent(ctx, MessageCreateActivity.class);
+		ctx.startActivity(intent);
+	}
 	
 	public void deleteMessages() {
 		

@@ -7,27 +7,20 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="right|center_vertical" >
         
         <Button
-            android:id="@+id/messageReplyInDetail"
+            android:id="@+id/messageSendInCreate"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="@string/message_reply" />
-
-        <ToggleButton
-            android:id="@+id/favoriteInDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:textOff="@string/message_favorite"
-            android:textOn="@string/message_favorite" />
+            android:text="@string/message_send" />
 
         <Button
-            android:id="@+id/messageBackInDetail"
+            android:id="@+id/messageDiscardInCreate"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="@string/message_back" />
+            android:text="@string/message_discard" />
     </LinearLayout>
 
     <TableLayout
@@ -39,23 +32,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:padding="5dip"
-                android:text="@string/message_from"
+                android:text="@string/message_to"
                 android:textColor="#458B00" />
 
-            <TextView
-                android:id="@+id/messageFromInDetail"
-                android:padding="5dip" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:padding="5dip"
-                android:text="@string/message_time"
-                android:textColor="#458B00" />
-
-            <TextView
-                android:id="@+id/messageTime"
+            <AutoCompleteTextView
+                android:id="@+id/messageToInCreate"
                 android:padding="5dip" />
         </TableRow>
 
@@ -66,9 +47,10 @@
                 android:text="@string/message_subject"
                 android:textColor="#458B00" />
 
-            <TextView
-                android:id="@+id/messageSubjectInDetail"
+            <EditText
+                android:id="@+id/messageSubjectInCreate"
                 android:gravity="left"
+                android:inputType="textNoSuggestions"
                 android:padding="5dip" />
         </TableRow>
 
@@ -80,9 +62,10 @@
                 android:textColor="#458B00" />
         </TableRow>
 
-        <TextView
-            android:id="@+id/messageContentInDetail"
+        <EditText
+            android:id="@+id/messageContentInCreate"
             android:padding="5dip"
+            android:inputType="textNoSuggestions"
             android:singleLine="false" />
     </TableLayout>
 

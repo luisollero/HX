@@ -54,7 +54,7 @@ public class MessageDetailActivity extends Activity {
 
 		((TextView) findViewById(R.id.messageFromInDetail)).setText(message.getFromName());
 		((TextView) findViewById(R.id.messageSubjectInDetail)).setText(message.getSubject());
-		((TextView) findViewById(R.id.messageBody)).setText(message.getBody());
+		((TextView) findViewById(R.id.messageContentInDetail)).setText(message.getBody());
 		
 		// Favorited
 		((ToggleButton) findViewById(R.id.favoriteInDetail)).setChecked(message.isFavorited());

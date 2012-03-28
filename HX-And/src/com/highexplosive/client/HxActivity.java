@@ -5,7 +5,6 @@ import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.highexplosive.client.view.InitialPagerAdapter;
@@ -35,18 +34,26 @@ public class HxActivity extends GDActivity  {
     private void initActionBar() {
 		getActionBar().setTitle("Highexplosive");
 		addActionBarItem(Type.Refresh, 0);
-		addActionBarItem(Type.Trashcan);
+		addActionBarItem(Type.Trashcan, 1);
+		addActionBarItem(Type.Mail, 2);
 	}
 
     public boolean onHandleActionBarItemClick(ActionBarItem item, int pos) {
 		switch (pos) {
 		case 0:
-			Toast.makeText(getApplicationContext(),
-					"Refresh", Toast.LENGTH_SHORT).show();
+			if (viewPager.getCurrentItem() != InitialPagerAdapter.POSITION_PROFILE) {
+				Toast.makeText(getApplicationContext(),
+						"Refresh", Toast.LENGTH_SHORT).show();
+			}
 			break;
 		case 1:
 			if (viewPager.getCurrentItem() == InitialPagerAdapter.POSITION_MESSAGES) {
 				viewPagerAdapter.deleteMessages();
+			}
+			break;
+		case 2:
+			if (viewPager.getCurrentItem() == InitialPagerAdapter.POSITION_MESSAGES) {
+				viewPagerAdapter.createMessage();
 			}
 			break;
 		default:
