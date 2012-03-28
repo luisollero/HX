@@ -50,7 +50,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 				TextView text = ((TextView)view.findViewById(R.id.messageSubject));
 				text.setText(items.get(position).getSubject());
 				
-				text.setOnClickListener(new OnClickListener() {
+				view.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(getContext(), MessageDetailActivity.class);

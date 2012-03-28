@@ -29,14 +29,13 @@
     <string name="message_subject">Subject: </string>
     <string name="message_content">Content: </string>
     
-<!--     <string name="main_arrow_left">&lt;-</string> -->
     <string name="main_arrow_left">Back</string>
     
     <string name="profile_image">Profile image</string>
     <string name="profile_name">Name</string>
     <string name="profile_role">Role</string>
-    <string name="profile_bio">Bio</string>
-    <string name="profile_karma">Karma</string>
+    <string name="profile_bio">Biography</string>
+    <string name="profile_karma">Influence</string>
     <string name="profile_since">Registered since</string>
     <string name="profile_declarations">Declarations</string>
     <string name="profile_endturn">End Turn</string>

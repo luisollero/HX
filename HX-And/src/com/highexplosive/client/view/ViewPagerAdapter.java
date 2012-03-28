@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.format.DateUtils;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,7 +35,6 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	public static int NUM_VIEWS = 4;
 	private Context ctx;
 	
-	private int currentPosition = 0;
 	private ListView declarationsListView = null;
 	private ListView messagesListView = null;
 	private ArrayList<Declaration> declarationList = null;
@@ -68,7 +66,6 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	public Object instantiateItem(View collection, int position) {
 		LayoutInflater inflater = LayoutInflater.from(ctx);
 		LinearLayout linearLayout = null;
-		currentPosition = position;
 		
 		switch (position) {
 		case POSITION_LATEST:
