@@ -32,6 +32,10 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar" />
         <activity
+            android:name=".activities.MessageCreateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar" />
+        <activity
             android:name=".activities.DeclarationDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar" />

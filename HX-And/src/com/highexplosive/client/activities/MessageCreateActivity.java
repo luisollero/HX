@@ -64,10 +64,12 @@ public class MessageCreateActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Editable to = ((AutoCompleteTextView) findViewById(R.id.messageToInCreate)).getText();
-				Editable subject = ((EditText) findViewById(R.id.messageSubjectInDetail)).getText();
-				Editable content = ((EditText) findViewById(R.id.messageContentInDetail)).getText();
+				Editable subject = ((EditText) findViewById(R.id.messageSubjectInCreate)).getText();
+				Editable content = ((EditText) findViewById(R.id.messageContentInCreate)).getText();
 				if ((to != null) && (subject != null) && (content != null)) {
-					new SendMessage().execute(new String[] { to.toString(), subject.toString(), content.toString() });
+					if (HxConstants.ONLINE_MODE) {
+						new SendMessage().execute(new String[] { to.toString(), subject.toString(), content.toString() });
+					}
 				}
 			}
 		});
