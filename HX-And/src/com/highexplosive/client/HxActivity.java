@@ -8,13 +8,13 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.highexplosive.client.view.ViewPagerAdapter;
+import com.highexplosive.client.view.InitialPagerAdapter;
 import com.viewpagerindicator.TitlePageIndicator;
 
 public class HxActivity extends GDActivity  {
 	
 	private static final String TAG = HxActivity.class.getName();
-	private ViewPagerAdapter viewPagerAdapter = null;
+	private InitialPagerAdapter viewPagerAdapter = null;
 	private ViewPager viewPager;
 	
     @Override
@@ -24,7 +24,7 @@ public class HxActivity extends GDActivity  {
         
         initActionBar();
 
-        viewPagerAdapter = new ViewPagerAdapter(this);
+        viewPagerAdapter = new InitialPagerAdapter(this);
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
 		viewPager.setAdapter(viewPagerAdapter);
 
@@ -45,7 +45,7 @@ public class HxActivity extends GDActivity  {
 					"Refresh", Toast.LENGTH_SHORT).show();
 			break;
 		case 1:
-			if (viewPager.getCurrentItem() == ViewPagerAdapter.POSITION_MESSAGES) {
+			if (viewPager.getCurrentItem() == InitialPagerAdapter.POSITION_MESSAGES) {
 				viewPagerAdapter.deleteMessages();
 			}
 			break;

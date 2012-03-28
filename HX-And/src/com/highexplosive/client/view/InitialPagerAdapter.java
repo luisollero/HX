@@ -3,7 +3,6 @@ package com.highexplosive.client.view;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -22,7 +21,7 @@ import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
 import com.viewpagerindicator.TitleProvider;
 
-public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
+public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 
 	
 	public static final int POSITION_LATEST = 0;
@@ -42,7 +41,7 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 	private ArrayList<Message> characterMessageList = null;
 	private MessageAdapter messagesAdapter;
 
-	public ViewPagerAdapter(Context context) {
+	public InitialPagerAdapter(Context context) {
 		this.ctx = context;
 	}
 
@@ -69,91 +68,131 @@ public class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		switch (position) {
 		case POSITION_LATEST:
-			
-			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_latest, null);
-
-			((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
-
-			DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-			declarationsListView = (ListView) linearLayout.findViewById(R.id.mainDeclarationList);
-			declarationsListView.setAdapter(messageAdapter);
-
-			if (declarationList == null) {
-				declarationList = new ArrayList<Declaration>();
-				declarationList = HxJsonUtils.getDeclarationList(ctx);
-			}
-
-			for (Declaration declaration : declarationList) {
-				messageAdapter.add(declaration);
-			}
-
-			((ViewPager) collection).addView(linearLayout, 0);
+			linearLayout = latestSection(collection, inflater);
 			break;
 		case POSITION_HOUSE:
-			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_house, null);
-			
-			((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
-			((HexMapView)linearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
-			
-			DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-			declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);
-			declarationsListView.setAdapter(houseDeclarationsAdapter);
-
-			if (factionDeclarationList == null) {
-				factionDeclarationList = new ArrayList<Declaration>();
-				factionDeclarationList = HxJsonUtils.getDeclarationList(ctx);
-			}
-
-			for (Declaration declaration : factionDeclarationList) {
-				houseDeclarationsAdapter.add(declaration);
-			}
-			
-			((ViewPager) collection).addView(linearLayout, 0);
+			linearLayout = houseSection(collection, inflater);
 			break;
 		case POSITION_MESSAGES:
-			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_messages, null);
-			
-			messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
-			messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
-			messagesListView.setAdapter(messagesAdapter);
-			
-			if (characterMessageList == null) {
-				characterMessageList = new ArrayList<Message>();
-				characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
-			}
-			
-			for (Message message : characterMessageList) {
-				messagesAdapter.add(message);
-			}
-			
-			((ViewPager) collection).addView(linearLayout, 0);
+			linearLayout = messageSection(collection, inflater);
 			break;
 		case POSITION_PROFILE:
-			linearLayout = (LinearLayout) inflater.inflate(R.layout.main_profile, null);
-			Character character = HxJsonUtils.getCharacterDetail(ctx, 0);
-			
-			((TextView)linearLayout.findViewById(R.id.profileName)).setText(character.getName());
-			((TextView)linearLayout.findViewById(R.id.profileKarma)).setText("" + character.getInfluence());
-			((TextView)linearLayout.findViewById(R.id.profileDeclarations)).setText("" + character.getNumberOfDeclarations());
-			((TextView)linearLayout.findViewById(R.id.profileRole)).setText(character.getRole());
-			((TextView)linearLayout.findViewById(R.id.profileSince)).setText(DateUtils
-					.formatDateTime(ctx, character.getCreationDate(),
-							DateUtils.FORMAT_24HOUR));
-			((TextView)linearLayout.findViewById(R.id.profileBio)).setText(character.getName());
-			
-			((ViewPager) collection).addView(linearLayout, 0);
+			linearLayout = profileSection(collection, inflater);
 			break;
 		default:
-			TextView tv = new TextView(ctx);
-			tv.setTextColor(Color.WHITE);
-			tv.setTextSize(30);
-			tv.setText("Other stuff " + position);
-			linearLayout = new LinearLayout(ctx);
-			linearLayout.addView(tv);
-			((ViewPager) collection).addView(linearLayout, 0);
 			break;
 		}
 
+		return linearLayout;
+	}
+
+	/**
+	 * Profile Section
+	 * @param collection
+	 * @param inflater
+	 * @return
+	 */
+	private LinearLayout profileSection(View collection, LayoutInflater inflater) {
+		LinearLayout linearLayout;
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_profile, null);
+		Character character = HxJsonUtils.getCharacterDetail(ctx, 0);
+		
+		((TextView)linearLayout.findViewById(R.id.profileName)).setText(character.getName());
+		((TextView)linearLayout.findViewById(R.id.profileKarma)).setText("" + character.getInfluence());
+		((TextView)linearLayout.findViewById(R.id.profileDeclarations)).setText("" + character.getNumberOfDeclarations());
+		((TextView)linearLayout.findViewById(R.id.profileRole)).setText(character.getRole());
+		((TextView)linearLayout.findViewById(R.id.profileSince)).setText(DateUtils
+				.formatDateTime(ctx, character.getCreationDate(),
+						DateUtils.FORMAT_24HOUR));
+		((TextView)linearLayout.findViewById(R.id.profileBio)).setText(character.getName());
+		
+		((ViewPager) collection).addView(linearLayout, 0);
+		return linearLayout;
+	}
+
+	/**
+	 * Messages section
+	 * @param collection
+	 * @param inflater
+	 * @return
+	 */
+	private LinearLayout messageSection(View collection, LayoutInflater inflater) {
+		LinearLayout linearLayout;
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_messages, null);
+		
+		messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
+		messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
+		messagesListView.setAdapter(messagesAdapter);
+		
+		if (characterMessageList == null) {
+			characterMessageList = new ArrayList<Message>();
+			characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
+		}
+		
+		for (Message message : characterMessageList) {
+			messagesAdapter.add(message);
+		}
+		
+		((ViewPager) collection).addView(linearLayout, 0);
+		return linearLayout;
+	}
+
+	/**
+	 * House/Faction section
+	 * @param collection
+	 * @param inflater
+	 * @return
+	 */
+	private LinearLayout houseSection(View collection, LayoutInflater inflater) {
+		LinearLayout linearLayout;
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_house, null);
+		
+		((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
+		((HexMapView)linearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
+		
+		DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+		declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);
+		declarationsListView.setAdapter(houseDeclarationsAdapter);
+
+		if (factionDeclarationList == null) {
+			factionDeclarationList = new ArrayList<Declaration>();
+			factionDeclarationList = HxJsonUtils.getDeclarationList(ctx);
+		}
+
+		for (Declaration declaration : factionDeclarationList) {
+			houseDeclarationsAdapter.add(declaration);
+		}
+		
+		((ViewPager) collection).addView(linearLayout, 0);
+		return linearLayout;
+	}
+
+	/**
+	 * Latest news section
+	 * @param collection
+	 * @param inflater
+	 * @return
+	 */
+	private LinearLayout latestSection(View collection, LayoutInflater inflater) {
+		LinearLayout linearLayout;
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_latest, null);
+
+		((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
+
+		DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+		declarationsListView = (ListView) linearLayout.findViewById(R.id.mainDeclarationList);
+		declarationsListView.setAdapter(messageAdapter);
+
+		if (declarationList == null) {
+			declarationList = new ArrayList<Declaration>();
+			declarationList = HxJsonUtils.getDeclarationList(ctx);
+		}
+
+		for (Declaration declaration : declarationList) {
+			messageAdapter.add(declaration);
+		}
+
+		((ViewPager) collection).addView(linearLayout, 0);
 		return linearLayout;
 	}
 
