@@ -11,7 +11,7 @@
 
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_weight="1">
+            android:layout_height="wrap_content" >
 
             <TableRow>
 
@@ -22,9 +22,9 @@
                     android:textColor="#458B00" />
 
                 <TextView
-                    android:text="@string/dummy_text"
                     android:id="@+id/profileName"
-                    android:padding="5dip" />
+                    android:padding="5dip"
+                    android:text="@string/dummy_text" />
             </TableRow>
 
             <TableRow>
@@ -35,9 +35,9 @@
                     android:textColor="#458B00" />
 
                 <TextView
-                    android:text="@string/dummy_text"
                     android:id="@+id/profileRole"
-                    android:padding="5dip" />
+                    android:padding="5dip"
+                    android:text="@string/dummy_text" />
             </TableRow>
 
             <TableRow>
@@ -48,21 +48,20 @@
                     android:textColor="#458B00" />
 
                 <TextView
-                    android:text="@string/dummy_text"
                     android:id="@+id/profileKarma"
-                    android:padding="5dip" />
+                    android:padding="5dip"
+                    android:text="@string/dummy_text" />
             </TableRow>
         </TableLayout>
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher" 
-            android:contentDescription="@string/profile_image"/>
-
+            android:contentDescription="@string/profile_image"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_launcher" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,64 +73,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#458B00"
-            android:text="@string/profile_bio" />
+            android:text="@string/profile_bio"
+            android:textColor="#458B00" />
 
         <TextView
+            android:id="@+id/profileBio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:id="@+id/profileBio"
             android:text="@string/dummy_text_long" />
     </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
 
-        <TableLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" android:layout_weight="1">
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
-            <TableRow>
+        <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:padding="5dip"
-                    android:text="@string/profile_since"
-                    android:textColor="#458B00" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:padding="5dip"
+                android:text="@string/profile_since"
+                android:textColor="#458B00" />
 
-                <TextView
-                    android:text="@string/dummy_text"
-                    android:id="@+id/profileSince"
-                    android:padding="5dip" />
+            <TextView
+                android:id="@+id/profileSince"
+                android:padding="5dip"
+                android:text="@string/dummy_text" />
+        </TableRow>
 
-            </TableRow>
+        <TableRow>
 
-            <TableRow>
+            <TextView
+                android:padding="5dip"
+                android:text="@string/profile_declarations"
+                android:textColor="#458B00" />
 
-                <TextView
-                    android:padding="5dip"
-                    android:text="@string/profile_declarations"
-                    android:textColor="#458B00" />
-
-                <TextView
-                    android:text="@string/dummy_text"
-                    android:id="@+id/profileDeclarations"
-                    android:padding="5dip" />
-            </TableRow>
-
-        </TableLayout>
-
-	    <Button
-	        android:id="@+id/button1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_vertical"
-	        android:text="@string/profile_endturn" />
-	    
-    </LinearLayout>
-
+            <TextView
+                android:id="@+id/profileDeclarations"
+                android:padding="5dip"
+                android:text="@string/dummy_text" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>

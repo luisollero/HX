@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:gravity="center" >
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="true"
+            android:id="@+id/mainMenuNews"
+            android:text="@string/main_menu_news"
+            android:width="100dp" />
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:id="@+id/mainMenuWar"
+            android:text="@string/main_menu_war"
+            android:width="100dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:gravity="center" >
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:id="@+id/mainMenuEconomy"
+            android:text="@string/main_menu_economy"
+            android:width="100dp" />
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:id="@+id/mainMenuPolitics"
+            android:text="@string/main_menu_politics"
+            android:width="100dp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:gravity="center" >
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="false"
+            android:id="@+id/mainMenuSpionage"
+            android:text="@string/main_menu_spionage"
+            android:width="100dp" />
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="true"
+            android:id="@+id/mainMenuProfile"
+            android:text="@string/main_menu_profile"
+            android:width="100dp" />
+    </TableRow>
+
+    <TableRow android:gravity="center" >
+
+        <Button
+            android:layout_margin="10dp"
+            android:enabled="true"
+            android:id="@+id/mainMenuEndOfTurn"
+            android:text="@string/main_menu_endofturn"
+            android:width="100dp" />
+    </TableRow>
+
+</TableLayout>

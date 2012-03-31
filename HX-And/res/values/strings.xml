@@ -84,4 +84,12 @@
         <item>Steiner</item>
     </string-array>
     
+    <string name="main_menu_news">News</string>
+    <string name="main_menu_war">War</string>
+    <string name="main_menu_economy">Economy</string>
+    <string name="main_menu_politics">Politics</string>
+    <string name="main_menu_spionage">Spionage</string>
+    <string name="main_menu_profile">Profile</string>
+    <string name="main_menu_endofturn">Done</string>
+    
 </resources>

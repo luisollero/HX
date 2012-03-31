@@ -50,13 +50,12 @@ public class MessageDetailActivity extends Activity {
 	private void retrieveFullDeclaration(int messageId) {
 		message = HxJsonUtils.getMessageDetail(this,
 				messageId);
-		Log.v(TAG, message.toString());
 
 		((TextView) findViewById(R.id.messageFromInDetail)).setText(message.getFromName());
 		((TextView) findViewById(R.id.messageSubjectInDetail)).setText(message.getSubject());
 		((TextView) findViewById(R.id.messageContentInDetail)).setText(message.getBody());
 		
-		// Favorited
+		// Favorite
 		((ToggleButton) findViewById(R.id.favoriteInDetail)).setChecked(message.isFavorited());
 
 		// Time
@@ -71,7 +70,7 @@ public class MessageDetailActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				new UpdateKarma().execute(new Integer[] { ((ToggleButton)v).isChecked() ? 1 : 0, message.getMessageId() });
+				new MarkAsFavorite().execute(new Integer[] { ((ToggleButton)v).isChecked() ? 1 : 0, message.getMessageId() });
 			}
 			
 		});
@@ -89,7 +88,7 @@ public class MessageDetailActivity extends Activity {
 	 * @author Luis Ollero
 	 *
 	 */
-	private class UpdateKarma extends AsyncTask<Integer, Void, String> {
+	private class MarkAsFavorite extends AsyncTask<Integer, Void, String> {
 		@Override
 		protected String doInBackground(Integer... integers) {
 			String response = "";

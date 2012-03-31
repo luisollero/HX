@@ -24,6 +24,9 @@
             android:name="com.highexplosive.client.HxRegister"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.highexplosive.client.HxMainMenu"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.highexplosive.client.HxActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.HX" />
@@ -31,6 +34,9 @@
             android:name=".activities.MessageDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.DeviceDefault.Dialog.NoActionBar" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.MessageCreateActivity"
             android:screenOrientation="portrait"

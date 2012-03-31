@@ -24,12 +24,10 @@ import android.widget.EditText;
 
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.R;
-import com.highexplosive.client.model.Message;
 
 public class MessageCreateActivity extends Activity {
 
 	private static final String TAG = MessageCreateActivity.class.getSimpleName();
-	private Message message;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,15 +37,6 @@ public class MessageCreateActivity extends Activity {
 		initializeButtons();
 	}
 
-
-	/**
-	 * Fill the message popup
-	 * @param messageId
-	 */
-	private void sendMessage() {
-
-		
-	}
 
 	private void initializeButtons() {
 		
@@ -91,9 +80,10 @@ public class MessageCreateActivity extends Activity {
 				try {
 					
 					List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-					nameValuePairs.add(new BasicNameValuePair("to", strings[0]));
-					nameValuePairs.add(new BasicNameValuePair("subject", strings[1]));
-					nameValuePairs.add(new BasicNameValuePair("content", strings[2]));
+					nameValuePairs.add(new BasicNameValuePair("userid", String.valueOf(HxConstants.userId)));
+					nameValuePairs.add(new BasicNameValuePair("to", strings[1]));
+					nameValuePairs.add(new BasicNameValuePair("subject", strings[2]));
+					nameValuePairs.add(new BasicNameValuePair("content", strings[3]));
 					
 					ResponseHandler<String> handler = new BasicResponseHandler();
 					httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));

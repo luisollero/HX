@@ -48,7 +48,7 @@ public class HxLogin extends Activity {
 		//TODO: Call the webservice
 		
 		if (loginSuccess) {
-			Intent intent = new Intent(this, HxActivity.class);
+			Intent intent = new Intent(this, HxMainMenu.class);
 			startActivity(intent);
 		}
 	}

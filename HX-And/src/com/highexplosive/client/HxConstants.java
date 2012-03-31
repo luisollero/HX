@@ -2,8 +2,10 @@ package com.highexplosive.client;
 
 public class HxConstants {
 
-	public static boolean DEBUG_MODE = true;
-	public static boolean ONLINE_MODE = false;
+	public final static boolean DEBUG_MODE = true;
+	public final static boolean ONLINE_MODE = false;
+	
+	public static Integer userId = 0; 
 
 	// Houses
 	public final static String FACTION_KURITA = "KURITA";

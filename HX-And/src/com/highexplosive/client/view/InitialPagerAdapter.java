@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,22 +17,20 @@ import android.widget.Toast;
 import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
 import com.highexplosive.client.activities.MessageCreateActivity;
-import com.highexplosive.client.model.Character;
 import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
 import com.viewpagerindicator.TitleProvider;
 
 public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 
+	@SuppressWarnings("unused")
+	private static final String TAG = InitialPagerAdapter.class.getName();
 	
 	public static final int POSITION_LATEST = 0;
 	public static final int POSITION_HOUSE = 1;
 	public static final int POSITION_MESSAGES = 2;
-	public static final int POSITION_PROFILE = 3;
 
-//	private static String[] titles = new String[4];
-	
-	public static int NUM_VIEWS = 4;
+	public static int NUM_VIEWS = 3;
 	private Context ctx;
 	
 	private ListView declarationsListView = null;
@@ -78,37 +75,10 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_MESSAGES:
 			linearLayout = messageSection(collection, inflater);
 			break;
-		case POSITION_PROFILE:
-			linearLayout = profileSection(collection, inflater);
-			break;
 		default:
 			break;
 		}
 
-		return linearLayout;
-	}
-
-	/**
-	 * Profile Section
-	 * @param collection
-	 * @param inflater
-	 * @return
-	 */
-	private LinearLayout profileSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_profile, null);
-		Character character = HxJsonUtils.getCharacterDetail(ctx, 0);
-		
-		((TextView)linearLayout.findViewById(R.id.profileName)).setText(character.getName());
-		((TextView)linearLayout.findViewById(R.id.profileKarma)).setText("" + character.getInfluence());
-		((TextView)linearLayout.findViewById(R.id.profileDeclarations)).setText("" + character.getNumberOfDeclarations());
-		((TextView)linearLayout.findViewById(R.id.profileRole)).setText(character.getRole());
-		((TextView)linearLayout.findViewById(R.id.profileSince)).setText(DateUtils
-				.formatDateTime(ctx, character.getCreationDate(),
-						DateUtils.FORMAT_24HOUR));
-		((TextView)linearLayout.findViewById(R.id.profileBio)).setText(character.getName());
-		
-		((ViewPager) collection).addView(linearLayout, 0);
 		return linearLayout;
 	}
 
@@ -235,6 +205,7 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
      */
 	@Override
 	public void finishUpdate(View arg0) {
+		
 	}
 
 	@Override
@@ -263,9 +234,6 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 		case POSITION_MESSAGES:
 			title = ctx.getString(R.string.section_messages);
 			break;
-		case POSITION_PROFILE:
-			title = ctx.getString(R.string.section_profile);
-			break;
 		default:
 			break;
 		}
@@ -278,13 +246,13 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 	}
 	
 	public void deleteMessages() {
-		
 		if (messagesListView != null) {
 			ArrayList<Integer> list = messagesAdapter.getItemsSelected();
 			for (Integer integer : list) {
 				Toast.makeText(ctx, "Id to delete: " + integer, Toast.LENGTH_LONG).show();
 			}
-			
 		}
 	}
+	
+	
 }

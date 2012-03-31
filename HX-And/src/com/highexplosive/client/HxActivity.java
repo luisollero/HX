@@ -12,7 +12,9 @@ import com.viewpagerindicator.TitlePageIndicator;
 
 public class HxActivity extends GDActivity  {
 	
+	@SuppressWarnings("unused")
 	private static final String TAG = HxActivity.class.getName();
+	
 	private InitialPagerAdapter viewPagerAdapter = null;
 	private ViewPager viewPager;
 	
@@ -33,18 +35,22 @@ public class HxActivity extends GDActivity  {
     
     private void initActionBar() {
 		getActionBar().setTitle("Highexplosive");
-		addActionBarItem(Type.Refresh, 0);
-		addActionBarItem(Type.Trashcan, 1);
-		addActionBarItem(Type.Mail, 2);
+		getActionBar().addItem(Type.Refresh, 0);
+		getActionBar().addItem(Type.Trashcan, 1);
+		getActionBar().addItem(Type.Mail, 2);
+		
+//		getActionBar().removeItem(2);
+//		getActionBar().removeItem(1);
+//		getActionBar().removeItem(0);
+		
 	}
-
+    
+    
     public boolean onHandleActionBarItemClick(ActionBarItem item, int pos) {
 		switch (pos) {
 		case 0:
-			if (viewPager.getCurrentItem() != InitialPagerAdapter.POSITION_PROFILE) {
-				Toast.makeText(getApplicationContext(),
-						"Refresh", Toast.LENGTH_SHORT).show();
-			}
+			Toast.makeText(getApplicationContext(),
+					"Refresh", Toast.LENGTH_SHORT).show();
 			break;
 		case 1:
 			if (viewPager.getCurrentItem() == InitialPagerAdapter.POSITION_MESSAGES) {

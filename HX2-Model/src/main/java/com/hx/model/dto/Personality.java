@@ -62,6 +62,9 @@ public class Personality {
 	
 	@Column(name = "hx_personality_complete_name")
 	private String completeName;
+	
+	@Column(name = "hx_personality_biography")
+	private String biography;
 
 	@OneToMany(mappedBy = "personality")
 	private Set<Sector> sectors = new HashSet<Sector>(); // Sectors ruled by the 
@@ -187,6 +190,13 @@ public class Personality {
 		this.endedTurn = endedTurn;
 	}
 
+	public String getBiography() {
+		return biography;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
+	}
 
 	@Override
 	public String toString() {
