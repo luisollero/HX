@@ -16,6 +16,7 @@ public class Personality implements Pojo {
 	private String factionId;
 	private String name;
 	private String completeName;
+	private String biography;
 	private Set<com.hx.engine.pojo.Sector> sectorsRuled;
 	
 	public Personality(com.hx.model.dto.Personality anotherPersonality) {
@@ -25,6 +26,7 @@ public class Personality implements Pojo {
 		this.influence = anotherPersonality.getInfluence();
 		this.name = anotherPersonality.getName();
 		this.role = anotherPersonality.getRole();
+		this.biography = anotherPersonality.getBiography();
 		this.userId = anotherPersonality.getUser().getId();
 		
 		for (com.hx.model.dto.Sector sector : anotherPersonality.getSectors()) {
@@ -48,6 +50,7 @@ public class Personality implements Pojo {
 		anotherPersonality.setInfluence(this.influence);
 		anotherPersonality.setRole(this.role);
 		anotherPersonality.setHouse(new House(this.factionId));
+		anotherPersonality.setBiography(this.biography);
 		// TODO Sets!
 		return anotherPersonality;
 	}
@@ -122,6 +125,14 @@ public class Personality implements Pojo {
 
 	public void setFactionId(String factionId) {
 		this.factionId = factionId;
+	}
+
+	public String getBiography() {
+		return biography;
+	}
+
+	public void setBiography(String biography) {
+		this.biography = biography;
 	}
 
 }

@@ -21,7 +21,7 @@ public class HxActivity extends GDActivity  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setActionBarContentView(R.layout.main);
+        setActionBarContentView(R.layout.news);
         
         initActionBar();
 

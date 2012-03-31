@@ -90,7 +90,7 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 	 */
 	private LinearLayout messageSection(View collection, LayoutInflater inflater) {
 		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_messages, null);
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_messages, null);
 		
 		messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
 		messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
@@ -117,7 +117,7 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 	 */
 	private LinearLayout houseSection(View collection, LayoutInflater inflater) {
 		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_house, null);
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_house, null);
 		
 		((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
 		((HexMapView)linearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
@@ -147,7 +147,7 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 	 */
 	private LinearLayout latestSection(View collection, LayoutInflater inflater) {
 		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.main_latest, null);
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_latest, null);
 
 		((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
 

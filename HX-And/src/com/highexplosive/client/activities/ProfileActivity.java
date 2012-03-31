@@ -15,7 +15,7 @@ public class ProfileActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_profile);
+		setContentView(R.layout.profile);
 
 		if (HxConstants.ONLINE_MODE) {
 			

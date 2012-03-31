@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +15,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * Regimientos. Unidades mínimas de combate.
+ * Regiments. Minimal combat units
  * @author Luis Ollero
  *
  */
@@ -22,8 +24,9 @@ import org.hibernate.annotations.FetchMode;
 public class Regiment {
 
 	@Id
-	@Column(name="hx_regiment_id")
-	private String id;			//Identificados unívoco del regimiento.
+	@Column(name = "hx_regiment_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
@@ -62,11 +65,10 @@ public class Regiment {
 	private Integer upkeep;			// Coste de mantenimiento.
 
 	//Getters and setters
-	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Sector getSector() {
