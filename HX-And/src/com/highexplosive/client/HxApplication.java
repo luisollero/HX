@@ -1,5 +1,7 @@
 package com.highexplosive.client;
 
+import com.highexplosive.client.activities.NewsActivity;
+
 import greendroid.app.GDApplication;
 import android.content.Intent;
  

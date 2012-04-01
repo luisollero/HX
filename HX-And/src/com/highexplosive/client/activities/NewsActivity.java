@@ -1,4 +1,4 @@
-package com.highexplosive.client;
+package com.highexplosive.client.activities;
 
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.highexplosive.client.R;
 import com.highexplosive.client.view.InitialPagerAdapter;
 import com.viewpagerindicator.TitlePageIndicator;
 

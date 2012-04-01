@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.highexplosive.client.activities.NewsActivity;
 import com.highexplosive.client.activities.ProfileActivity;
 
 public class HxMainMenu extends Activity {

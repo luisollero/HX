@@ -37,8 +37,6 @@ public class WarActivity extends GDActivity  {
     private void initActionBar() {
 		getActionBar().setTitle("Highexplosive");
 		getActionBar().addItem(Type.Trashcan, 0);
-		
-		
 	}
     
     

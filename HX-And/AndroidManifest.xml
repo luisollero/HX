@@ -27,7 +27,7 @@
             android:name=".HxMainMenu"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NewsActivity"
+            android:name=".activities.NewsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.HX" />
         <activity
