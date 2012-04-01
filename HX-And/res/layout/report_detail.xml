@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="800dp"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="right|center_vertical" >
+
+        <Button
+            android:id="@+id/backInReportDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/report_back" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:padding="5dip"
+                android:text="@string/report_result"
+                android:textColor="#458B00" />
+
+            <TextView
+                android:id="@+id/reportResultInDetail"
+                android:padding="5dip" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:padding="5dip"
+                android:text="@string/report_resume"
+                android:textColor="#458B00" />
+        </TableRow>
+
+        <TextView
+            android:id="@+id/reportResumeInDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dip"
+            android:singleLine="false" />
+    </TableLayout>
+
+</LinearLayout>

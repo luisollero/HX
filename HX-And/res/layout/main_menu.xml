@@ -17,7 +17,7 @@
 
         <Button
             android:layout_margin="10dp"
-            android:enabled="false"
+            android:enabled="true"
             android:id="@+id/mainMenuWar"
             android:text="@string/main_menu_war"
             android:width="100dp" />

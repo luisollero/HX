@@ -8,7 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
 import com.highexplosive.client.R;
-import com.highexplosive.client.view.InitialPagerAdapter;
+import com.highexplosive.client.view.NewsPagerAdapter;
 import com.viewpagerindicator.TitlePageIndicator;
 
 public class NewsActivity extends GDActivity  {
@@ -16,7 +16,7 @@ public class NewsActivity extends GDActivity  {
 	@SuppressWarnings("unused")
 	private static final String TAG = NewsActivity.class.getName();
 	
-	private InitialPagerAdapter viewPagerAdapter = null;
+	private NewsPagerAdapter viewPagerAdapter = null;
 	private ViewPager viewPager;
 	
     @Override
@@ -26,7 +26,7 @@ public class NewsActivity extends GDActivity  {
         
         initActionBar();
 
-        viewPagerAdapter = new InitialPagerAdapter(this);
+        viewPagerAdapter = new NewsPagerAdapter(this);
 		viewPager = (ViewPager) findViewById(R.id.newsPager);
 		viewPager.setAdapter(viewPagerAdapter);
 
@@ -54,12 +54,12 @@ public class NewsActivity extends GDActivity  {
 					"Refresh", Toast.LENGTH_SHORT).show();
 			break;
 		case 1:
-			if (viewPager.getCurrentItem() == InitialPagerAdapter.POSITION_MESSAGES) {
+			if (viewPager.getCurrentItem() == NewsPagerAdapter.POSITION_MESSAGES) {
 				viewPagerAdapter.deleteMessages();
 			}
 			break;
 		case 2:
-			if (viewPager.getCurrentItem() == InitialPagerAdapter.POSITION_MESSAGES) {
+			if (viewPager.getCurrentItem() == NewsPagerAdapter.POSITION_MESSAGES) {
 				viewPagerAdapter.createMessage();
 			}
 			break;

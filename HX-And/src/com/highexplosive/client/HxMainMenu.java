@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.highexplosive.client.activities.NewsActivity;
 import com.highexplosive.client.activities.ProfileActivity;
+import com.highexplosive.client.activities.WarActivity;
 
 public class HxMainMenu extends Activity {
 
@@ -31,6 +32,14 @@ public class HxMainMenu extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(HxMainMenu.this, NewsActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		((Button)findViewById(R.id.mainMenuWar)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(HxMainMenu.this, WarActivity.class);
 				startActivity(intent);
 			}
 		});

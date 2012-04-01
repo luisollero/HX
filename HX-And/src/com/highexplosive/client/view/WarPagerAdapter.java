@@ -3,7 +3,6 @@ package com.highexplosive.client.view;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,11 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.highexplosive.client.HxJsonUtils;
+import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.R;
-import com.highexplosive.client.activities.MessageCreateActivity;
-import com.highexplosive.client.model.Declaration;
-import com.highexplosive.client.model.Message;
+import com.highexplosive.client.model.WarReport;
 import com.viewpagerindicator.TitleProvider;
 
 public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
@@ -26,19 +23,15 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	@SuppressWarnings("unused")
 	private static final String TAG = WarPagerAdapter.class.getName();
 	
-	public static final int POSITION_LATEST = 0;
-	public static final int POSITION_HOUSE = 1;
-	public static final int POSITION_MESSAGES = 2;
+	public static final int POSITION_REPORTS = 0;
+	public static final int POSITION_ORDERS = 1;
 
-	public static int NUM_VIEWS = 3;
+	public static int NUM_VIEWS = 2;
 	private Context ctx;
 	
-	private ListView declarationsListView = null;
-	private ListView messagesListView = null;
-	private ArrayList<Declaration> declarationList = null;
-	private ArrayList<Declaration> factionDeclarationList = null;
-	private ArrayList<Message> characterMessageList = null;
-	private MessageAdapter messagesAdapter;
+	private ListView reportsListView = null;
+	private ArrayList<WarReport> warReportList = null;
+	private WarReportAdapter reportAdapter = null;
 
 	public WarPagerAdapter(Context context) {
 		this.ctx = context;
@@ -66,14 +59,11 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 		LinearLayout linearLayout = null;
 		
 		switch (position) {
-		case POSITION_LATEST:
-			linearLayout = latestSection(collection, inflater);
+		case POSITION_REPORTS:
+			linearLayout = reportSection(collection, inflater);
 			break;
-		case POSITION_HOUSE:
-			linearLayout = houseSection(collection, inflater);
-			break;
-		case POSITION_MESSAGES:
-			linearLayout = messageSection(collection, inflater);
+		case POSITION_ORDERS:
+			linearLayout = orderSection(collection, inflater);
 			break;
 		default:
 			break;
@@ -82,32 +72,6 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 		return linearLayout;
 	}
 
-	/**
-	 * Messages section
-	 * @param collection
-	 * @param inflater
-	 * @return
-	 */
-	private LinearLayout messageSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_messages, null);
-		
-		messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
-		messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
-		messagesListView.setAdapter(messagesAdapter);
-		
-		if (characterMessageList == null) {
-			characterMessageList = new ArrayList<Message>();
-			characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
-		}
-		
-		for (Message message : characterMessageList) {
-			messagesAdapter.add(message);
-		}
-		
-		((ViewPager) collection).addView(linearLayout, 0);
-		return linearLayout;
-	}
 
 	/**
 	 * House/Faction section
@@ -115,25 +79,9 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @param inflater
 	 * @return
 	 */
-	private LinearLayout houseSection(View collection, LayoutInflater inflater) {
+	private LinearLayout orderSection(View collection, LayoutInflater inflater) {
 		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_house, null);
-		
-		((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
-		((HexMapView)linearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
-		
-		DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-		declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);
-		declarationsListView.setAdapter(houseDeclarationsAdapter);
-
-		if (factionDeclarationList == null) {
-			factionDeclarationList = new ArrayList<Declaration>();
-			factionDeclarationList = HxJsonUtils.getDeclarationList(ctx);
-		}
-
-		for (Declaration declaration : factionDeclarationList) {
-			houseDeclarationsAdapter.add(declaration);
-		}
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.war_orders, null);
 		
 		((ViewPager) collection).addView(linearLayout, 0);
 		return linearLayout;
@@ -145,25 +93,29 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @param inflater
 	 * @return
 	 */
-	private LinearLayout latestSection(View collection, LayoutInflater inflater) {
+	private LinearLayout reportSection(View collection, LayoutInflater inflater) {
 		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_latest, null);
+		linearLayout = (LinearLayout) inflater.inflate(R.layout.war_reports, null);
 
-		((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
-
-		DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-		declarationsListView = (ListView) linearLayout.findViewById(R.id.mainDeclarationList);
-		declarationsListView.setAdapter(messageAdapter);
-
-		if (declarationList == null) {
-			declarationList = new ArrayList<Declaration>();
-			declarationList = HxJsonUtils.getDeclarationList(ctx);
+		WarReportAdapter warReportAdapter = new WarReportAdapter(ctx, android.R.layout.simple_list_item_1);
+		reportsListView = (ListView) linearLayout.findViewById(R.id.warReportsList);
+		reportsListView.setAdapter(warReportAdapter);
+		
+		if (warReportList == null) {
+			if (HxConstants.ONLINE_MODE) {
+				//TODO: War reports online mode
+			} else {
+				warReportList = new ArrayList<WarReport>();
+				for (int i = 0; i < 5; i++) {
+					warReportList.add(new WarReport(1, ctx.getString(R.string.dummy_text), ctx.getString(R.string.dummy_text_long)));
+				}
+			}
 		}
-
-		for (Declaration declaration : declarationList) {
-			messageAdapter.add(declaration);
+		
+		for (WarReport report : warReportList) {
+			warReportAdapter.add(report);
 		}
-
+		
 		((ViewPager) collection).addView(linearLayout, 0);
 		return linearLayout;
 	}
@@ -225,14 +177,11 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	public String getTitle(int position) {
 		String title = new String();
 		switch (position) {
-		case POSITION_LATEST:
+		case POSITION_REPORTS:
 			title = ctx.getString(R.string.section_latest);
 			break;
-		case POSITION_HOUSE:
+		case POSITION_ORDERS:
 			title = ctx.getString(R.string.section_house);
-			break;
-		case POSITION_MESSAGES:
-			title = ctx.getString(R.string.section_messages);
 			break;
 		default:
 			break;
@@ -240,14 +189,10 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 		return title;
 	}
 
-	public void createMessage() {
-		Intent intent = new Intent(ctx, MessageCreateActivity.class);
-		ctx.startActivity(intent);
-	}
 	
-	public void deleteMessages() {
-		if (messagesListView != null) {
-			ArrayList<Integer> list = messagesAdapter.getItemsSelected();
+	public void deleteReports() {
+		if (reportsListView != null) {
+			ArrayList<Integer> list = reportAdapter.getItemsSelected();
 			for (Integer integer : list) {
 				Toast.makeText(ctx, "Id to delete: " + integer, Toast.LENGTH_LONG).show();
 			}

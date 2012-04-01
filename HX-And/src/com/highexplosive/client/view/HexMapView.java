@@ -59,6 +59,7 @@ public class HexMapView extends View {
 
 	protected void onDraw(Canvas canvas) {
 
+		
 		if (mapInitialized) {
 			Paint mPaint = new Paint();
 			mPaint.setStrokeWidth(8); 
@@ -314,4 +315,5 @@ public class HexMapView extends View {
 		this.mCornersX = null;
 		this.mCornersY = null;
 	}
+
 }

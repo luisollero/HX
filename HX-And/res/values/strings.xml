@@ -3,49 +3,6 @@
     
     <string name="app_name">HX</string>
     
-    <string name="dummy_text">Dummy text</string>
-    <string name="dummy_text_long">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-
-    <string name="section_latest">Latest</string>
-    <string name="section_house">House</string>
-    <string name="section_messages">Messages</string>
-    <string name="section_profile">Profile</string>
-    
-    <string name="section_latest_header">INNER SPHERE</string>
-    <string name="section_house_header">HOUSE</string>
-    <string name="section_messages_header">MESSAGES</string>
-    <string name="section_profile_header">PROFILE</string>
-    
-    <!-- Declarations -->
-    <string name="declaration_from">From: </string>
-    <string name="declaration_published">Published in: </string>
-    <string name="declaration_time">Time: </string>
-    <string name="declaration_subject">Subject: </string>
-    <string name="declaration_content">Content: </string>
-    <string name="declaration_back">Back</string>
-    
-    <!-- Messages -->
-    <string name="message_from">From: </string>
-    <string name="message_to">To: </string>
-    <string name="message_time">Time: </string>
-    <string name="message_subject">Subject: </string>
-    <string name="message_content">Content: </string>
-    <string name="message_favorite">Fav</string>
-    <string name="message_reply">Reply</string>
-    <string name="message_delete">Delete</string>
-    <string name="message_back">Back</string>
-    <string name="message_discard">Discard</string>
-    <string name="message_send">Send</string>
-    
-    <string name="profile_image">Profile image</string>
-    <string name="profile_name">Name</string>
-    <string name="profile_role">Role</string>
-    <string name="profile_bio">Biography</string>
-    <string name="profile_influence">Influence</string>
-    <string name="profile_since">Registered since</string>
-    <string name="profile_declarations">Declarations</string>
-    <string name="profile_endturn">End Turn</string>
-    
     <string name="login_button">Sign in</string>
     <string name="login_register">No Account? Register here</string>
     <string name="login_user">User</string>
@@ -91,5 +48,47 @@
     <string name="main_menu_spionage">Spionage</string>
     <string name="main_menu_profile">Profile</string>
     <string name="main_menu_endofturn">Done</string>
+
+    <string name="section_latest">Latest</string>
+    <string name="section_house">House</string>
+    <string name="section_messages">Messages</string>
+    <string name="section_profile">Profile</string>
     
+    <!-- Reports -->
+    <string name="report_result">Result: </string>
+    <string name="report_resume">Description: </string>
+    <string name="report_back">Back</string>
+    
+    <!-- Declarations -->
+    <string name="declaration_from">From: </string>
+    <string name="declaration_published">Published in: </string>
+    <string name="declaration_time">Time: </string>
+    <string name="declaration_subject">Subject: </string>
+    <string name="declaration_content">Content: </string>
+    <string name="declaration_back">Back</string>
+    
+    <!-- Messages -->
+    <string name="message_from">From: </string>
+    <string name="message_to">To: </string>
+    <string name="message_time">Time: </string>
+    <string name="message_subject">Subject: </string>
+    <string name="message_content">Content: </string>
+    <string name="message_favorite">Fav</string>
+    <string name="message_reply">Reply</string>
+    <string name="message_delete">Delete</string>
+    <string name="message_back">Back</string>
+    <string name="message_discard">Discard</string>
+    <string name="message_send">Send</string>
+    
+    <string name="profile_image">Profile image</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_role">Role</string>
+    <string name="profile_bio">Biography</string>
+    <string name="profile_influence">Influence</string>
+    <string name="profile_since">Registered since</string>
+    <string name="profile_declarations">Declarations</string>
+    <string name="profile_endturn">End Turn</string>
+    
+    <string name="dummy_text">Dummy text</string>
+    <string name="dummy_text_long">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
 </resources>

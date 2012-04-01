@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.HxJsonUtils;
 import com.highexplosive.client.R;
 import com.highexplosive.client.activities.MessageCreateActivity;
@@ -21,10 +22,10 @@ import com.highexplosive.client.model.Declaration;
 import com.highexplosive.client.model.Message;
 import com.viewpagerindicator.TitleProvider;
 
-public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
+public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 
 	@SuppressWarnings("unused")
-	private static final String TAG = InitialPagerAdapter.class.getName();
+	private static final String TAG = NewsPagerAdapter.class.getName();
 	
 	public static final int POSITION_LATEST = 0;
 	public static final int POSITION_HOUSE = 1;
@@ -40,7 +41,11 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 	private ArrayList<Message> characterMessageList = null;
 	private MessageAdapter messagesAdapter;
 
-	public InitialPagerAdapter(Context context) {
+	private HexMapView innerSphereMap;
+
+	private LinearLayout newsLinearLayout;
+
+	public NewsPagerAdapter(Context context) {
 		this.ctx = context;
 	}
 
@@ -97,8 +102,11 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 		messagesListView.setAdapter(messagesAdapter);
 		
 		if (characterMessageList == null) {
-			characterMessageList = new ArrayList<Message>();
-			characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
+			if (HxConstants.ONLINE_MODE) {
+				//TODO: News message online mode
+			} else {
+				characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
+			}
 		}
 		
 		for (Message message : characterMessageList) {
@@ -127,12 +135,15 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 		declarationsListView.setAdapter(houseDeclarationsAdapter);
 
 		if (factionDeclarationList == null) {
-			factionDeclarationList = new ArrayList<Declaration>();
 			factionDeclarationList = HxJsonUtils.getDeclarationList(ctx);
 		}
 
 		for (Declaration declaration : factionDeclarationList) {
-			houseDeclarationsAdapter.add(declaration);
+			if (HxConstants.ONLINE_MODE) {
+				//TODO: Declarations online mode
+			} else {
+				houseDeclarationsAdapter.add(declaration);
+			}
 		}
 		
 		((ViewPager) collection).addView(linearLayout, 0);
@@ -140,32 +151,37 @@ public class InitialPagerAdapter extends PagerAdapter implements TitleProvider {
 	}
 
 	/**
-	 * Latest news section
+	 * Latest news section, with lazy loading.
 	 * @param collection
 	 * @param inflater
 	 * @return
 	 */
 	private LinearLayout latestSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_latest, null);
 
-		((HexMapView)linearLayout.findViewById(R.id.isMap)).createMap("map/hx_map_prod.json");
-
-		DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-		declarationsListView = (ListView) linearLayout.findViewById(R.id.mainDeclarationList);
-		declarationsListView.setAdapter(messageAdapter);
-
-		if (declarationList == null) {
-			declarationList = new ArrayList<Declaration>();
-			declarationList = HxJsonUtils.getDeclarationList(ctx);
+		if (newsLinearLayout == null) {
+			newsLinearLayout = (LinearLayout) inflater.inflate(R.layout.news_latest, null);
+		
+			if (innerSphereMap == null) {
+				innerSphereMap = ((HexMapView)newsLinearLayout.findViewById(R.id.isMap));
+				innerSphereMap.createMap("map/hx_map_prod.json");
+			}
+	
+			DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+			declarationsListView = (ListView) newsLinearLayout.findViewById(R.id.mainDeclarationList);
+			declarationsListView.setAdapter(messageAdapter);
+	
+			if (declarationList == null) {
+				declarationList = new ArrayList<Declaration>();
+				declarationList = HxJsonUtils.getDeclarationList(ctx);
+			}
+	
+			for (Declaration declaration : declarationList) {
+				messageAdapter.add(declaration);
+			}
 		}
 
-		for (Declaration declaration : declarationList) {
-			messageAdapter.add(declaration);
-		}
-
-		((ViewPager) collection).addView(linearLayout, 0);
-		return linearLayout;
+		((ViewPager) collection).addView(newsLinearLayout, 0);
+		return newsLinearLayout;
 	}
 
     /**
