@@ -10,10 +10,10 @@ import android.widget.Toast;
 import com.highexplosive.client.view.InitialPagerAdapter;
 import com.viewpagerindicator.TitlePageIndicator;
 
-public class HxActivity extends GDActivity  {
+public class NewsActivity extends GDActivity  {
 	
 	@SuppressWarnings("unused")
-	private static final String TAG = HxActivity.class.getName();
+	private static final String TAG = NewsActivity.class.getName();
 	
 	private InitialPagerAdapter viewPagerAdapter = null;
 	private ViewPager viewPager;
@@ -26,10 +26,10 @@ public class HxActivity extends GDActivity  {
         initActionBar();
 
         viewPagerAdapter = new InitialPagerAdapter(this);
-		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		viewPager = (ViewPager) findViewById(R.id.newsPager);
 		viewPager.setAdapter(viewPagerAdapter);
 
-		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.title);
+		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.newsTitle);
 		titleIndicator.setViewPager(viewPager);
     }
     

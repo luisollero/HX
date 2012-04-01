@@ -29,7 +29,7 @@ public class HxMainMenu extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(HxMainMenu.this, HxActivity.class);
+				Intent intent = new Intent(HxMainMenu.this, NewsActivity.class);
 				startActivity(intent);
 			}
 		});

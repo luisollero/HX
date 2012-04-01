@@ -6,7 +6,7 @@ import android.content.Intent;
 public class HxApplication extends GDApplication {
     @Override
    public Class<?> getHomeActivityClass() {
-       return HxActivity.class;
+       return NewsActivity.class;
    }
  
    @Override

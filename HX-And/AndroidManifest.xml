@@ -21,13 +21,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.highexplosive.client.HxRegister"
+            android:name=".HxRegister"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.highexplosive.client.HxMainMenu"
+            android:name=".HxMainMenu"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.highexplosive.client.HxActivity"
+            android:name=".NewsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.HX" />
+        <activity
+            android:name=".activities.WarActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.HX" />
         <activity
