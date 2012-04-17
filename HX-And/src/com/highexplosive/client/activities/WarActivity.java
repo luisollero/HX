@@ -36,15 +36,18 @@ public class WarActivity extends GDActivity  {
     
     private void initActionBar() {
 		getActionBar().setTitle("Highexplosive");
-		getActionBar().addItem(Type.Trashcan, 0);
+		getActionBar().addItem(Type.Add, 0);
+		getActionBar().addItem(Type.Trashcan, 1);
 	}
     
     
     public boolean onHandleActionBarItemClick(ActionBarItem item, int pos) {
 		switch (pos) {
 		case 0:
-			Toast.makeText(getApplicationContext(),
-					"Garbage", Toast.LENGTH_SHORT).show();
+			viewPagerAdapter.addOrder();
+			break;
+		case 1:
+			viewPagerAdapter.deleteReports();
 			break;
 		default:
 			break;

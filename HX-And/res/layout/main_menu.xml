@@ -13,14 +13,14 @@
             android:enabled="true"
             android:id="@+id/mainMenuNews"
             android:text="@string/main_menu_news"
-            android:width="100dp" />
+            android:width="110dp" />
 
         <Button
             android:layout_margin="10dp"
             android:enabled="true"
             android:id="@+id/mainMenuWar"
             android:text="@string/main_menu_war"
-            android:width="100dp" />
+            android:width="110dp" />
     </TableRow>
 
     <TableRow
@@ -32,14 +32,14 @@
             android:enabled="false"
             android:id="@+id/mainMenuEconomy"
             android:text="@string/main_menu_economy"
-            android:width="100dp" />
+            android:width="110dp" />
 
         <Button
             android:layout_margin="10dp"
             android:enabled="false"
             android:id="@+id/mainMenuPolitics"
             android:text="@string/main_menu_politics"
-            android:width="100dp" />
+            android:width="110dp" />
     </TableRow>
 
     <TableRow
@@ -51,14 +51,14 @@
             android:enabled="false"
             android:id="@+id/mainMenuSpionage"
             android:text="@string/main_menu_spionage"
-            android:width="100dp" />
+            android:width="110dp" />
 
         <Button
             android:layout_margin="10dp"
             android:enabled="true"
             android:id="@+id/mainMenuProfile"
             android:text="@string/main_menu_profile"
-            android:width="100dp" />
+            android:width="110dp" />
     </TableRow>
 
     <TableRow android:gravity="center" >
@@ -68,7 +68,7 @@
             android:enabled="true"
             android:id="@+id/mainMenuEndOfTurn"
             android:text="@string/main_menu_endofturn"
-            android:width="100dp" />
+            android:width="140dp" />
     </TableRow>
 
 </TableLayout>

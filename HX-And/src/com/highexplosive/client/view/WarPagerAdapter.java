@@ -3,6 +3,7 @@ package com.highexplosive.client.view;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.R;
+import com.highexplosive.client.activities.WarOrderCreationActivity;
+import com.highexplosive.client.activities.WarReportDetailActivity;
+import com.highexplosive.client.model.RegimentOrder;
 import com.highexplosive.client.model.WarReport;
 import com.viewpagerindicator.TitleProvider;
 
@@ -31,7 +35,11 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	
 	private ListView reportsListView = null;
 	private ArrayList<WarReport> warReportList = null;
+	private ArrayList<RegimentOrder> warOrdersList = null;
 	private WarReportAdapter reportAdapter = null;
+
+	private ListView ordersListView;
+
 
 	public WarPagerAdapter(Context context) {
 		this.ctx = context;
@@ -80,8 +88,22 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @return
 	 */
 	private LinearLayout orderSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.war_orders, null);
+		LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.war_orders, null);
+		
+		WarOrderAdapter warOrdersAdapter = new WarOrderAdapter(ctx, android.R.layout.simple_list_item_1);
+		ordersListView = (ListView) linearLayout.findViewById(R.id.warOrdersList);
+		ordersListView.setAdapter(warOrdersAdapter);
+		
+		if (warOrdersList == null) {
+			warOrdersList = new ArrayList<RegimentOrder>();
+			for (int i = 0; i < 5; i++) {
+				warOrdersList.add(new RegimentOrder(i, ctx.getString(R.string.dummy_text), ctx.getString(R.string.dummy_text)));
+			}
+		}
+		
+		for (WarReport report : warReportList) {
+			warOrdersAdapter.add(report);
+		}
 		
 		((ViewPager) collection).addView(linearLayout, 0);
 		return linearLayout;
@@ -94,12 +116,11 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @return
 	 */
 	private LinearLayout reportSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.war_reports, null);
+		LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.war_reports, null);
 
-		WarReportAdapter warReportAdapter = new WarReportAdapter(ctx, android.R.layout.simple_list_item_1);
+		reportAdapter = new WarReportAdapter(ctx, android.R.layout.simple_list_item_1);
 		reportsListView = (ListView) linearLayout.findViewById(R.id.warReportsList);
-		reportsListView.setAdapter(warReportAdapter);
+		reportsListView.setAdapter(reportAdapter);
 		
 		if (warReportList == null) {
 			if (HxConstants.ONLINE_MODE) {
@@ -113,7 +134,7 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 		}
 		
 		for (WarReport report : warReportList) {
-			warReportAdapter.add(report);
+			reportAdapter.add(report);
 		}
 		
 		((ViewPager) collection).addView(linearLayout, 0);
@@ -178,10 +199,10 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 		String title = new String();
 		switch (position) {
 		case POSITION_REPORTS:
-			title = ctx.getString(R.string.section_latest);
+			title = ctx.getString(R.string.section_war_reports);
 			break;
 		case POSITION_ORDERS:
-			title = ctx.getString(R.string.section_house);
+			title = ctx.getString(R.string.section_war_orders);
 			break;
 		default:
 			break;
@@ -191,12 +212,17 @@ public class WarPagerAdapter extends PagerAdapter implements TitleProvider {
 
 	
 	public void deleteReports() {
-		if (reportsListView != null) {
+		if (reportAdapter != null) {
 			ArrayList<Integer> list = reportAdapter.getItemsSelected();
 			for (Integer integer : list) {
 				Toast.makeText(ctx, "Id to delete: " + integer, Toast.LENGTH_LONG).show();
 			}
 		}
+	}
+
+	public void addOrder() {
+		Intent intent = new Intent(ctx, WarOrderCreationActivity.class);
+		ctx.startActivity(intent);
 	}
 	
 	

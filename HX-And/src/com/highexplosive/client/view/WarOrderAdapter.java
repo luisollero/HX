@@ -16,12 +16,12 @@ import com.highexplosive.client.R;
 import com.highexplosive.client.activities.WarReportDetailActivity;
 import com.highexplosive.client.model.WarReport;
 
-public class WarReportAdapter extends ArrayAdapter<WarReport> {
+public class WarOrderAdapter extends ArrayAdapter<WarReport> {
 
 	private ArrayList<WarReport> items;
 	private ArrayList<Integer> itemsSelected = new ArrayList<Integer>();
 
-	public WarReportAdapter(Context context, int textViewResourceId) {
+	public WarOrderAdapter(Context context, int textViewResourceId) {
 		super(context, textViewResourceId);
 	}
 
