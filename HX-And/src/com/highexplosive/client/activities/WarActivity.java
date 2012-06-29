@@ -22,8 +22,8 @@ public class WarActivity extends GDActivity  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setActionBarContentView(R.layout.war);
         
+        setActionBarContentView(R.layout.war);
         initActionBar();
 
         viewPagerAdapter = new WarPagerAdapter(this);
@@ -35,7 +35,7 @@ public class WarActivity extends GDActivity  {
     }
     
     private void initActionBar() {
-		getActionBar().setTitle("Highexplosive");
+    	getActionBar().setTitle(getString(R.string.action_bar_title));
 		getActionBar().addItem(Type.Add, 0);
 		getActionBar().addItem(Type.Trashcan, 1);
 	}

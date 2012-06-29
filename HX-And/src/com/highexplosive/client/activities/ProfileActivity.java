@@ -1,44 +1,49 @@
 package com.highexplosive.client.activities;
 
-import com.highexplosive.client.HxConstants;
-import com.highexplosive.client.HxJsonUtils;
-import com.highexplosive.client.R;
-import com.highexplosive.client.model.Character;
-
-import android.app.Activity;
+import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem;
+import greendroid.widget.ActionBarItem.Type;
 import android.os.Bundle;
-import android.text.format.DateUtils;
-import android.widget.TextView;
+import android.support.v4.view.ViewPager;
 
-public class ProfileActivity extends Activity {
+import com.highexplosive.client.R;
+import com.highexplosive.client.view.ProfilePagerAdapter;
+import com.viewpagerindicator.TitlePageIndicator;
+
+public class ProfileActivity extends GDActivity {
+
+	private ProfilePagerAdapter viewPagerAdapter = null;
+	private ViewPager viewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.profile);
 
-		if (HxConstants.ONLINE_MODE) {
-			
-		} else {
-			initOfflineContent();
-		}
+		setActionBarContentView(R.layout.profile);
+		initActionBar();
+
+        viewPagerAdapter = new ProfilePagerAdapter(this);
+		viewPager = (ViewPager) findViewById(R.id.profilePager);
+		viewPager.setAdapter(viewPagerAdapter);
+
+		TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.profileTitle);
+		titleIndicator.setViewPager(viewPager);
 	}
 
-	private void initOfflineContent() {
-		Character character = HxJsonUtils.getCharacterDetail(this, 0);
+	private void initActionBar() {
+		getActionBar().setTitle(getString(R.string.action_bar_title));
+		getActionBar().addItem(Type.Edit, 0);
+	}
 
-		((TextView) findViewById(R.id.profileName))
-				.setText(character.getName());
-		((TextView) findViewById(R.id.profileKarma)).setText(""
-				+ character.getInfluence());
-		((TextView) findViewById(R.id.profileDeclarations)).setText(""
-				+ character.getNumberOfDeclarations());
-		((TextView) findViewById(R.id.profileRole))
-				.setText(character.getRole());
-		((TextView) findViewById(R.id.profileSince)).setText(DateUtils
-				.formatDateTime(this, character.getCreationDate(),
-						DateUtils.FORMAT_24HOUR));
-		((TextView) findViewById(R.id.profileBio)).setText(character.getName());
+	
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int pos) {
+		switch (pos) {
+		case 0:
+			break;
+		default:
+			break;
+		}
+		return super.onHandleActionBarItemClick(item, pos);
 	}
 
 }

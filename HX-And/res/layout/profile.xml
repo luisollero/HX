@@ -4,117 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:padding="5dip"
-                    android:text="@string/profile_name"
-                    android:textColor="#458B00" />
-
-                <TextView
-                    android:id="@+id/profileName"
-                    android:padding="5dip"
-                    android:text="@string/dummy_text" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:padding="5dip"
-                    android:text="@string/profile_role"
-                    android:textColor="#458B00" />
-
-                <TextView
-                    android:id="@+id/profileRole"
-                    android:padding="5dip"
-                    android:text="@string/dummy_text" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:padding="5dip"
-                    android:text="@string/profile_influence"
-                    android:textColor="#458B00" />
-
-                <TextView
-                    android:id="@+id/profileKarma"
-                    android:padding="5dip"
-                    android:text="@string/dummy_text" />
-            </TableRow>
-        </TableLayout>
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/profile_image"
-            android:scaleType="fitEnd"
-            android:src="@drawable/ic_launcher" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/profile_bio"
-            android:textColor="#458B00" />
-
-        <TextView
-            android:id="@+id/profileBio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:text="@string/dummy_text_long" />
-    </LinearLayout>
-
-    <TableLayout
+    <com.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/profileTitle"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_height="wrap_content" />
 
-        <TableRow>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:padding="5dip"
-                android:text="@string/profile_since"
-                android:textColor="#458B00" />
-
-            <TextView
-                android:id="@+id/profileSince"
-                android:padding="5dip"
-                android:text="@string/dummy_text" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:padding="5dip"
-                android:text="@string/profile_declarations"
-                android:textColor="#458B00" />
-
-            <TextView
-                android:id="@+id/profileDeclarations"
-                android:padding="5dip"
-                android:text="@string/dummy_text" />
-        </TableRow>
-    </TableLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/profilePager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" /> 
 
 </LinearLayout>

@@ -3,13 +3,21 @@ package com.hx.engine.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpRequestFactory;
+import org.apache.http.HttpResponse;
+import org.apache.http.MethodNotSupportedException;
 import org.apache.http.NameValuePair;
+import org.apache.http.RequestLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpRequest;
 import org.apache.http.message.BasicNameValuePair;
 import org.junit.Test;
 
@@ -23,6 +31,7 @@ public class RestTest extends TestBase {
 //		postUserTest();
 //		postPersonalityTest();
 		postCommunicationTest();
+		getCommunicationTest();
 //		putTest();
 //		deleteTest();
 	}
@@ -70,6 +79,26 @@ public class RestTest extends TestBase {
 			httpclient.getConnectionManager().shutdown();
 		}
 
+		if (result != null)
+			System.out.println(result);
+	}
+
+	/**
+	 * 
+	 */
+	private void getCommunicationTest() {
+		HttpResponse result = null;
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpUriRequest request = new HttpGet("http://localhost:8080/HX2-Rest/communication/1");
+		
+		try {
+			result = httpclient.execute(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httpclient.getConnectionManager().shutdown();
+		}
+		
 		if (result != null)
 			System.out.println(result);
 	}
