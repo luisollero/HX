@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.JsonReader;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.model.HexGridCell;
+import com.highexplosive.client.util.HxUtil;
 
 
 /**
@@ -58,7 +60,6 @@ public class HexMapView extends View {
     
 
 	protected void onDraw(Canvas canvas) {
-
 		
 		if (mapInitialized) {
 			Paint mPaint = new Paint();
@@ -158,38 +159,21 @@ public class HexMapView extends View {
 		}
 		
 		cellMap = new int[MAX_SIZE_X][MAX_SIZE_Y];
-		String faction = null;
-		String sectorName = null;
-		int i = 0,j = 0;
+		
 		
 		JsonReader reader;
 		try {
-			reader = new JsonReader(new InputStreamReader(getContext().getAssets()
+			
+			if (HxConstants.ONLINE_MODE) {
+				new RetrieveMapFromURL().execute(mapURI);
+				
+			} else {
+				reader = new JsonReader(new InputStreamReader(getContext().getAssets()
 						.open(mapURI), "UTF-8"));
-
-			reader.beginArray();
-			while (reader.hasNext()) {
-				reader.beginObject();
-				while (reader.hasNext()) {
-					String name = reader.nextName();
-					if (name.equals("name")) {
-						sectorName = reader.nextString();
-					} else if (name.equals("coordX")) {
-						i = reader.nextInt();
-					} else if (name.equals("coordY")) {
-						j = reader.nextInt();
-					} else if (name.equals("house")) {
-						faction = reader.nextString();
-					} else if (name.equals("id")) {
-						reader.nextInt();
-					}
-				}
-				
-				placeSectorInArray(faction, i, j);
-				
-				reader.endObject();
+				parseMap(reader);
 			}
-			reader.endArray();
+
+			
 		} catch (UnsupportedEncodingException e) {
 			Log.e(TAG, e.getMessage());
 		} catch (IOException e) {
@@ -199,6 +183,62 @@ public class HexMapView extends View {
 		mapInitialized = true;
 		useOptimizedMap = false;
 
+	}
+
+
+	private void parseMap(JsonReader reader) throws IOException {
+		String faction = null;
+		String sectorName = null;
+		int i = 0,j = 0;
+
+		reader.beginArray();
+		while (reader.hasNext()) {
+			reader.beginObject();
+			while (reader.hasNext()) {
+				String name = reader.nextName();
+				if (name.equals("name")) {
+					sectorName = reader.nextString();
+				} else if (name.equals("coordX")) {
+					i = reader.nextInt();
+				} else if (name.equals("coordY")) {
+					j = reader.nextInt();
+				} else if (name.equals("house")) {
+					faction = reader.nextString();
+				} else if (name.equals("id")) {
+					reader.nextInt();
+				}
+			}
+			
+			placeSectorInArray(faction, i, j);
+			
+			reader.endObject();
+		}
+		reader.endArray();
+	}
+	
+	class RetrieveMapFromURL extends AsyncTask<String, Void, Void> {
+
+		private JsonReader reader;
+
+		@Override
+		protected Void doInBackground(String... params) {
+			try {
+				reader = new JsonReader(new InputStreamReader(HxUtil.retrieveInputStreamFromURL(params[0]), "UTF-8"));
+				parseMap(reader);
+			} catch (UnsupportedEncodingException e) {
+				Log.e(TAG, "Error: " + e.getMessage());
+			} catch (IOException e) {
+				Log.e(TAG, "Error: " + e.getMessage());
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			recalculateMapDimensions();
+			super.onPostExecute(result);
+		}
+		
 	}
 
 

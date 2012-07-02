@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.R;
+import com.highexplosive.client.model.Faction;
 import com.highexplosive.client.view.NewsPagerAdapter;
 import com.viewpagerindicator.TitlePageIndicator;
 
@@ -26,7 +28,10 @@ public class NewsActivity extends GDActivity  {
         
         initActionBar();
 
-        viewPagerAdapter = new NewsPagerAdapter(this);
+        Faction faction = new Faction();
+        faction.setName(HxConstants.FACTION_LIAO);
+        
+        viewPagerAdapter = new NewsPagerAdapter(this, faction);
 		viewPager = (ViewPager) findViewById(R.id.newsPager);
 		viewPager.setAdapter(viewPagerAdapter);
 

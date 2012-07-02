@@ -53,7 +53,7 @@ public class ProfilePagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		switch (position) {
 		case POSITION_PROFILE:
-			linearLayout = profileSection(inflater);
+			linearLayout = profileSection(collection, inflater);
 			break;
 		default:
 			break;
@@ -69,7 +69,7 @@ public class ProfilePagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @param inflater
 	 * @return
 	 */
-	private LinearLayout profileSection(LayoutInflater inflater) {
+	private LinearLayout profileSection(View collection, LayoutInflater inflater) {
 		LinearLayout linearLayout = (LinearLayout) inflater.inflate(R.layout.profile_detail, null);
 		
 		if (HxConstants.ONLINE_MODE) {
@@ -77,6 +77,8 @@ public class ProfilePagerAdapter extends PagerAdapter implements TitleProvider {
 		} else {
 			initOfflineContent(linearLayout);
 		}
+		
+		((ViewPager) collection).addView(linearLayout, 0);
 		
 		return linearLayout;
 	}
@@ -156,7 +158,7 @@ public class ProfilePagerAdapter extends PagerAdapter implements TitleProvider {
 		String title = new String();
 		switch (position) {
 		case POSITION_PROFILE:
-			title = ctx.getString(R.string.section_war_reports);
+			title = ctx.getString(R.string.section_profile);
 			break;
 		default:
 			break;

@@ -1,6 +1,7 @@
 package com.highexplosive.client;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import com.highexplosive.client.model.Sector;
 public class HxJsonUtils {
 
 	private static final String TAG = HxJsonUtils.class.getSimpleName();
+
 
 	/**
 	 * Get the full {@link Message} from the server
@@ -124,23 +126,11 @@ public class HxJsonUtils {
 	 * @param context
 	 * @return
 	 */
-	public static ArrayList<Declaration> getDeclarationList(Context context) {
-		ArrayList<Declaration> declarationList = null;
-		try {
-			JsonReader reader = null;
-			if (HxConstants.ONLINE_MODE) {
-				// TODO: Implement the online mode
-			} else {
-				reader = new JsonReader(new InputStreamReader(context
-						.getAssets().open("json/type_declaration_list.json"),
-						"UTF-8"));
-			}
-			declarationList = parseDeclarationList(reader);
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		}
-		return declarationList;
+	public static ArrayList<Declaration> getDeclarationList(Context context, InputStream is) {
+		JsonReader reader = new JsonReader(new InputStreamReader(is));
+		return parseDeclarationList(reader);
 	}
+	
 
 	// ********************************************************************
 	// Private and auxiliary methods
@@ -319,12 +309,6 @@ public class HxJsonUtils {
 		reader.endObject();
 
 		return declaration;
-	}
-
-
-	private static JsonReader retrieveJSonFromUrl(String string) {
-		// TODO Get JSon From Server URL
-		return null;
 	}
 
 }

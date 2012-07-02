@@ -5,7 +5,6 @@ import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
 
 import com.highexplosive.client.R;
 import com.highexplosive.client.view.WarPagerAdapter;

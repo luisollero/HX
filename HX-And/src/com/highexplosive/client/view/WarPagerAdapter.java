@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.R;
 import com.highexplosive.client.activities.WarOrderCreationActivity;
-import com.highexplosive.client.activities.WarReportDetailActivity;
 import com.highexplosive.client.model.RegimentOrder;
 import com.highexplosive.client.model.WarReport;
 import com.viewpagerindicator.TitleProvider;

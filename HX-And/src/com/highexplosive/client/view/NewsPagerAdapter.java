@@ -1,12 +1,16 @@
 package com.highexplosive.client.view;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -16,15 +20,17 @@ import android.widget.Toast;
 
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.HxJsonUtils;
+import com.highexplosive.client.HxLinks;
 import com.highexplosive.client.R;
 import com.highexplosive.client.activities.MessageCreateActivity;
 import com.highexplosive.client.model.Declaration;
+import com.highexplosive.client.model.Faction;
 import com.highexplosive.client.model.Message;
+import com.highexplosive.client.util.HxUtil;
 import com.viewpagerindicator.TitleProvider;
 
 public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 
-	@SuppressWarnings("unused")
 	private static final String TAG = NewsPagerAdapter.class.getName();
 	
 	public static final int POSITION_LATEST = 0;
@@ -45,8 +51,15 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 
 	private LinearLayout newsLinearLayout;
 
-	public NewsPagerAdapter(Context context) {
+	private Faction faction;
+
+	private LinearLayout newsHouseLinearLayout;
+
+	private DeclarationAdapter houseDeclarationsAdapter;
+
+	public NewsPagerAdapter(Context context, Faction faction) {
 		this.ctx = context;
+		this.faction = faction;
 	}
 
 	@Override
@@ -124,31 +137,30 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @return
 	 */
 	private LinearLayout houseSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_house, null);
 		
-		((HexMapView)linearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
-		((HexMapView)linearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
-		
-		DeclarationAdapter houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-		declarationsListView = (ListView) linearLayout.findViewById(R.id.factionDeclarationList);
-		declarationsListView.setAdapter(houseDeclarationsAdapter);
+		if (newsHouseLinearLayout == null) {
+			
+			newsHouseLinearLayout = (LinearLayout) inflater.inflate(R.layout.news_house, null);
 
-		if (factionDeclarationList == null) {
-			factionDeclarationList = HxJsonUtils.getDeclarationList(ctx);
-		}
-
-		for (Declaration declaration : factionDeclarationList) {
+			houseDeclarationsAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+			declarationsListView = (ListView) newsHouseLinearLayout.findViewById(R.id.factionDeclarationList);
+			declarationsListView.setAdapter(houseDeclarationsAdapter);
+			
 			if (HxConstants.ONLINE_MODE) {
-				//TODO: Declarations online mode
+				((HexMapView)newsHouseLinearLayout.findViewById(R.id.factionMap)).createMap(HxLinks.MAP_HOUSE + faction.getName());
 			} else {
-				houseDeclarationsAdapter.add(declaration);
+				((HexMapView)newsHouseLinearLayout.findViewById(R.id.factionMap)).createMap("map/hx_liao_map.json");
 			}
+			
+//			((HexMapView)newsHouseLinearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
+
+			new LoadHouseDeclarationsTask().execute();
+			
+			((ViewPager) collection).addView(newsHouseLinearLayout, 0);
 		}
-		
-		((ViewPager) collection).addView(linearLayout, 0);
-		return linearLayout;
+		return newsHouseLinearLayout;
 	}
+	
 
 	/**
 	 * Latest news section, with lazy loading.
@@ -163,21 +175,15 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 			if (innerSphereMap == null) {
 				innerSphereMap = ((HexMapView)newsLinearLayout.findViewById(R.id.isMap));
-				innerSphereMap.createMap("map/hx_map_prod.json");
+				if (HxConstants.ONLINE_MODE) {
+					innerSphereMap.createMap(HxLinks.MAP);
+				} else {
+					innerSphereMap.createMap("map/hx_map_prod.json");
+				}
 			}
 	
-			DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
-			declarationsListView = (ListView) newsLinearLayout.findViewById(R.id.mainDeclarationList);
-			declarationsListView.setAdapter(messageAdapter);
-	
-			if (declarationList == null) {
-				declarationList = new ArrayList<Declaration>();
-				declarationList = HxJsonUtils.getDeclarationList(ctx);
-			}
-	
-			for (Declaration declaration : declarationList) {
-				messageAdapter.add(declaration);
-			}
+			new LoadDeclarationsTask().execute();
+			
 		}
 
 		((ViewPager) collection).addView(newsLinearLayout, 0);
@@ -270,5 +276,80 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 		}
 	}
 	
+
+	/**
+	 * Helper class to do in background the call to the server
+	 * @author luis.pena
+	 *
+	 */
+	class LoadHouseDeclarationsTask extends AsyncTask<Void, Void, Void> {
+
+		private InputStream is;
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			if (HxConstants.ONLINE_MODE) {
+				is = HxUtil.retrieveInputStreamFromURL(HxLinks.DECLARATIONS);
+			} else {
+				try {
+					is = ctx.getAssets().open("json/type_character.json");
+				} catch (IOException e) {
+					Log.e(TAG, e.getMessage());
+				}
+			}
+			factionDeclarationList = HxJsonUtils.getDeclarationList(ctx, is);
+			return null;
+		}
+		
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			
+			for (Declaration declaration : factionDeclarationList) {
+				houseDeclarationsAdapter.add(declaration);
+			}
+			super.onPostExecute(result);
+		}
+	}
+
+	/**
+	 * Helper class to do in background the call to the server
+	 * @author luis.pena
+	 *
+	 */
+	class LoadDeclarationsTask extends AsyncTask<Void, Void, Void> {
+		
+		private InputStream is;
+		
+		@Override
+		protected Void doInBackground(Void... params) {
+	
+			if (HxConstants.ONLINE_MODE) {
+				is = HxUtil.retrieveInputStreamFromURL(HxLinks.DECLARATIONS);
+			} else {
+				try {
+					is = ctx.getAssets().open("json/type_character.json");
+				} catch (IOException e) {
+					Log.e(TAG, e.getMessage());
+				}
+			}
+			declarationList = HxJsonUtils.getDeclarationList(ctx, is);
+			return null;
+		}
+		
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			
+			DeclarationAdapter messageAdapter = new DeclarationAdapter(ctx, android.R.layout.simple_list_item_1);
+			declarationsListView = (ListView) newsLinearLayout.findViewById(R.id.mainDeclarationList);
+			declarationsListView.setAdapter(messageAdapter);
+			
+			for (Declaration declaration : declarationList) {
+				messageAdapter.add(declaration);
+			}
+			super.onPostExecute(result);
+		}
+	}
 	
 }

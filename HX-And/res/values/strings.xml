@@ -15,7 +15,7 @@
     <string name="register_mail">Mail</string>
     <string name="register_user">User</string>
     <string name="register_button">Register</string>
-    <string name="register_ok">Ok</string>
+    <string name="register_ok">OK</string>
     <string name="register_cancel">Cancel</string>
     <string name="register_fill_all_fields">Please, fill all the fields</string>
     <string name="register_popup">Please, realize that Highexplosive is a full RPG. This means the registering process is manually made so it may take some hours to get a response from your Game Director. For more information, visit the official webpage of the project</string>
@@ -54,18 +54,19 @@
     <string name="section_messages">Messages</string>
     <string name="section_profile">Profile</string>
     
+    <!-- War -->
     <string name="section_war_reports">War Reports</string>
     <string name="section_war_orders">War Orders</string>
-    
-    <!-- Reports -->
-    <string name="report_result">Result: </string>
-    <string name="report_resume">Description: </string>
-    <string name="report_back">Back</string>
     
     <string name="war_creation_regiment">Regiment</string>
     <string name="war_creation_sector">Where</string>
     <string name="war_creation_attitude">Attitude</string>
     <string name="war_creation_save">Save</string>
+
+    <!-- Reports -->
+    <string name="report_result">Result: </string>
+    <string name="report_resume">Description: </string>
+    <string name="report_back">Back</string>
     
     <!-- Declarations -->
     <string name="declaration_from">From: </string>
@@ -88,6 +89,8 @@
     <string name="message_discard">Discard</string>
     <string name="message_send">Send</string>
     
+    <!-- Profile -->
+    <string name="section_profile">Profile</string>
     <string name="profile_image">Profile image</string>
     <string name="profile_name">Name</string>
     <string name="profile_role">Role</string>

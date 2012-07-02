@@ -1,9 +1,9 @@
 package com.highexplosive.client.activities;
 
-import com.highexplosive.client.R;
-
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.highexplosive.client.R;
 
 public class WarOrderCreationActivity extends Activity {
 	
