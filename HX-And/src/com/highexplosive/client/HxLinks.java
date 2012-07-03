@@ -8,6 +8,8 @@ public class HxLinks {
 	public static final String MAP_HOUSE = MAIN_SERVER + "sector.json?houseId=";
 	
 	public static final String DECLARATIONS = MAIN_SERVER + "communication.json";
+
+	public static final String MESSAGES = MAIN_SERVER + "message/";
 	
 	
 }

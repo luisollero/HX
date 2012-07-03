@@ -51,22 +51,9 @@ public class HxJsonUtils {
 	 * @return
 	 */
 	public static ArrayList<Message> getMessageList(Context context,
-			int characterId) {
-		ArrayList<Message> list = null;
-		try {
-			JsonReader reader = null;
-			if (HxConstants.ONLINE_MODE) {
-				// TODO: Implement the online mode
-			} else {
-				reader = new JsonReader(new InputStreamReader(context
-						.getAssets().open("json/type_message_list.json"),
-						"UTF-8"));
-			}
-			list = parseMessageList(reader);
-		} catch (IOException e) {
-			Log.e(TAG, e.getMessage());
-		}
-		return list;
+			InputStream is) {
+		JsonReader reader = new JsonReader(new InputStreamReader(is));
+		return parseMessageList(reader);
 	}
 
 	/**
@@ -146,7 +133,8 @@ public class HxJsonUtils {
 			}
 			reader.endArray();
 		} catch (Exception e) {
-			Log.e(TAG, e.getMessage());
+			if (e.getMessage() != null)
+				Log.e(TAG, e.getMessage());
 		}
 		return list;
 	}

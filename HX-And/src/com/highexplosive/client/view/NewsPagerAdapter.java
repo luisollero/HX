@@ -2,6 +2,7 @@ package com.highexplosive.client.view;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,11 +53,14 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 
 	private LinearLayout newsLinearLayout;
 
+	private Integer userId = 1;
 	private Faction faction;
 
 	private LinearLayout newsHouseLinearLayout;
 
 	private DeclarationAdapter houseDeclarationsAdapter;
+
+	private LinearLayout messagesLinearLayout;
 
 	public NewsPagerAdapter(Context context, Faction faction) {
 		this.ctx = context;
@@ -107,27 +112,31 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 	 * @return
 	 */
 	private LinearLayout messageSection(View collection, LayoutInflater inflater) {
-		LinearLayout linearLayout;
-		linearLayout = (LinearLayout) inflater.inflate(R.layout.news_messages, null);
+		
+		messagesLinearLayout = (LinearLayout) inflater.inflate(R.layout.news_messages, null);
 		
 		messagesAdapter = new MessageAdapter(ctx, android.R.layout.simple_list_item_1);
-		messagesListView = (ListView) linearLayout.findViewById(R.id.userMessageList);
+		messagesListView = (ListView) messagesLinearLayout.findViewById(R.id.userMessageList);
 		messagesListView.setAdapter(messagesAdapter);
 		
 		if (characterMessageList == null) {
 			if (HxConstants.ONLINE_MODE) {
-				//TODO: News message online mode
+				new LoadMessagesTask().execute(userId);
 			} else {
-				characterMessageList = HxJsonUtils.getMessageList(ctx, 1);
+				try {
+					characterMessageList = HxJsonUtils.getMessageList(ctx, ctx.getAssets().open("json/type_message_list.json"));
+				} catch (IOException e) {
+					Log.e(TAG, e.getMessage());
+				}
+				for (Message message : characterMessageList) {
+					messagesAdapter.add(message);
+				}
 			}
 		}
 		
-		for (Message message : characterMessageList) {
-			messagesAdapter.add(message);
-		}
 		
-		((ViewPager) collection).addView(linearLayout, 0);
-		return linearLayout;
+		((ViewPager) collection).addView(messagesLinearLayout, 0);
+		return messagesLinearLayout;
 	}
 
 	/**
@@ -153,6 +162,7 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 			}
 			
 //			((HexMapView)newsHouseLinearLayout.findViewById(R.id.factionMap)).recalculateMapDimensions();
+//			((HexMapView)newsHouseLinearLayout.findViewById(R.id.factionMap)).invalidate();
 
 			new LoadHouseDeclarationsTask().execute();
 			
@@ -183,6 +193,9 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 			}
 	
 			new LoadDeclarationsTask().execute();
+			
+//			innerSphereMap.recalculateMapDimensions();
+//			innerSphereMap.invalidate();
 			
 		}
 
@@ -292,7 +305,7 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 				is = HxUtil.retrieveInputStreamFromURL(HxLinks.DECLARATIONS);
 			} else {
 				try {
-					is = ctx.getAssets().open("json/type_character.json");
+					is = ctx.getAssets().open("json/type_declaration_list.json");
 				} catch (IOException e) {
 					Log.e(TAG, e.getMessage());
 				}
@@ -304,7 +317,6 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		@Override
 		protected void onPostExecute(Void result) {
-			
 			for (Declaration declaration : factionDeclarationList) {
 				houseDeclarationsAdapter.add(declaration);
 			}
@@ -323,12 +335,11 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 		@Override
 		protected Void doInBackground(Void... params) {
-	
 			if (HxConstants.ONLINE_MODE) {
 				is = HxUtil.retrieveInputStreamFromURL(HxLinks.DECLARATIONS);
 			} else {
 				try {
-					is = ctx.getAssets().open("json/type_character.json");
+					is = ctx.getAssets().open("json/type_declaration_list.json");
 				} catch (IOException e) {
 					Log.e(TAG, e.getMessage());
 				}
@@ -348,6 +359,34 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 			for (Declaration declaration : declarationList) {
 				messageAdapter.add(declaration);
 			}
+			super.onPostExecute(result);
+		}
+	}
+
+	/**
+	 * Helper class to do in background the call to the server
+	 * @author luis.pena
+	 *
+	 */
+	class LoadMessagesTask extends AsyncTask<Integer, Void, Void> {
+		
+		private InputStream is;
+		
+		@Override
+		protected Void doInBackground(Integer... params) {
+			is = HxUtil.retrieveInputStreamFromURL(HxLinks.MESSAGES + params[0] + ".json");
+			characterMessageList = HxJsonUtils.getMessageList(ctx, is);
+			return null;
+		}
+		
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			
+			for (Message message : characterMessageList) {
+				messagesAdapter.add(message);
+			}
+
 			super.onPostExecute(result);
 		}
 	}

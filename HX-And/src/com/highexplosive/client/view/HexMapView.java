@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,13 +23,16 @@ import com.highexplosive.client.util.HxUtil;
 
 
 /**
+ * Map in the game
  * 
  * @author Luis Ollero
  *
  */
 public class HexMapView extends View {
 
-    private static final int NOT_VISIBLE = 0;
+	private static final String TAG = HexMapView.class.getSimpleName();
+
+	private static final int NOT_VISIBLE = 0;
     private static final int HOUSE_KURITA = 1;
     private static final int HOUSE_LIAO = 2;
     private static final int HOUSE_DAVION = 3;
@@ -39,8 +43,6 @@ public class HexMapView extends View {
 	private final int MAX_SIZE_Y = 28;
     private static final int NUM_HEX_CORNERS = 6;
     private static final int CELL_RADIUS_FULL_MAP = 15;
-
-	private static final String TAG = HexMapView.class.getSimpleName();
 
     private int[][] cellMap = null;
     private int[][] cellOptimizedMap;
@@ -53,6 +55,9 @@ public class HexMapView extends View {
     private boolean mapInitialized = false;
     private boolean useOptimizedMap = false;
 	private int cellRadiusOptimizedMap = 0;
+
+	private ProgressDialog progressDialog;
+	private JsonReader reader;
     
     public HexMapView(Context context, AttributeSet set) {
     	super(context, set);
@@ -160,17 +165,18 @@ public class HexMapView extends View {
 		
 		cellMap = new int[MAX_SIZE_X][MAX_SIZE_Y];
 		
-		
-		JsonReader reader;
 		try {
 			
 			if (HxConstants.ONLINE_MODE) {
+				progressDialog = 
+						ProgressDialog.show(getContext(), 
+								"Loading...", "Please wait...", true, false);
 				new RetrieveMapFromURL().execute(mapURI);
 				
 			} else {
 				reader = new JsonReader(new InputStreamReader(getContext().getAssets()
 						.open(mapURI), "UTF-8"));
-				parseMap(reader);
+				new ParseMapTask().execute();
 			}
 
 			
@@ -185,8 +191,37 @@ public class HexMapView extends View {
 
 	}
 
+	
+	class ParseMapTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			try {
+				parseMap(reader);
+			} catch (IOException e) {
+				if (e.getMessage() != null) {
+					Log.e(TAG, e.getMessage());
+				}
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			recalculateMapDimensions();
+			invalidate();
+			progressDialog.dismiss();
+			super.onPostExecute(result);
+		}
+		
+	}
 
 	private void parseMap(JsonReader reader) throws IOException {
+		
+		if (HxConstants.DEBUG_MODE) {
+			Log.i(TAG, "Parsing map");
+		}
+		
 		String faction = null;
 		String sectorName = null;
 		int i = 0,j = 0;
@@ -216,32 +251,13 @@ public class HexMapView extends View {
 		reader.endArray();
 	}
 	
-	class RetrieveMapFromURL extends AsyncTask<String, Void, Void> {
-
-		private JsonReader reader;
-
-		@Override
-		protected Void doInBackground(String... params) {
-			try {
-				reader = new JsonReader(new InputStreamReader(HxUtil.retrieveInputStreamFromURL(params[0]), "UTF-8"));
-				parseMap(reader);
-			} catch (UnsupportedEncodingException e) {
-				Log.e(TAG, "Error: " + e.getMessage());
-			} catch (IOException e) {
-				Log.e(TAG, "Error: " + e.getMessage());
-			}
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			recalculateMapDimensions();
-			super.onPostExecute(result);
-		}
-		
-	}
-
-
+	/**
+	 * Set the type of sector in the array
+	 * 
+	 * @param faction
+	 * @param i
+	 * @param j
+	 */
 	private void placeSectorInArray(String faction, int i, int j) {
 		if (HxConstants.FACTION_LIAO.equals(faction)) {
 			cellMap[j][i] = HOUSE_LIAO;
@@ -257,6 +273,27 @@ public class HexMapView extends View {
 			cellMap[j][i] = NOT_VISIBLE;
 		}
 	}
+	
+	class RetrieveMapFromURL extends AsyncTask<String, Void, Void> {
+
+		@Override
+		protected Void doInBackground(String... params) {
+			try {
+				reader = new JsonReader(new InputStreamReader(HxUtil.retrieveInputStreamFromURL(params[0]), "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				Log.e(TAG, "Error: " + e.getMessage());
+			} 
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			new ParseMapTask().execute();
+			super.onPostExecute(result);
+		}
+		
+	}
+
 
 
 	/**
