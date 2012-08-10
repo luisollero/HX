@@ -3,7 +3,7 @@ package com.highexplosive.client;
 public class HxConstants {
 
 	public final static boolean DEBUG_MODE = true;
-	public final static boolean ONLINE_MODE = true;
+	public final static boolean ONLINE_MODE = false;
 	
 	public static Integer userId = 0; 
 

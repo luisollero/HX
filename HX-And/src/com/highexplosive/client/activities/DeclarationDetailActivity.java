@@ -72,7 +72,11 @@ public class DeclarationDetailActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				new UpdateKarma().execute(new Integer[] { ((ToggleButton)v).isChecked() ? 1 : 0, declaration.getDeclarationId() });
+				if (HxConstants.ONLINE_MODE) {
+					new UpdateKarma().execute(new Integer[] { ((ToggleButton)v).isChecked() ? 1 : 0, declaration.getDeclarationId() });
+				} else {
+					
+				}
 			}
 			
 		});
@@ -85,6 +89,7 @@ public class DeclarationDetailActivity extends Activity {
 		});
 	}
 
+	
 	/**
 	 * Update the karma of the declaration
 	 * @author Luis Ollero
@@ -94,24 +99,21 @@ public class DeclarationDetailActivity extends Activity {
 		@Override
 		protected String doInBackground(Integer... integers) {
 			String response = "";
-
-			if (HxConstants.ONLINE_MODE) {
-				DefaultHttpClient client = new DefaultHttpClient();
-				HttpPut httpGet = new HttpPut("url_to_upload_URL" + "declarationId" + integers[0]
-						+ "upvote" +  integers[1]);
-				try {
-					HttpResponse execute = client.execute(httpGet);
-					InputStream content = execute.getEntity().getContent();
-					
-					BufferedReader buffer = new BufferedReader(
-							new InputStreamReader(content));
-					String s = "";
-					while ((s = buffer.readLine()) != null) {
-						response += s;
-					}
-				} catch (Exception e) {
-					Log.e(TAG, e.getMessage());
+			DefaultHttpClient client = new DefaultHttpClient();
+			HttpPut httpGet = new HttpPut("url_to_upload_URL" + "declarationId" + integers[0]
+					+ "upvote" +  integers[1]);
+			try {
+				HttpResponse execute = client.execute(httpGet);
+				InputStream content = execute.getEntity().getContent();
+				
+				BufferedReader buffer = new BufferedReader(
+						new InputStreamReader(content));
+				String s = "";
+				while ((s = buffer.readLine()) != null) {
+					response += s;
 				}
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage());
 			}
 			return response;
 		}

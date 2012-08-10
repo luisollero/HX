@@ -20,7 +20,6 @@ public class WarReportDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.report_detail);
 
-
 		retrieveFullReport(0);
 		
 		initializeButtons();
