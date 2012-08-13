@@ -38,6 +38,7 @@ public class RegimentEngine implements IRegimentEngine {
 	}
 	
 	public Collection<Regiment> findAll() {
+		
 		return daoRegiment.find();
 	}
 	

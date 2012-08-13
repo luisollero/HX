@@ -16,130 +16,146 @@ import org.hibernate.annotations.FetchMode;
 
 /**
  * Regiments. Minimal combat units
+ * 
  * @author Luis Ollero
- *
+ * 
  */
 @Entity
-@Table(name="hx_regiment",catalog="hx")
+@Table(name = "hx_regiment", catalog = "hx")
 public class Regiment {
 
 	@Id
-	@Column(name = "hx_regiment_id", nullable = false)
+	@Column(name = "regiment_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_regiment_sector", referencedColumnName="hx_sector_id")
-	private Sector sector;		// Sector en el que está estacionado.
-	
+	@JoinColumn(name = "regiment_sector", referencedColumnName = "hx_sector_id")
+	private Sector sector; // Sector in which the regiment is
+
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_regiment_house", referencedColumnName="hx_house_id")
-	private House house; 		// Casa a la que debe obediencia el regimiento.
-	
+	@JoinColumn(name = "regiment_house", referencedColumnName = "hx_house_id")
+	private House house; // House that owns the regiment
+
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_regiment_home", referencedColumnName="hx_sector_id")
-	private Sector homeSector; // Sector "hogar" para el regimiento.
-	
-	@Column(name="hx_regiment_experience", length=20)
+	@JoinColumn(name = "regiment_home", referencedColumnName = "hx_sector_id")
+	private Sector homeSector; // Home sector of the regiment
+
+	@Column(name = "regiment_rank", length = 20)
 	@Enumerated(EnumType.STRING)
-	private Experience experience; // Experiencia en combate de la unidad.
+	private Rank rank; // Rank of the unit
 
-	@Column(name="hx_regiment_name",nullable=false)
-	private String name;			// Nombre del regimiento. Identificador para el usuario.
-	@Column(name="hx_regiment_maneuver")
-	private Integer maneuver;		// Capacidad de maniobra.
-	@Column(name="hx_regiment_attack")
-	private Integer attack;			// Capacidad ofensiva.
-	@Column(name="hx_regiment_defense")
-	private Integer defense;		// Capacidad defensiva.
-	@Column(name="hx_regiment_resistance")
-	private Integer resistance;		// Resistencia actual.
-	@Column(name="hx_regiment_total_resistance")
+	@Column(name = "hx_regiment_name", nullable = false)
+	private String name; // Regiment name. Identifier for the player
+	@Column(name = "hx_regiment_maneuver")
+	private Integer maneuver; // Ability to synchronize and move of the unit
+	@Column(name = "hx_regiment_attack")
+	private Integer attack; // Fire power of the unit
+	@Column(name = "hx_regiment_resistance")
+	private Integer resistance; // Resistencia actual.
+	@Column(name = "hx_regiment_total_resistance")
 	private Integer totalResistence; // Resistencia máxima.
-	@Column(name="hx_regiment_price")
-	private Integer price;			// Precio orientativo del regimiento.
-	@Column(name="hx_regiment_upkeep")
-	private Integer upkeep;			// Coste de mantenimiento.
+	@Column(name = "hx_regiment_price")
+	private Integer price; // Current cost of the regiment
+	@Column(name = "hx_regiment_upkeep")
+	private Integer upkeep; // Upkeep cost
 
-	//Getters and setters
+	// Getters and setters
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Sector getSector() {
 		return sector;
 	}
+
 	public void setSector(Sector sector) {
 		this.sector = sector;
 	}
+
 	public House getHouse() {
 		return house;
 	}
+
 	public void setHouse(House house) {
 		this.house = house;
 	}
+
 	public Sector getHomeSector() {
 		return homeSector;
 	}
+
 	public void setHomeSector(Sector homeSector) {
 		this.homeSector = homeSector;
 	}
-	public Experience getExperience() {
-		return experience;
+
+	public Rank getRank() {
+		return rank;
 	}
-	public void setExperience(Experience experience) {
-		this.experience = experience;
+
+	public void setRank(Rank rank) {
+		this.rank = rank;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Integer getManeuver() {
 		return maneuver;
 	}
+
 	public void setManeuver(Integer maneuver) {
 		this.maneuver = maneuver;
 	}
+
 	public Integer getAttack() {
 		return attack;
 	}
+
 	public void setAttack(Integer attack) {
 		this.attack = attack;
 	}
-	public Integer getDefense() {
-		return defense;
-	}
-	public void setDefense(Integer defense) {
-		this.defense = defense;
-	}
+
 	public Integer getResistance() {
 		return resistance;
 	}
+
 	public void setResistance(Integer resistance) {
 		this.resistance = resistance;
 	}
+
 	public Integer getTotalResistence() {
 		return totalResistence;
 	}
+
 	public void setTotalResistence(Integer totalResistence) {
 		this.totalResistence = totalResistence;
 	}
+
 	public Integer getPrice() {
 		return price;
 	}
+
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+
 	public Integer getUpkeep() {
 		return upkeep;
 	}
+
 	public void setUpkeep(Integer upkeep) {
 		this.upkeep = upkeep;
 	}
@@ -151,6 +167,7 @@ public class Regiment {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -172,5 +189,5 @@ public class Regiment {
 	public String toString() {
 		return id + " || " + name;
 	}
-	
+
 }
