@@ -30,12 +30,15 @@
         <TableRow>
 
             <TextView
+                android:layout_weight="0.1"
                 android:layout_width="wrap_content"
                 android:padding="5dip"
                 android:text="@string/message_to"
                 android:textColor="#458B00" />
 
             <AutoCompleteTextView
+                android:layout_weight="1"
+                android:layout_width="match_parent"
                 android:id="@+id/messageToInCreate"
                 android:padding="5dip" />
         </TableRow>
@@ -43,19 +46,20 @@
         <TableRow>
 
             <TextView
+                android:layout_weight="0.1"
                 android:padding="5dip"
                 android:text="@string/message_subject"
                 android:textColor="#458B00" />
 
             <EditText
                 android:id="@+id/messageSubjectInCreate"
+                android:layout_weight="1"
                 android:gravity="left"
-                android:inputType="textNoSuggestions"
+                android:inputType="textShortMessage"
                 android:padding="5dip" />
         </TableRow>
 
         <TableRow>
-
             <TextView
                 android:padding="5dip"
                 android:text="@string/message_content"
@@ -64,8 +68,9 @@
 
         <EditText
             android:id="@+id/messageContentInCreate"
+            android:minLines="4"
             android:padding="5dip"
-            android:inputType="textNoSuggestions"
+            android:inputType="textMultiLine"
             android:singleLine="false" />
     </TableLayout>
 

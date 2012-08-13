@@ -15,7 +15,6 @@ import android.util.AttributeSet;
 import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.highexplosive.client.HxConstants;
 import com.highexplosive.client.model.HexGridCell;
@@ -53,7 +52,7 @@ public class HexMapView extends View {
     private static HexGridCell cellMetrics = new HexGridCell(CELL_RADIUS_FULL_MAP);
     private static HexGridCell cellMetricsOptimizedMap = null;
     private boolean mapInitialized = false;
-    private boolean useOptimizedMap = false;
+    private boolean useOptimizedMap = true;
 	private int cellRadiusOptimizedMap = 0;
 
 	private ProgressDialog progressDialog;
@@ -140,7 +139,7 @@ public class HexMapView extends View {
 
     /**
 	 * Paint a sector. First fill, then stroke to set the black border. Sadly
-	 * FillStroke Style doesn't work properly.
+	 * FillStroke Style doesn't look like been working properly.
 	 * 
 	 * @param canvas
 	 * @param mPaint
@@ -186,9 +185,6 @@ public class HexMapView extends View {
 			Log.e(TAG, e.getMessage());
 		}
 
-		mapInitialized = true;
-		useOptimizedMap = false;
-
 	}
 
 	
@@ -210,7 +206,10 @@ public class HexMapView extends View {
 		protected void onPostExecute(Void result) {
 			recalculateMapDimensions();
 			invalidate();
-			progressDialog.dismiss();
+			if (progressDialog != null) {
+				progressDialog.dismiss();
+			}
+			mapInitialized = true;
 			super.onPostExecute(result);
 		}
 		
@@ -361,29 +360,10 @@ public class HexMapView extends View {
 			}
 		}
 		
-		useOptimizedMap = true;
 	}
 
 
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
-		
-		if (useOptimizedMap) {
-			int semiSize = (cellOptimizedMap.length * cellRadiusOptimizedMap) / 2; //semi-width of the map
-			int semiWidth = parentWidth / 2; //semi-width of the screen
-			int left = semiWidth - semiSize;
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(parentWidth,
-					parentHeight);
-			lp.setMargins(left, 0, 0, 0);
-			this.setLayoutParams(lp);
-		}
-		
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-	}
 	
-
 	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
@@ -391,6 +371,16 @@ public class HexMapView extends View {
 		this.cellOptimizedMap = null;
 		this.mCornersX = null;
 		this.mCornersY = null;
+	}
+
+
+	public boolean isUseOptimizedMap() {
+		return useOptimizedMap;
+	}
+
+
+	public void setUseOptimizedMap(boolean useOptimizedMap) {
+		this.useOptimizedMap = useOptimizedMap;
 	}
 
 }

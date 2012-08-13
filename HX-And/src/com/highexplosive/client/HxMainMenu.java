@@ -1,7 +1,9 @@
 package com.highexplosive.client;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +17,8 @@ public class HxMainMenu extends Activity {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = HxMainMenu.class.getCanonicalName();
+	
+	private ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +57,36 @@ public class HxMainMenu extends Activity {
 		});
 
 		((Button)findViewById(R.id.mainMenuEndOfTurn)).setOnClickListener(new OnClickListener() {
+			
+
 			@Override
 			public void onClick(View v) {
-				
+				if (HxConstants.ONLINE_MODE) {
+					
+					new EndTurnTask().execute();
+				}
 			}
 		});
 		
 	}
 	
 
-		
+		private class EndTurnTask extends AsyncTask<Void, Void, Void> {
+
+			@Override
+			protected Void doInBackground(Void... params) {
+				progressDialog = 
+						ProgressDialog.show(HxMainMenu.this, 
+								"Loading...", "Please wait...", true, false);
+				return null;
+			}
+			
+			@Override
+			protected void onPostExecute(Void result) {
+				progressDialog.dismiss();
+				super.onPostExecute(result);
+			}
+		}
 	
 
 }

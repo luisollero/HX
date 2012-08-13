@@ -58,6 +58,8 @@ public class MessageCreateActivity extends Activity {
 				if ((to != null) && (subject != null) && (content != null)) {
 					if (HxConstants.ONLINE_MODE) {
 						new SendMessage().execute(new String[] { to.toString(), subject.toString(), content.toString() });
+					} else {
+						onBackPressed();
 					}
 				}
 			}
@@ -65,7 +67,7 @@ public class MessageCreateActivity extends Activity {
 	}
 
 	/**
-	 * Update the karma of the message
+	 * Send the message
 	 * @author Luis Ollero
 	 *
 	 */

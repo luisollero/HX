@@ -185,6 +185,7 @@ public class NewsPagerAdapter extends PagerAdapter implements TitleProvider {
 		
 			if (innerSphereMap == null) {
 				innerSphereMap = ((HexMapView)newsLinearLayout.findViewById(R.id.isMap));
+				innerSphereMap.setUseOptimizedMap(false);
 				if (HxConstants.ONLINE_MODE) {
 					innerSphereMap.createMap(HxLinks.MAP);
 				} else {
