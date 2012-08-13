@@ -27,16 +27,16 @@ import org.hibernate.annotations.FetchMode;
 public class SuplyLine {
 
 	@Id
-	@Column(name="hx_suplyline_id",nullable=false)
+	@Column(name="suplyline_id",nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_suplyline_house", referencedColumnName="hx_house_id")
+	@JoinColumn(name="suplyline_house", referencedColumnName="hx_house_id")
 	private House house;
 	
-	@Column(name="hx_suplyline_cost")
+	@Column(name="suplyline_cost")
 	private Integer cost;
 	
 	@OneToMany(mappedBy="suplyLine")

@@ -23,55 +23,55 @@ import org.hibernate.annotations.FetchMode;
 public class Sector {
 
 	@Id
-	@Column(name = "hx_sector_id", nullable = false)
+	@Column(name = "sector_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name="hx_sector_name")
+	@Column(name="sector_name")
 	private String name;
 	
-	@Column(name="hx_sector_coord_x")
+	@Column(name="sector_coord_x")
 	private Integer coordX;		// Axis X
-	@Column(name="hx_sector_coord_y")
+	@Column(name="sector_coord_y")
 	private Integer coordY;		// Axis Y
 	
-	@Column(name="hx_sector_depth")
-	private Integer depth;		// Profundidad del sector, (i.e. densidad de planetas)
+	@Column(name="sector_depth")
+	private Integer depth;		// Density of planets in the sector. 
 	
-	@Column(name="hx_sector_disputed")
-	private Boolean disputed;	// Sector en disputa
+	@Column(name="sector_disputed")
+	private Boolean disputed;	// Disputed sector
 
-	@Column(name="hx_sector_production")
-	private Integer production; // Producción del planeta
+	@Column(name="sector_production")
+	private Integer production; // Planet production
 	
-	@Column(name="hx_sector_defense")
+	@Column(name="sector_defense")
 	private Integer defenseBonus;	// Bonificador para las tropas que defiendan el planeta
 	
-	@Column(name="hx_sector_happiness")
+	@Column(name="sector_happiness")
 	private Integer happiness;	// Empatía de la población local con la casa gobernante
 	
 	@OneToOne(optional=true)
-	@JoinColumn(name="hx_sector_lord")
+	@JoinColumn(name="sector_lord")
 	private Personality lord;	// Direct owner of the sector
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_sector_loyalty", referencedColumnName="hx_house_id")
-	private House loyalty;		// Casa a la que el sector es leal
+	@JoinColumn(name="sector_loyalty", referencedColumnName="hx_house_id")
+	private House loyalty;		// House to which the sector is loyal
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_sector_house", referencedColumnName="hx_house_id")
+	@JoinColumn(name="sector_house", referencedColumnName="hx_house_id")
 	private House house;		// Casa gobernante
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_sector_personality", referencedColumnName="hx_personality_id")
+	@JoinColumn(name="sector_personality", referencedColumnName="personality_id")
 	private Personality personality;		// Who rules de sector
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="hx_sector_suplyline", referencedColumnName="hx_suplyline_id")
+	@JoinColumn(name="sector_suplyline", referencedColumnName="suplyline_id")
 	private SuplyLine suplyLine;		// Pertenece o no a una línea de suministros
 	
 	public Sector(Integer homeSectorId) {

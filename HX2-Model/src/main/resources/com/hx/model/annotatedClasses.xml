@@ -35,7 +35,10 @@
 					com.hx.model.dto.House
 				</value>
 				<value>
-					com.hx.model.dto.Experience
+					com.hx.model.dto.Rank
+				</value>
+				<value>
+					com.hx.model.dto.Combat
 				</value>
 				<value>
 					com.hx.model.dto.Personality

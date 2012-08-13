@@ -2,6 +2,8 @@ package com.hx.model.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +13,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * Turnos del juego
+ * Game turns
  * @author Luis Ollero
  *
  */
@@ -20,27 +22,29 @@ import org.hibernate.annotations.FetchMode;
 public class Turn {
 
 	@Id
-	@Column(name="hx_turn_id")
-	private String id;		// Id del turno. Compuesto por number y House.name.
-	@Column(name="hx_turn_number")
-	private Integer number;	// Número del turno.
-	@Column(name="hx_turn_ended")
-	private Long ended;		// La fecha (en millis) de cuándo fue terminado el turno.
-	@Column(name="hx_turn_finish", nullable=false)
-	private Boolean finish = false;	// Indica si el turno se ha terminado.
+	@Column(name = "turn_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+	
+	@Column(name="turn_number")
+	private Integer number;	// turn number
+	@Column(name="turn_ended_date")
+	private Long ended;		// Date (in millis) of when the turn was finished
+	@Column(name="turn_finish", nullable=false)
+	private Boolean finish = false;	// Indicates whenever a turn is finished
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="hx_turn_house", referencedColumnName="hx_house_id")
-	private House house;	// Casa propietaria del turno.
+	private House house;	// House that determines this turn
 
 	//Getters and Setters
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

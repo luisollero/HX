@@ -36,7 +36,7 @@ public class Message {
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "hx_messages_from", referencedColumnName = "hx_personality_id")
+	@JoinColumn(name = "hx_messages_from", referencedColumnName = "personality_id")
 	private Personality from;
 
 	@ManyToMany(targetEntity = com.hx.model.dto.Personality.class, cascade = {

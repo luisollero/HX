@@ -31,7 +31,7 @@ public class Regiment {
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "regiment_sector", referencedColumnName = "hx_sector_id")
+	@JoinColumn(name = "regiment_sector", referencedColumnName = "sector_id")
 	private Sector sector; // Sector in which the regiment is
 
 	@ManyToOne
@@ -41,27 +41,37 @@ public class Regiment {
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "regiment_home", referencedColumnName = "hx_sector_id")
+	@JoinColumn(name = "regiment_home", referencedColumnName = "sector_id")
 	private Sector homeSector; // Home sector of the regiment
 
-	@Column(name = "regiment_rank", length = 20)
+	@Column(name = "rank", length = 20)
 	@Enumerated(EnumType.STRING)
 	private Rank rank; // Rank of the unit
 
-	@Column(name = "hx_regiment_name", nullable = false)
+	@Column(name = "name", nullable = false)
 	private String name; // Regiment name. Identifier for the player
-	@Column(name = "hx_regiment_maneuver")
+	
+	@Column(name = "maneuver")
 	private Integer maneuver; // Ability to synchronize and move of the unit
-	@Column(name = "hx_regiment_attack")
+	
+	@Column(name = "attack")
 	private Integer attack; // Fire power of the unit
-	@Column(name = "hx_regiment_resistance")
-	private Integer resistance; // Resistencia actual.
-	@Column(name = "hx_regiment_total_resistance")
-	private Integer totalResistence; // Resistencia máxima.
-	@Column(name = "hx_regiment_price")
+	
+	@Column(name = "resistance")
+	private Integer resistance; // current resistance
+	
+	@Column(name = "total_resistance")
+	private Integer totalResistence; // maximum resistance
+	
+	@Column(name = "price")
 	private Integer price; // Current cost of the regiment
-	@Column(name = "hx_regiment_upkeep")
-	private Integer upkeep; // Upkeep cost
+	
+	@Column(name = "upkeep_cost")
+	private Integer upkeepCost; // Upkeep cost
+	
+	@Column(name = "upkeep_type", length = 10)
+	@Enumerated(EnumType.STRING)
+	private Upkeep upkeep; // Paid upkeep this turn
 
 	// Getters and setters
 	public Integer getId() {
@@ -152,11 +162,19 @@ public class Regiment {
 		this.price = price;
 	}
 
-	public Integer getUpkeep() {
+	public Integer getUpkeepCost() {
+		return upkeepCost;
+	}
+
+	public void setUpkeepCost(Integer upkeep) {
+		this.upkeepCost = upkeep;
+	}
+
+	public Upkeep getUpkeep() {
 		return upkeep;
 	}
 
-	public void setUpkeep(Integer upkeep) {
+	public void setUpkeep(Upkeep upkeep) {
 		this.upkeep = upkeep;
 	}
 

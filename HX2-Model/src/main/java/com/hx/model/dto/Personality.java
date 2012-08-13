@@ -33,7 +33,7 @@ import org.hibernate.annotations.FetchMode;
 public class Personality {
 
 	@Id
-	@Column(name = "hx_personality_id", nullable = false)
+	@Column(name = "personality_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 

@@ -39,7 +39,7 @@ public class Communication {
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "hx_communications_from", referencedColumnName = "hx_personality_id")
+	@JoinColumn(name = "hx_communications_from", referencedColumnName = "personality_id")
 	private Personality from; // User that sends the communication
 
 	@Column(name = "hx_communications_subject", length = 40)
