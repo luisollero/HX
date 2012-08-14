@@ -45,7 +45,7 @@ public class CombatEngine {
 					launchConquestTrigger(combat.getSector(), combat.getAttackerRegiments().get(0).getHouse());
 				}
 				combat.setPending(false);
-				daoCombat.flush();
+				daoCombat.saveOrUpdate(combat);
 			}
 		}
 	}

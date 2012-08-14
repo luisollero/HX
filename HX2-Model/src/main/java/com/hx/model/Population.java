@@ -1,11 +1,13 @@
 package com.hx.model;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.hx.model.dto.AttackOrder;
+import com.hx.model.dto.Combat;
 import com.hx.model.dto.Communication;
 import com.hx.model.dto.House;
 import com.hx.model.dto.Maneuver;
@@ -47,6 +49,10 @@ public class Population {
 	private static Sector quentin;
 	private static Sector tikonov;
 
+	private static Regiment deathCommandos;
+
+	private static Regiment newSyrtisLancers;
+
 	// Here we go
 	public static void main(String[] args) {
 		config.setUp();
@@ -57,6 +63,7 @@ public class Population {
 		insertCommunications();
 		insertMessages();
 		insertRegiments();
+		insertCombats();
 		config.tearDown();
 	}
 
@@ -226,13 +233,33 @@ public class Population {
 	 * Initial regiments
 	 */
 	private static void insertRegiments() {
-		insertRegiment(5, AttackOrder.NORMAL, kineasLiao, tikonov, liao, Maneuver.MEDIUM, Morale.SUPERB, 
+		deathCommandos = insertRegiment(5, AttackOrder.NORMAL, kineasLiao, tikonov, liao, Maneuver.MEDIUM, Morale.SUPERB, 
 				"Death Commandos", 100, Rank.ELITE, 10, tikonov, 10, Upkeep.FULL, 2);
-		insertRegiment(7, AttackOrder.NORMAL, vitorDavion, quentin, davion, Maneuver.HEAVY, Morale.SUPERB, 
+		newSyrtisLancers = insertRegiment(7, AttackOrder.NORMAL, vitorDavion, quentin, davion, Maneuver.HEAVY, Morale.SUPERB, 
 				"New Syrtis Lancers", 100, Rank.REGULAR, 10, tikonov, 10, Upkeep.FULL, 2);
 	}
 
 
+	/**
+	 * 
+	 */
+	private static void insertCombats() {
+		
+		ArrayList<Regiment> attackingRegiments = new ArrayList<Regiment>();
+		ArrayList<Regiment> defendingRegiments = new ArrayList<Regiment>();
+		
+		attackingRegiments.add(newSyrtisLancers);
+		defendingRegiments.add(deathCommandos);
+		
+		Combat combat = new Combat();
+		combat.setAttackerRegiments(attackingRegiments);
+		combat.setDefenderRegiments(defendingRegiments);
+		combat.setPending(true);
+		combat.setSector(tikonov);
+		
+		config.getDaoCombat().saveOrUpdate(combat);
+	}
+	
 	/**
 	 * Insert a single regiment
 	 * 
@@ -252,7 +279,7 @@ public class Population {
 	 * @param upkeep
 	 * @param upkeepCost
 	 */
-	private static void insertRegiment(int attack, AttackOrder order,
+	private static Regiment insertRegiment(int attack, AttackOrder order,
 			Personality personality, Sector homeSector, House house,
 			Maneuver maneuver, Morale morale, String name, int price, Rank rank,
 			int resistance, Sector currentSector, int totalResistence, Upkeep upkeep, int upkeepCost) {
@@ -274,6 +301,8 @@ public class Population {
 		regiment.setUpkeepCost(upkeepCost);
 		
 		config.getDaoRegiment().saveOrUpdate(regiment);
+		
+		return regiment;
 	}
 	
 	
