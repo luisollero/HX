@@ -8,6 +8,7 @@ import org.apache.log4j.SimpleLayout;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hx.model.dao.ethereal.IDAOAction;
+import com.hx.model.dao.ethereal.IDAOCombat;
 import com.hx.model.dao.ethereal.IDAOCommunication;
 import com.hx.model.dao.ethereal.IDAOHouse;
 import com.hx.model.dao.ethereal.IDAOMessage;
@@ -73,6 +74,10 @@ public class PopulationConfigurator {
 
 	protected IDAOCommunication getDaoCommunication() {
 		return getBean("daoCommunication", IDAOCommunication.class);
+	}
+
+	protected IDAOCombat getDaoCombat() {
+		return getBean("daoCombat", IDAOCombat.class);
 	}
 
 	protected IDAOMessage getDaoMessage() {

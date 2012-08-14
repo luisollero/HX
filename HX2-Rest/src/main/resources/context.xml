@@ -54,6 +54,7 @@
 	<bean id="combatEngine" class="com.hx.engine.implementation.CombatEngine" autowire="byName">
 		<property name="daoSector" ref="daoSector"/>
 		<property name="daoRegiment" ref="daoRegiment"/>
+		<property name="daoCombat" ref="daoCombat"/>
 	</bean>
 	
 	<!-- Controllers -->

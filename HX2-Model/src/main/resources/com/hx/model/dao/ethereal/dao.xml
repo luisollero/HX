@@ -23,13 +23,11 @@
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
 
-
 	<bean id="daoPersonality" class="com.hx.persistence.ddg.DaoFactoryBean">
 		<property name="pojoClass" value="com.hx.model.dto.Personality"/>
 		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOPersonality"/>
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
-
  
 	<bean id="daoRegiment" class="com.hx.persistence.ddg.DaoFactoryBean">
 		<property name="pojoClass" value="com.hx.model.dto.Regiment"/>
@@ -40,6 +38,12 @@
 	<bean id="daoSector" class="com.hx.persistence.ddg.DaoFactoryBean">
 		<property name="pojoClass" value="com.hx.model.dto.Sector"/>
 		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOSector"/>
+		<property name="transactionManager" ref="transactionManager"/>
+	</bean>
+
+	<bean id="daoCombat" class="com.hx.persistence.ddg.DaoFactoryBean">
+		<property name="pojoClass" value="com.hx.model.dto.Combat"/>
+		<property name="daoClass" value="com.hx.model.dao.ethereal.IDAOCombat"/>
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
 
@@ -61,17 +65,21 @@
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
 	
-	<!-- DAO Implementado
+	<!-- 
+	
+	 Implemented DAO
+	
 	<bean id="daoPerson" class="com.hx.persistence.ddg.DaoFactoryBean">
 		<property name="pojoClass" value="com.hx.backoffice.model.cms.dto.Person"/>
 		<property name="daoClass" value="com.hx.backoffice.model.cms.dao.hibernate3.DAOPerson"/>
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
 	
-	DAO NO IMPLEMENTADO
+	 Non implemented DAO
+	
 	<bean id="daoPersonCategory" class="com.hx.persistence.ddg.DaoFactoryBean">
-		<property name="pojoClass" value="com.hx.backoffice.model.cms.dto.PersonCategory"/>
-		<property name="daoClass" value="com.hx.backoffice.model.cms.dao.IDAOPersonCategory"/>
+		<property name="pojoClass" value="com.hx.model.dto.PersonCategory"/>
+		<property name="daoClass" value="com.hx.model.dao.IDAOPersonCategory"/>
 		<property name="transactionManager" ref="transactionManager"/>
 	</bean>
  	-->

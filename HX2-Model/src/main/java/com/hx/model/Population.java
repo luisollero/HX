@@ -5,13 +5,19 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.hx.model.dto.AttackOrder;
 import com.hx.model.dto.Communication;
 import com.hx.model.dto.House;
+import com.hx.model.dto.Maneuver;
 import com.hx.model.dto.Message;
+import com.hx.model.dto.Morale;
 import com.hx.model.dto.Personality;
+import com.hx.model.dto.Rank;
+import com.hx.model.dto.Regiment;
 import com.hx.model.dto.Role;
 import com.hx.model.dto.Scope;
 import com.hx.model.dto.Sector;
+import com.hx.model.dto.Upkeep;
 import com.hx.model.dto.User;
 import com.hx.model.dto.UserStatus;
 import com.hx.model.util.HXKeys;
@@ -50,6 +56,7 @@ public class Population {
 		insertPersonalities();
 		insertCommunications();
 		insertMessages();
+		insertRegiments();
 		config.tearDown();
 	}
 
@@ -198,6 +205,9 @@ public class Population {
 		config.getDaoCommunication().saveOrUpdate(comm);
 	}
 	
+	/**
+	 * 
+	 */
 	private static void insertMessages() {
 		Message message = new Message();
 		message.setFrom(kineasLiao);
@@ -212,6 +222,68 @@ public class Population {
 		config.getDaoMessage().saveOrUpdate(message);
 	}
 	
+	/**
+	 * Initial regiments
+	 */
+	private static void insertRegiments() {
+		insertRegiment(5, AttackOrder.NORMAL, kineasLiao, tikonov, liao, Maneuver.MEDIUM, Morale.SUPERB, 
+				"Death Commandos", 100, Rank.ELITE, 10, tikonov, 10, Upkeep.FULL, 2);
+		insertRegiment(7, AttackOrder.NORMAL, vitorDavion, quentin, davion, Maneuver.HEAVY, Morale.SUPERB, 
+				"New Syrtis Lancers", 100, Rank.REGULAR, 10, tikonov, 10, Upkeep.FULL, 2);
+	}
+
+
+	/**
+	 * Insert a single regiment
+	 * 
+	 * @param attack
+	 * @param order
+	 * @param personality
+	 * @param homeSector
+	 * @param house
+	 * @param maneuver
+	 * @param morale
+	 * @param name
+	 * @param price
+	 * @param rank
+	 * @param resistance
+	 * @param currentSector
+	 * @param totalResistence
+	 * @param upkeep
+	 * @param upkeepCost
+	 */
+	private static void insertRegiment(int attack, AttackOrder order,
+			Personality personality, Sector homeSector, House house,
+			Maneuver maneuver, Morale morale, String name, int price, Rank rank,
+			int resistance, Sector currentSector, int totalResistence, Upkeep upkeep, int upkeepCost) {
+		Regiment regiment = new Regiment();
+		regiment.setAttack(attack);
+		regiment.setAttackOrder(order);
+		regiment.setColonel(personality);
+		regiment.setHomeSector(homeSector);
+		regiment.setHouse(house);
+		regiment.setManeuver(maneuver);
+		regiment.setMorale(morale);
+		regiment.setName(name);
+		regiment.setPrice(price);
+		regiment.setRank(rank);
+		regiment.setResistance(resistance);
+		regiment.setSector(currentSector);
+		regiment.setTotalResistence(totalResistence);
+		regiment.setUpkeep(upkeep);
+		regiment.setUpkeepCost(upkeepCost);
+		
+		config.getDaoRegiment().saveOrUpdate(regiment);
+	}
+	
+	
+	/**
+	 * 
+	 * @param houseId
+	 * @param houseName
+	 * @param alternateName
+	 * @return
+	 */
 	private static House createFaction(String houseId, String houseName, String alternateName) {
 		House house = new House(houseId);
 		house.setName(houseName);
