@@ -47,7 +47,10 @@ public class Sector {
 	@Column(name="sector_production")
 	private Integer production; // Planet production
 	
-	@Column(name="sector_defense")
+	@Column(name="max_defense")
+	private Integer maxDefenseBonus;	// Defensive bonus
+
+	@Column(name="current_defense")
 	private Integer defenseBonus;	// Defensive bonus
 	
 	@Column(name="sector_happiness")

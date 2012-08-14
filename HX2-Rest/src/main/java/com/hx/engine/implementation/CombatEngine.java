@@ -1,9 +1,10 @@
 package com.hx.engine.implementation;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import com.hx.model.dao.ethereal.IDAOCombat;
 import com.hx.model.dao.ethereal.IDAORegiment;
 import com.hx.model.dao.ethereal.IDAOSector;
 import com.hx.model.dto.AttackOrder;
@@ -15,11 +16,12 @@ import com.hx.model.dto.Sector;
 public class CombatEngine {
 
 	private Random r = new Random();
-	private List<Combat> combatList = new ArrayList<Combat>();
+	private Collection<Combat> combatList = null;
 	private String currentCombatResult;
 
 	private IDAORegiment daoRegiment = null;
 	private IDAOSector daoSector;
+	private IDAOCombat daoCombat;
 	
 	private static String RESULT_DRAW = "result_draw"; 
 	private static String RESULT_ATTACKER_VICTORY = "result_attacker_victory"; 
@@ -27,16 +29,23 @@ public class CombatEngine {
 	private static String RESULT_DEFENDER_VICTORY = "result_defender_victory"; 
 	private static String RESULT_DEFENDER_TOTAL_VICTORY = "result_defender_total_victory"; 
 
+	/**
+	 * Solve every pending combat
+	 */
 	public void solveCombats() {
 		
 		r.setSeed(System.currentTimeMillis());
 		
-		//TODO: Retrieve all pending combats from the database
+		combatList = daoCombat.findByPendingWithLazies(true);
 		
-		for (Combat combat : combatList) {
-			solveCombat(combat);
-			if (currentCombatResult.equals(RESULT_ATTACKER_VICTORY) || currentCombatResult.equals(RESULT_ATTACKER_TOTAL_VICTORY)) {
-				launchConquestTrigger(combat.getSector(), combat.getAttackerRegiments().get(0).getHouse());
+		if (combatList != null) {
+			for (Combat combat : combatList) {
+				solveCombat(combat);
+				if (currentCombatResult.equals(RESULT_ATTACKER_VICTORY) || currentCombatResult.equals(RESULT_ATTACKER_TOTAL_VICTORY)) {
+					launchConquestTrigger(combat.getSector(), combat.getAttackerRegiments().get(0).getHouse());
+				}
+				combat.setPending(false);
+				daoCombat.flush();
 			}
 		}
 	}
@@ -52,7 +61,7 @@ public class CombatEngine {
 		
 		for (Regiment regiment : combat.getAttackerRegiments()) {
 			int partialAttackPower = 0;
-			// Retreating regs attacking doesn't add power
+			// Retreating regiments that are attacking doesn't add power
 			if (!regiment.getAttackOrder().equals(AttackOrder.RETREAT)) {
 				partialAttackPower = partialAttackPower + regiment.getAttack();
 				partialAttackPower = partialAttackPower + regiment.getRank().getValue();
@@ -62,7 +71,7 @@ public class CombatEngine {
 				partialAttackPower = partialAttackPower + regiment.getMorale().getValue();
 				partialAttackPower = partialAttackPower + luck();
 			}
-			// Defensive regs attacking only add half their power
+			// Defensive regiments that are attacking only add half their power
 			if (regiment.getAttackOrder().equals(AttackOrder.DEFENSIVE)) {
 				partialAttackPower = partialAttackPower / 2;
 			}
@@ -86,6 +95,8 @@ public class CombatEngine {
 			
 			fullDefensivePower = fullDefensivePower + partialDefensePower; 
 		}
+
+		fullDefensivePower = fullDefensivePower + combat.getSector().getDefenseBonus(); 
 		
 		computeCasualtiesAndResult(combat, fullAttackPower, fullDefensivePower);
 	}
@@ -201,10 +212,14 @@ public class CombatEngine {
 	private void launchConquestTrigger(Sector sector, House house) {
 		// TODO: Some sectors have a depth higher than 1. For those, I need to implement a system for partial conquest.
 		sector.setHouse(house);
+		if (sector.getDefenseBonus() > 0)
+			sector.setDefenseBonus(sector.getDefenseBonus() - 1);
+		
 		daoSector.saveOrUpdate(sector);
 	}
 
 	/**
+	 * Generates a random int
 	 * 
 	 * @return value between (0-2)
 	 */
@@ -230,6 +245,16 @@ public class CombatEngine {
 
 	public IDAOSector getDaoSector() {
 		return daoSector;
+	}
+
+
+	public IDAOCombat getDaoCombat() {
+		return daoCombat;
+	}
+
+
+	public void setDaoCombat(IDAOCombat daoCombat) {
+		this.daoCombat = daoCombat;
 	}
 	
 }

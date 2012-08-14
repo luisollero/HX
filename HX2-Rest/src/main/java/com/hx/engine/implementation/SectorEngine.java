@@ -9,8 +9,7 @@ import com.hx.model.dto.House;
 import com.hx.model.dto.Sector;
 
 /**
- * Clase de utilidad para facilitar el control de transacciones en el trabajo
- * con sectores.
+ * Engine to work with sectors
  * 
  * @author Luis Ollero
  * 
