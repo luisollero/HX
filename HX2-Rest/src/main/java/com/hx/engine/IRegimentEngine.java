@@ -13,13 +13,13 @@ public interface IRegimentEngine {
 
 	
 	@Transactional
-	void saveOrUpdate(final Regiment user);
+	void saveOrUpdate(final Regiment regiment);
 	
 	@Transactional
 	Regiment getById(String id);
 	
 	@Transactional
-	void delete(Regiment user);
+	void delete(Regiment regiment);
 	
 	@Transactional
 	Collection<Regiment> findAll();

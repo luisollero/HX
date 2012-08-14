@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -52,7 +53,8 @@ public class Regiment {
 	private String name; // Regiment name. Identifier for the player
 	
 	@Column(name = "maneuver")
-	private Integer maneuver; // Ability to synchronize and move of the unit
+	@Enumerated(EnumType.STRING)
+	private Maneuver maneuver; // Ability to synchronize and move of the unit
 	
 	@Column(name = "attack")
 	private Integer attack; // Fire power of the unit
@@ -72,7 +74,15 @@ public class Regiment {
 	@Column(name = "upkeep_type", length = 10)
 	@Enumerated(EnumType.STRING)
 	private Upkeep upkeep; // Paid upkeep this turn
-
+	
+	@Column(name = "morale", length = 10)
+	@Enumerated(EnumType.STRING)
+	private Morale morale; // Paid upkeep this turn
+	
+	@OneToOne(optional=true)
+	@JoinColumn(name="regiment_leader")
+	private Personality colonel;
+	
 	// Getters and setters
 	public Integer getId() {
 		return id;
@@ -122,11 +132,11 @@ public class Regiment {
 		this.name = name;
 	}
 
-	public Integer getManeuver() {
+	public Maneuver getManeuver() {
 		return maneuver;
 	}
 
-	public void setManeuver(Integer maneuver) {
+	public void setManeuver(Maneuver maneuver) {
 		this.maneuver = maneuver;
 	}
 
@@ -176,6 +186,22 @@ public class Regiment {
 
 	public void setUpkeep(Upkeep upkeep) {
 		this.upkeep = upkeep;
+	}
+
+	public Morale getMorale() {
+		return morale;
+	}
+
+	public void setMorale(Morale morale) {
+		this.morale = morale;
+	}
+
+	public Personality getColonel() {
+		return colonel;
+	}
+
+	public void setColonel(Personality colonel) {
+		this.colonel = colonel;
 	}
 
 	@Override

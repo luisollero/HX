@@ -1,15 +1,15 @@
 package com.hx.model.dto;
 
-public enum Upkeep {
+public enum Ability {
 
-	NONE(0), MAINTENANCE(1), FULL(2);
+	NONE(0), MEDIUM(1), ELITE(2), MASTER(3);
 	
 	private int value;
-	
-	Upkeep(int value) {
+
+	Ability(int value) {
 		this.value = value;
 	}
-	
+
 	public int getValue() {
 		return value;
 	}

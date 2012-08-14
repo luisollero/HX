@@ -37,37 +37,41 @@ public class Personality {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@Column(name = "hx_personality_role", length = 20)
+	@Column(name = "role", length = 20)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "hx_personality_user", referencedColumnName = "hx_user_id")
+	@JoinColumn(name = "user", referencedColumnName = "hx_user_id")
 	private User user;
 
 	@OneToOne(mappedBy = "lord")
-	@JoinColumn(name = "hx_personality_home")
+	@JoinColumn(name = "home")
 	private Sector home;
 
-	@Column(name = "hx_personality_status")
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private UserStatus status;
 
-	@Column(name = "hx_personality_influence")
+	@Column(name = "influence")
 	private Integer influence;
 	
-	@Column(name = "hx_personality_name")
+	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "hx_personality_complete_name")
+	@Column(name = "complete_name")
 	private String completeName;
 	
-	@Column(name = "hx_personality_biography")
+	@Column(name = "biography")
 	private String biography;
 
+	@Column(name = "ability", length = 20)
+	@Enumerated(EnumType.STRING)
+	private Ability ability; // Ability
+
 	@OneToMany(mappedBy = "personality")
-	private Set<Sector> sectors = new HashSet<Sector>(); // Sectors ruled by the 
+	private Set<Sector> sectors = new HashSet<Sector>(); // Sectors ruled by the character
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
@@ -196,6 +200,14 @@ public class Personality {
 
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+
+	public Ability getAbility() {
+		return ability;
+	}
+
+	public void setAbility(Ability ability) {
+		this.ability = ability;
 	}
 
 	@Override

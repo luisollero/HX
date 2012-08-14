@@ -2,6 +2,8 @@ package com.hx.model.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +34,7 @@ public class Sector {
 	
 	@Column(name="sector_coord_x")
 	private Integer coordX;		// Axis X
+	
 	@Column(name="sector_coord_y")
 	private Integer coordY;		// Axis Y
 	
@@ -45,10 +48,14 @@ public class Sector {
 	private Integer production; // Planet production
 	
 	@Column(name="sector_defense")
-	private Integer defenseBonus;	// Bonificador para las tropas que defiendan el planeta
+	private Integer defenseBonus;	// Defensive bonus
 	
 	@Column(name="sector_happiness")
-	private Integer happiness;	// Empatía de la población local con la casa gobernante
+	private Integer happiness;	// Empathy of the population with the current dominant house
+	
+	@Column(name = "orography")
+	@Enumerated(EnumType.STRING)
+	private Orography orography; // Orography of the planet, the worst the better for light units
 	
 	@OneToOne(optional=true)
 	@JoinColumn(name="sector_lord")
@@ -62,17 +69,17 @@ public class Sector {
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="sector_house", referencedColumnName="hx_house_id")
-	private House house;		// Casa gobernante
+	private House house;		// Dominant house
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="sector_personality", referencedColumnName="personality_id")
-	private Personality personality;		// Who rules de sector
+	private Personality personality;		// Who rules the sector
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="sector_suplyline", referencedColumnName="suplyline_id")
-	private SuplyLine suplyLine;		// Pertenece o no a una línea de suministros
+	private SuplyLine suplyLine;		// Is part of a supply line
 	
 	public Sector(Integer homeSectorId) {
 		this.id = homeSectorId;
@@ -194,6 +201,14 @@ public class Sector {
 		this.lord = lord;
 	}
 	
+	public Orography getOrography() {
+		return orography;
+	}
+
+	public void setOrography(Orography orography) {
+		this.orography = orography;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
