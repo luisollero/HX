@@ -51,6 +51,10 @@
 	<bean id="messageEngine" class="com.hx.engine.implementation.MessageEngine" autowire="byName">
 		<property name="daoMessage" ref="daoMessage"/>
 	</bean>
+	<bean id="combatEngine" class="com.hx.engine.implementation.CombatEngine" autowire="byName">
+		<property name="daoSector" ref="daoSector"/>
+		<property name="daoRegiment" ref="daoRegiment"/>
+	</bean>
 	
 	<!-- Controllers -->
 	<bean id="communicationController" class="com.hx.rest.action.CommunicationController" scope="prototype">

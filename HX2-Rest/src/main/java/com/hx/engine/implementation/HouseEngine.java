@@ -32,6 +32,10 @@ public class HouseEngine implements IHouseEngine {
 		daoHouse.saveOrUpdate(house);
 	}
 
+	public void delete(House house) {
+		daoHouse.delete(house);
+	}
+
 	public IDAOHouse getDaoHouse() {
 		return daoHouse;
 	}
@@ -40,8 +44,5 @@ public class HouseEngine implements IHouseEngine {
 		this.daoHouse = daoHouse;
 	}
 
-	public void delete(House house) {
-		daoHouse.delete(house);
-	}
 
 }

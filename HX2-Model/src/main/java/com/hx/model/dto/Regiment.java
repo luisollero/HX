@@ -77,7 +77,11 @@ public class Regiment {
 	
 	@Column(name = "morale", length = 10)
 	@Enumerated(EnumType.STRING)
-	private Morale morale; // Paid upkeep this turn
+	private Morale morale; // Current morale
+
+	@Column(name = "attack_order", length = 10)
+	@Enumerated(EnumType.STRING)
+	private AttackOrder attackOrder; // Current AttackOrder
 	
 	@OneToOne(optional=true)
 	@JoinColumn(name="regiment_leader")
@@ -122,6 +126,14 @@ public class Regiment {
 
 	public void setRank(Rank rank) {
 		this.rank = rank;
+	}
+
+	public AttackOrder getAttackOrder() {
+		return attackOrder;
+	}
+
+	public void setAttackOrder(AttackOrder attackOrder) {
+		this.attackOrder = attackOrder;
 	}
 
 	public String getName() {

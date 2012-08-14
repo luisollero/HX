@@ -8,7 +8,8 @@ import com.hx.model.dto.Role;
 import com.hx.model.dto.UserStatus;
 
 /**
- * Carga las colecciones.
+ * Load collections. 
+ * FIXME: Is this useful?
  * @author Luis Ollero
  *
  */

@@ -39,7 +39,7 @@ public class Sector {
 	private Integer coordY;		// Axis Y
 	
 	@Column(name="sector_depth")
-	private Integer depth;		// Density of planets in the sector. 
+	private Integer depth;		// Density of planets in the sector. Number of successful battles to win the sector.
 	
 	@Column(name="sector_disputed")
 	private Boolean disputed;	// Disputed sector
