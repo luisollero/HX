@@ -159,12 +159,16 @@ public class Population {
 		luisOllero.setApplication("Test application");
 		luisOllero.setMail("luisollero@gmail.com");
 		luisOllero.setName("Luis Ollero");
+		luisOllero.setFavoriteHouse(liao);
+		luisOllero.setFavoriteRole(Role.PRINCE);
 		config.getDaoUser().saveOrUpdate(luisOllero);
 		
 		tsunami  = new User();
 		tsunami.setApplication("Test application");
 		tsunami.setMail("tsunami@tsunami.com");
 		tsunami.setName("Tsunami");
+		tsunami.setFavoriteHouse(davion);
+		tsunami.setFavoriteRole(Role.PRINCE);
 		config.getDaoUser().saveOrUpdate(tsunami);
 	}
 	
