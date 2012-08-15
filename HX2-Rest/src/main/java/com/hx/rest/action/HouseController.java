@@ -18,7 +18,7 @@ public class HouseController implements ModelDriven<Object> {
 
 	private IHouseEngine houseEngine;
 
-	// GET /house/House_id : {/house/liao}
+	// GET /house/House_id : {/house/liao} and .json/.xml
 	public HttpHeaders show() {
 		house = new House(houseEngine.getById(id));
 		return new DefaultHttpHeaders("show");

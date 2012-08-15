@@ -26,12 +26,14 @@ import com.hx.model.dto.Role;
 public class RestTest extends TestBase {
 	
 	
+	private static String MAIN_SERVER = "http://localhost:8081/HX2-Rest/";
+	
 	@Test
 	public void init() {
-//		postUserTest();
+		postUserTest();
 //		postPersonalityTest();
-		postCommunicationTest();
-		getCommunicationTest();
+//		postCommunicationTest();
+//		getCommunicationTest();
 //		putTest();
 //		deleteTest();
 	}
@@ -57,7 +59,7 @@ public class RestTest extends TestBase {
 		String result = null;
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(
-				"http://localhost:8080/HX2-Rest/communication");
+				MAIN_SERVER + "communication");
 		ResponseHandler<String> handler = new BasicResponseHandler();
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
@@ -89,7 +91,7 @@ public class RestTest extends TestBase {
 	private void getCommunicationTest() {
 		HttpResponse result = null;
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpUriRequest request = new HttpGet("http://localhost:8080/HX2-Rest/communication/1");
+		HttpUriRequest request = new HttpGet(MAIN_SERVER + "communication/1");
 		
 		try {
 			result = httpclient.execute(request);
@@ -107,15 +109,15 @@ public class RestTest extends TestBase {
 		String result = null;
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(
-				"http://localhost:8080/HX2-Rest/user");
+				MAIN_SERVER + "user");
 		ResponseHandler<String> handler = new BasicResponseHandler();
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 		nameValuePairs.add(new BasicNameValuePair("name", "Uno Quepasaba"));
-		nameValuePairs.add(new BasicNameValuePair("application", "I want to join this wonderful game. Foo."));
+		nameValuePairs.add(new BasicNameValuePair("motivation", "I want to join this wonderful game. Foo."));
 		nameValuePairs.add(new BasicNameValuePair("mail", "test@highexplosive.net"));
-		nameValuePairs.add(new BasicNameValuePair("favoriteRole", "PRIMUS"));
-		nameValuePairs.add(new BasicNameValuePair("favoriteHouseId", "COMSTAR"));
+		nameValuePairs.add(new BasicNameValuePair("role", "PRIMUS"));
+		nameValuePairs.add(new BasicNameValuePair("faction", "COMSTAR"));
 		
 		try {
 			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -134,7 +136,7 @@ public class RestTest extends TestBase {
 		String result = null;
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost request = new HttpPost(
-				"http://localhost:8080/HX2-Rest/personality");
+				MAIN_SERVER + "personality");
 		ResponseHandler<String> handler = new BasicResponseHandler();
 		
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(6);

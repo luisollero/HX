@@ -20,6 +20,8 @@ public class User implements Pojo {
 		setMail(user.getMail());
 		setPass(user.getPass());
 		setName(user.getName());
+		setFavoriteHouseId(user.getFavoriteHouse().getId());
+		setFavoriteRole(user.getFavoriteRole().name());
 	}
 
 	public User(Integer id) {

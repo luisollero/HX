@@ -31,7 +31,7 @@ public class UserEngine implements IUserEngine {
 	}
 	
 	public com.hx.engine.pojo.User getById(Integer id) {
-		User aux = daoUser.getById(id);
+		User aux = daoUser.getWithLaziesById(id);
 		if (aux != null) {
 			return new com.hx.engine.pojo.User(aux);
 		}

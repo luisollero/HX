@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.hx.engine.IHouseEngine;
 import com.hx.engine.IUserEngine;
 import com.hx.engine.pojo.User;
+import com.hx.model.dto.House;
 import com.hx.model.dto.Role;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -16,10 +17,10 @@ public class UserController implements ModelDriven<Object> {
 
 	private String id;
 	private String mail;
-	private String application;
+	private String motivation;
 	private String name;
-	private String favoriteHouseId;
-	private String favoriteRole;
+	private String faction;
+	private String role;
 	
 	private User user;
 	private Collection<User> list;
@@ -42,13 +43,16 @@ public class UserController implements ModelDriven<Object> {
 	// POST /user
 	public HttpHeaders create() throws Exception {
 		user = new User();
-		user.setApplication(application);
+		user.setApplication(motivation);
 		user.setMail(mail);
 		user.setName(name);
 		
 		com.hx.model.dto.User newUser = (com.hx.model.dto.User) user.toDTO();
-		newUser.setFavoriteHouse(houseEngine.getById(favoriteHouseId));
-		newUser.setFavoriteRole(Role.valueOf(favoriteRole));
+		newUser.setFavoriteHouse(new House(faction));
+		newUser.setFavoriteRole(Role.valueOf(role));
+		
+		System.out.println(user.toString());
+
 		userEngine.saveOrUpdate(newUser);
 		
 		return new DefaultHttpHeaders("success");
@@ -66,6 +70,7 @@ public class UserController implements ModelDriven<Object> {
 		this.id = id;
 	}
 
+
 	public String getMail() {
 		return mail;
 	}
@@ -74,12 +79,12 @@ public class UserController implements ModelDriven<Object> {
 		this.mail = mail;
 	}
 
-	public String getApplication() {
-		return application;
+	public String getMotivation() {
+		return motivation;
 	}
 
-	public void setApplication(String application) {
-		this.application = application;
+	public void setMotivation(String motivation) {
+		this.motivation = motivation;
 	}
 
 	public String getName() {
@@ -90,20 +95,20 @@ public class UserController implements ModelDriven<Object> {
 		this.name = name;
 	}
 
-	public String getFavoriteRole() {
-		return favoriteRole;
+	public String getFaction() {
+		return faction;
 	}
 
-	public void setFavoriteRole(String favoriteRole) {
-		this.favoriteRole = favoriteRole;
+	public void setFaction(String faction) {
+		this.faction = faction;
 	}
 
-	public String getFavoriteHouseId() {
-		return favoriteHouseId;
+	public String getRole() {
+		return role;
 	}
 
-	public void setFavoriteHouseId(String favoriteHouseId) {
-		this.favoriteHouseId = favoriteHouseId;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Autowired
