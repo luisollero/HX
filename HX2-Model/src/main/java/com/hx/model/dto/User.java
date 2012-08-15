@@ -28,25 +28,25 @@ import org.hibernate.annotations.FetchMode;
 public class User {
 
 	@Id
-	@Column(name = "hx_user_id", nullable = false)
+	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@Column(name = "hx_user_pass")
+	@Column(name = "password")
 	private String pass;
-	@Column(name = "hx_user_mail")
+	@Column(name = "mail")
 	private String mail;
-	@Column(name = "hx_user_name")
+	@Column(name = "name")
 	private String name;
-	@Column(name = "hx_user_application")
+	@Column(name = "application")
 	private String application;
 	
-	@Column(name = "hx_user_favrole")
+	@Column(name = "favrole")
 	@Enumerated(EnumType.STRING)
 	private Role favoriteRole;
 	
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "hx_user_favhouse", referencedColumnName = "hx_house_id")
+	@JoinColumn(name = "favhouse", referencedColumnName = "hx_house_id")
 	private House favoriteHouse;
 
 	@OneToMany(mappedBy="user")

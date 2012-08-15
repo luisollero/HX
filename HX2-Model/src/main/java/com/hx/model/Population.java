@@ -158,6 +158,7 @@ public class Population {
 		luisOllero  = new User();
 		luisOllero.setApplication("Test application");
 		luisOllero.setMail("luisollero@gmail.com");
+		luisOllero.setPass("whatever");
 		luisOllero.setName("Luis Ollero");
 		luisOllero.setFavoriteHouse(liao);
 		luisOllero.setFavoriteRole(Role.PRINCE);
@@ -166,6 +167,7 @@ public class Population {
 		tsunami  = new User();
 		tsunami.setApplication("Test application");
 		tsunami.setMail("tsunami@tsunami.com");
+		tsunami.setPass("whatever");
 		tsunami.setName("Tsunami");
 		tsunami.setFavoriteHouse(davion);
 		tsunami.setFavoriteRole(Role.PRINCE);

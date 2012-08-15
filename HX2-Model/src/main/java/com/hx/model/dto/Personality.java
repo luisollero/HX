@@ -43,7 +43,7 @@ public class Personality {
 
 	@ManyToOne
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "user", referencedColumnName = "hx_user_id")
+	@JoinColumn(name = "user", referencedColumnName = "id")
 	private User user;
 
 	@OneToOne(mappedBy = "lord")
