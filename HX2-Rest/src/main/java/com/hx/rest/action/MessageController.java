@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class MessageController implements ModelDriven<Object> {
 
 	private String id;
+	private String token;
 	private String subject;
 	private String body;
 	private String fromId;
@@ -62,6 +63,14 @@ public class MessageController implements ModelDriven<Object> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getSubject() {

@@ -3,6 +3,8 @@ package com.hx.engine.implementation;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.hx.engine.IUserEngine;
 import com.hx.model.dao.ethereal.IDAOUser;
 import com.hx.model.dto.Personality;
@@ -53,6 +55,11 @@ public class UserEngine implements IUserEngine {
 	
 	public ArrayList<User> findByPersonality(Personality personality) {
 		return daoUser.findByPersonality(personality);
+	}
+
+	public User checkUser(String userName, String userPass) {
+		User user = daoUser.findByMailAndPass(userName, userPass).get(0);
+		return user;
 	}
 	
 //	public ArrayList<User> findByRole(Role role) {

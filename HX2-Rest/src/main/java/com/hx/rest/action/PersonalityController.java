@@ -20,6 +20,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class PersonalityController implements ModelDriven<Object> {
 
 	private String id;
+	private String token;
 	private String homeSectorId;
 	private String completeName;
 	private String name;
@@ -76,6 +77,14 @@ public class PersonalityController implements ModelDriven<Object> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getName() {

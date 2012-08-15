@@ -6,7 +6,6 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hx.engine.IHouseEngine;
 import com.hx.engine.IRegimentEngine;
 import com.hx.engine.pojo.Regiment;
 import com.opensymphony.xwork2.ModelDriven;
@@ -14,6 +13,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class RegimentController implements ModelDriven<Object> {
 
 	private String id;
+	private String token;
 	private Regiment house = new Regiment();
 	private Collection<Regiment> list;
 
@@ -25,7 +25,7 @@ public class RegimentController implements ModelDriven<Object> {
 		return new DefaultHttpHeaders("show");
 	}
 
-	// GET /house
+	// GET /regiment
 	public HttpHeaders index() {
 //		list = regimentEngine.findAll();
 		return new DefaultHttpHeaders("index");
@@ -41,6 +41,14 @@ public class RegimentController implements ModelDriven<Object> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Autowired

@@ -6,7 +6,6 @@ import org.apache.struts2.rest.DefaultHttpHeaders;
 import org.apache.struts2.rest.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hx.engine.IHouseEngine;
 import com.hx.engine.IUserEngine;
 import com.hx.engine.pojo.User;
 import com.hx.model.dto.House;
@@ -16,17 +15,20 @@ import com.opensymphony.xwork2.ModelDriven;
 public class UserController implements ModelDriven<Object> {
 
 	private String id;
+	private String token;
 	private String mail;
 	private String motivation;
 	private String name;
 	private String faction;
 	private String role;
+
+	private String userName;
+	private String userPass;
 	
 	private User user;
 	private Collection<User> list;
 
 	private IUserEngine userEngine;
-	private IHouseEngine houseEngine;
 
 	// GET /user/user_id
 	public HttpHeaders show() {
@@ -40,6 +42,12 @@ public class UserController implements ModelDriven<Object> {
 		return new DefaultHttpHeaders("index");
 	}
 	
+	// POST /check
+	public HttpHeaders check() throws Exception {
+		userEngine.checkUser(userName, userPass);
+		return new DefaultHttpHeaders("success");
+	}
+
 	// POST /user
 	public HttpHeaders create() throws Exception {
 		user = new User();
@@ -70,6 +78,14 @@ public class UserController implements ModelDriven<Object> {
 		this.id = id;
 	}
 
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 	public String getMail() {
 		return mail;
@@ -110,15 +126,26 @@ public class UserController implements ModelDriven<Object> {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserPass() {
+		return userPass;
+	}
+
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
+	}
 
 	@Autowired
 	public void setUserEngine(IUserEngine userEngine) {
 		this.userEngine = userEngine;
 	}
 	
-	@Autowired
-	public void setHouseEngine(IHouseEngine houseEngine) {
-		this.houseEngine = houseEngine;
-	}
-
 }

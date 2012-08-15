@@ -21,9 +21,11 @@ public interface IUserEngine {
 	void delete(User user);
 	
 	@Transactional
+	User checkUser(String userName, String userPass);
+
+	@Transactional
 	Collection<com.hx.engine.pojo.User> findAll();
 
 	@Transactional
 	ArrayList<User> findByPersonality(Personality personality);
-	
 }

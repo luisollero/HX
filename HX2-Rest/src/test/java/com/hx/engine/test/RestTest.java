@@ -30,7 +30,8 @@ public class RestTest extends TestBase {
 	
 	@Test
 	public void init() {
-		postUserTest();
+//		postUserTest();
+		postCheckUserTest();
 //		postPersonalityTest();
 //		postCommunicationTest();
 //		getCommunicationTest();
@@ -128,6 +129,33 @@ public class RestTest extends TestBase {
 			httpclient.getConnectionManager().shutdown();
 		}
 
+		if (result != null)
+			System.out.println(result);
+	}
+
+	/**
+	 * 
+	 */
+	private void postCheckUserTest() {
+		String result = null;
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost request = new HttpPost(
+				MAIN_SERVER + "user/0/check");
+		ResponseHandler<String> handler = new BasicResponseHandler();
+		
+		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		nameValuePairs.add(new BasicNameValuePair("userName", "luisollero@gmail.com"));
+		nameValuePairs.add(new BasicNameValuePair("userPass", "whatever"));
+		
+		try {
+			request.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			result = httpclient.execute(request, handler);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			httpclient.getConnectionManager().shutdown();
+		}
+		
 		if (result != null)
 			System.out.println(result);
 	}

@@ -13,6 +13,7 @@ import com.opensymphony.xwork2.ModelDriven;
 
 public class CommunicationController implements ModelDriven<Object> {
 
+	private String token;
 	private String id;
 	private String subject;
 	private String published;
@@ -92,6 +93,14 @@ public class CommunicationController implements ModelDriven<Object> {
 
 	public String getFromId() {
 		return fromId;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public void setFromId(String fromId) {
